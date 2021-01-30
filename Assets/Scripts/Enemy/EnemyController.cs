@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public List<Vector3> PointsRoute;
     public Vector3 CurrentPointRoute;
     public float Velocity = 5f;
+    public GameObject Player;
     public bool InCurrentPointRoute
     {
         get
@@ -44,6 +45,11 @@ public class EnemyController : MonoBehaviour
 
     }
 
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log(collision.name);
+    }
 
 
     void Start()
