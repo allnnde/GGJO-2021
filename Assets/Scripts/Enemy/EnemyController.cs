@@ -8,17 +8,17 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject Route;
-    public List<Vector3> PointsRoute;
-    public Vector3 CurrentPointRoute;
+    public List<Vector3> PointsRoute { get; set; }
+    public Vector3 CurrentPointRoute { get; set; }
     public float Velocity = 5f;
-    public GameObject Player;
+    public float RadiusOfView = 2f;
+    public GameObject Player { get; set; }
     public bool InCurrentPointRoute
     {
         get
         {
             var distancia = Vector3.Distance(CurrentPointRoute, transform.position);
-            // Debug.Log("Distance" + distancia);
-                return distancia  < 1.01f;
+            return distancia < 1.01f;
         }
     }
 
@@ -46,19 +46,27 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void MoveToPoint(Vector3 point)
     {
-        Debug.Log(collision.name);
+        Vector3 dir = point - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.Translate(Vector2.right * Velocity * Time.deltaTime);
     }
 
-
-    void Start()
+    public bool PlayerInView()
     {
-
+        var colliders = Physics2D.OverlapCircleAll(transform.position, RadiusOfView);
+        if (colliders != null)
+        {
+            foreach (var item in colliders)
+            {
+                if (item.CompareTag("Player"))
+                    return true;
+            }
+        }
+        return false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

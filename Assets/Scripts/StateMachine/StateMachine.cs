@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public float checkExitRate;
     private State currentState;
 
     void Awake()
     {
-
         currentState = GetComponent<PatrolState>();
         if (currentState == null)
         {
             currentState = gameObject.AddComponent<PatrolState>();
         }
-        currentState.enabled = true;
-        //InvokeRepeating("Check", 0, checkExitRate);
+        currentState.enabled = true; 
     }
 
     void Update()
     {
         currentState.CheckExit();
-
     }
 
     public void ChangeState<TState>() where TState : State
