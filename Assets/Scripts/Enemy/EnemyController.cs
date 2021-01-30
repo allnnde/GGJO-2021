@@ -13,8 +13,12 @@ public class EnemyController : MonoBehaviour
     public Vector3 CurrentPointRoute { get; set; } //Variable que indica hacia donde se está moviendo el enemigo
     public float Velocity = 5f; //Velocidad de moviento del Enemigo
     public float RadiusOfView = 2f; //Radio de visión del Enemigo
-    public GameObject Player { get; set; } //Personaje
+    public GameObject Player { get; private set; } //Personaje
+    public PlayerMentalHealthController PlayerMentalHealth { get; private set; }
+
     private NavMeshAgent navAgent; //Agente de navegacion
+
+    public EnemyTypeEnum enemyType;
     public bool InCurrentPointRoute 
     {
         get
@@ -34,6 +38,10 @@ public class EnemyController : MonoBehaviour
         }
 
         CurrentPointRoute = PointsRoute.FirstOrDefault(); //Asignas al primer punto de la lista al CurrentPointRoute
+
+        Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerMentalHealth = Player.GetComponent<PlayerMentalHealthController>();
+        
     }
     public Vector3 GetNextPointRoute() //Al llegar al punto seleccionado de la lista, se selecciona el siguiente
     {
@@ -71,6 +79,22 @@ public class EnemyController : MonoBehaviour
         }
         return false; //De lo contrario, devolver "false"
     }
+
+    public bool ShouldFollowPlayer() //Saber si el Player se encuentra dentro del rango de visión
+    {
+        if (enemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
+        {
+            return true;
+        }
+        
+        if (enemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Cuerdo)
+        {
+            return true;
+        }
+        return false;
+
+    }
+
 
     private void OnDrawGizmos() //Dibuja el area de efecto en el editor
     {

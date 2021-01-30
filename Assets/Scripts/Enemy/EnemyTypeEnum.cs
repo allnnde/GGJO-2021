@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Player
+public enum EnemyTypeEnum
 {
-    class PlayerSaludController
-    {
-    }
+    Paciente,
+    Medico
 }
+

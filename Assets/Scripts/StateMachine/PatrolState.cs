@@ -6,9 +6,8 @@ public class PatrolState : State
 {
     public override void CheckExit() //Salir de este estado
     {
-        if (Enemy.PlayerInView()) //Si el enemigo detecta al Player
+        if (Enemy.PlayerInView() && Enemy.ShouldFollowPlayer()) //Si el enemigo detecta al Player
         {
-            Enemy.Player = GameObject.FindGameObjectWithTag("Player"); //El enemigo debe encontrar al GameObject con el Tag: "Player"
             StateMachine.ChangeState<FollowState>(); //La máquina de estado camabiara al estado Seguir
         }
 
