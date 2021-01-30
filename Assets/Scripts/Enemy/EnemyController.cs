@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     public float Velocity = 5f;
     public float RadiusOfView = 2f;
     public GameObject Player { get; set; }
+    private NavMeshAgent navAgent;
     public bool InCurrentPointRoute
     {
         get
@@ -25,6 +26,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
+        navAgent = GetComponent<NavMeshAgent>();
         PointsRoute = new List<Vector3>();
         foreach (Transform item in Route?.transform)
         {
@@ -53,7 +55,7 @@ public class EnemyController : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;        
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        GetComponent<NavMeshAgent>().SetDestination(point);
+        navAgent.SetDestination(point);
     }
 
     public bool PlayerInView()
