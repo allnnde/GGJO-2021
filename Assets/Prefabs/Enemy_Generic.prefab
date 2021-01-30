@@ -98,9 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Route: {fileID: 0}
-  PointsRoute: []
-  CurrentPointRoute: {x: 0, y: 0, z: 0}
   Velocity: 2
+  RadiusOfView: 2
 --- !u!114 &837180869453071232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b287094a769cb8e4a90f9e874ada6ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkExitRate: 0
 --- !u!114 &837180869453071235
 MonoBehaviour:
   m_ObjectHideFlags: 0
