@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -49,10 +50,10 @@ public class EnemyController : MonoBehaviour
     public void MoveToPoint(Vector3 point)
     {
         Vector3 dir = point - transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;        
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.Translate(Vector2.right * Velocity * Time.deltaTime);
+
+        GetComponent<NavMeshAgent>().SetDestination(point);
     }
 
     public bool PlayerInView()
