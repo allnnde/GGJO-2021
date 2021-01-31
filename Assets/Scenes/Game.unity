@@ -1219,6 +1219,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 713915576203643975, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: m_Size.y
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 713915576203643975, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 837180869453071233, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
       propertyPath: Route
       value: 
@@ -1764,6 +1772,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 713915576203643975, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 713915576203643975, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 837180869453071233, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
       propertyPath: Route
       value: 
@@ -1876,6 +1892,14 @@ PrefabInstance:
     - target: {fileID: 837180869453071236, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
       propertyPath: m_Name
       value: Enemy_Medic
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276803634139810313, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
+      propertyPath: m_Size.y
+      value: 2.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276803634139810313, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}

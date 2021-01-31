@@ -7,6 +7,11 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
+    private const string horizontal = "x";
+    private const string vertical = "y";
+    private const string lastHorizontal = "lastX";
+    private const string lastVertical = "lastY";
+    private const string walkingState = "Runing";
 
     public GameObject Route; //Variable que contiene todos los puntos donde el enemigo se va a mover
     public List<Vector3> PointsRoute { get; set; } //Variable que contiene los vectores del Route
@@ -22,16 +27,19 @@ public class EnemyController : MonoBehaviour
 
     private DialogManager dialogManager;
 
+    private Animator anim;
 
     public string Name;
     public List<string> dialogs;
 
+
+    private AudioManager audioSource;
     public bool InCurrentPointRoute
     {
         get
         {
             var distancia = Vector3.Distance(CurrentPointRoute, transform.position);
-            return distancia < 1.01f;
+            return distancia < 0.91f;
         }
     } //Variable para indicar si el enemigo llegó al punto
 
@@ -42,7 +50,7 @@ public class EnemyController : MonoBehaviour
         foreach (Transform item in Route?.transform)
         {
             PointsRoute.Add(item.position); //añadís puntos a la lista
-        }
+        }       
 
         CurrentPointRoute = PointsRoute.FirstOrDefault(); //Asignas al primer punto de la lista al CurrentPointRoute
 
@@ -50,8 +58,8 @@ public class EnemyController : MonoBehaviour
         PlayerMentalHealth = Player.GetComponent<PlayerMentalHealthController>();
 
         dialogManager = FindObjectOfType<DialogManager>();
-
-
+        audioSource = FindObjectOfType<AudioManager>();
+        anim = GetComponent<Animator>();
     }
     public Vector3 GetNextPointRoute() //Al llegar al punto seleccionado de la lista, se selecciona el siguiente
     {
@@ -72,6 +80,48 @@ public class EnemyController : MonoBehaviour
         Vector3 dir = point - transform.position; //Calcula la dirección a la cual el enemigo tiene que ver
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;   //Calcula el angulo al cual tiene que rotar      
         transform.rotation = Quaternion.AngleAxis(0, Vector3.forward); //Rotar en esta cantidad de angulos
+
+        float x = 0;
+        float y = -1;
+
+
+        if (dir.x != 0)
+            x = dir.x / Mathf.Abs(dir.x);
+
+        if (dir.y != 0)
+            y = dir.y / Mathf.Abs(dir.y);
+
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            y = 0;
+        else
+            x = 0;
+
+
+
+        anim.SetFloat(horizontal, x);
+        anim.SetFloat(vertical, y);
+
+        bool walking = false;
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+        {
+            if (!navAgent.hasPath || Mathf.Abs(navAgent.velocity.sqrMagnitude) < float.Epsilon)
+                walking = false;
+        }
+        else
+        {
+            walking = true;
+        }
+
+
+        Debug.Log(dir.x);
+        Debug.Log(dir.y);
+
+        Debug.Log(walking);
+
+        anim.SetBool(walkingState, walking);
+
+        anim.SetFloat(lastHorizontal, x);
+        anim.SetFloat(lastVertical, y);
 
         navAgent.SetDestination(point); //Marca el destino en el NavAgent
     }
@@ -116,12 +166,15 @@ public class EnemyController : MonoBehaviour
             {
                 dialogManager.Start_Dialog(Name, dialogs);
                 PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
+                audioSource.PlayCuerdo();
             }
 
             if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Demente)
             {
                 dialogManager.Start_Dialog(Name, dialogs);
                 PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
+                audioSource.PlayLoco();
+
             }
         }
     }
