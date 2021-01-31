@@ -364,7 +364,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 169cd6afe53029e45be44026b2a0f113, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 577a5946bee93104b9a68c7a4909045d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -484,7 +484,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4.95, y: 4.43}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 4.95, y: 4.43}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -532,12 +532,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 91efc3b465803874ea46cd1dd705424a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c401f6c91137fb446b187fa32ff3869a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.95, y: 4.43}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1097,7 +1097,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dd498b5d9e0d6d14cb3c2a20a12198d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63f415c4dce470646a78c00f5a2fb5fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1162,18 +1162,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 608852156, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 608852156, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 608852156, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6317251971283352620, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1220,18 +1208,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6317251971283352622, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6317251971283352623, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: m_SortingLayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6317251971283352623, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6317251971283352623, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1294,6 +1270,22 @@ PrefabInstance:
     - target: {fileID: 837180869453071236, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
       propertyPath: m_Name
       value: Enemy_Pacient
+      objectReference: {fileID: 0}
+    - target: {fileID: 837180869453071237, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: m_Size.x
+      value: 3.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 837180869453071237, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: m_Size.y
+      value: 4.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 837180869453071237, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 28936b239db488647a8ef008886c1d32, type: 3}
+    - target: {fileID: 837180869453071237, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
