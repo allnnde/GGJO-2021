@@ -7,7 +7,7 @@ public class PlayerMentalHealthController : MonoBehaviour
 
     public PlayerMentalHealthEnum MentalState;
    
-    public void ChangeSalud(PlayerMentalHealthEnum newMentalHealth)
+    public void ChangeMentalHealth(PlayerMentalHealthEnum newMentalHealth)
     {
         MentalState = newMentalHealth;
     }

@@ -6,7 +6,7 @@ public class FollowState : State
 {
     public override void CheckExit() //Condicion de Salida
     {
-        if (!Enemy.PlayerInView()) //Si el NO enemigo detecta al Player
+        if (!Enemy.PlayerInView() || !Enemy.ShouldFollowPlayer()) //Si el NO enemigo detecta al Player
         {
             StateMachine.ChangeState<PatrolState>();//La maquina de estado cambia al estado de Patrullaje
         }

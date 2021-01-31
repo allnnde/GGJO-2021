@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
 
     private NavMeshAgent navAgent; //Agente de navegacion
 
-    public EnemyTypeEnum enemyType;
+    public EnemyTypeEnum EnemyType;
     public bool InCurrentPointRoute 
     {
         get
@@ -82,17 +82,39 @@ public class EnemyController : MonoBehaviour
 
     public bool ShouldFollowPlayer() //Saber si el Player se encuentra dentro del rango de visión
     {
-        if (enemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
+        if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
         {
             return true;
         }
         
-        if (enemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Cuerdo)
+        if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Cuerdo)
         {
             return true;
         }
         return false;
 
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("OnTriggerEnter2D");
+        Debug.Log(collision.tag);
+        if (collision.CompareTag("Player"))
+        {
+
+            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
+            {
+                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
+                
+            }
+
+            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Cuerdo)
+            {
+                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
+            }
+
+        }
     }
 
 
