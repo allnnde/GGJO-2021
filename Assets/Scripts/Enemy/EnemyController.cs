@@ -19,6 +19,13 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent navAgent; //Agente de navegacion
 
     public EnemyTypeEnum EnemyType;
+
+    private DialogManager dialogManager;
+
+
+    public string Name;
+    public List<string> dialogs;
+
     public bool InCurrentPointRoute 
     {
         get
@@ -41,7 +48,10 @@ public class EnemyController : MonoBehaviour
 
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerMentalHealth = Player.GetComponent<PlayerMentalHealthController>();
-        
+
+        dialogManager = FindObjectOfType<DialogManager>();
+
+
     }
     public Vector3 GetNextPointRoute() //Al llegar al punto seleccionado de la lista, se selecciona el siguiente
     {
@@ -92,7 +102,6 @@ public class EnemyController : MonoBehaviour
             return true;
         }
         return false;
-
     }
 
 
@@ -102,18 +111,16 @@ public class EnemyController : MonoBehaviour
         Debug.Log(collision.tag);
         if (collision.CompareTag("Player"))
         {
-
+            dialogManager.Start_Dialog(Name, dialogs);
             if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
             {
-                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
-                
+                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);                
             }
 
             if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Cuerdo)
             {
                 PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
             }
-
         }
     }
 
@@ -121,8 +128,6 @@ public class EnemyController : MonoBehaviour
     private void OnDrawGizmos() //Dibuja el area de efecto en el editor
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, RadiusOfView);
-            
+        Gizmos.DrawWireSphere(transform.position, RadiusOfView);            
     }
-
 }
