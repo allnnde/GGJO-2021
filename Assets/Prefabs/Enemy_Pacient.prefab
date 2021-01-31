@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 837180869453071232}
   - component: {fileID: 837180869453071235}
   - component: {fileID: 9109505367353303162}
-  - component: {fileID: 3276803634139810313}
+  - component: {fileID: 713915576203643975}
   m_Layer: 9
-  m_Name: Enemy_Medic
+  m_Name: Enemy_Pacient
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b8f07e0ee57278544b8439e41d806e3a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2aae2691ad5a83d428bed36c6ade5d02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,10 +102,10 @@ MonoBehaviour:
   Route: {fileID: 0}
   Velocity: 5
   RadiusOfView: 3
-  EnemyType: 1
-  Name: Doctora
+  EnemyType: 0
+  Name: Paciente 1101
   dialogs:
-  - Estas cuerdo, sal por la puerta
+  - Hola, ahora estas loco
 --- !u!114 &837180869453071232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!70 &3276803634139810313
+--- !u!70 &713915576203643975
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,5 +166,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 3.11, y: 4.9}
+  m_Size: {x: 3.11, y: 4.71}
   m_Direction: 0

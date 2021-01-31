@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     public string Name;
     public List<string> dialogs;
 
-    public bool InCurrentPointRoute 
+    public bool InCurrentPointRoute
     {
         get
         {
@@ -71,7 +71,7 @@ public class EnemyController : MonoBehaviour
     {
         Vector3 dir = point - transform.position; //Calcula la dirección a la cual el enemigo tiene que ver
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;   //Calcula el angulo al cual tiene que rotar      
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); //Rotar en esta cantidad de angulos
+        transform.rotation = Quaternion.AngleAxis(0, Vector3.forward); //Rotar en esta cantidad de angulos
 
         navAgent.SetDestination(point); //Marca el destino en el NavAgent
     }
@@ -96,7 +96,7 @@ public class EnemyController : MonoBehaviour
         {
             return true;
         }
-        
+
         if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Cuerdo)
         {
             return true;
@@ -107,18 +107,20 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnTriggerEnter2D");
-        Debug.Log(collision.tag);
         if (collision.CompareTag("Player"))
         {
-            dialogManager.Start_Dialog(Name, dialogs);
-            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
+
+            Debug.Log("EnemyType " + EnemyType);
+            Debug.Log("PlayerMentalHealth.MentalState " + PlayerMentalHealth.MentalState);
+            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Cuerdo)
             {
-                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);                
+                dialogManager.Start_Dialog(Name, dialogs);
+                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
             }
 
-            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Cuerdo)
+            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Demente)
             {
+                dialogManager.Start_Dialog(Name, dialogs);
                 PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
             }
         }
@@ -128,6 +130,6 @@ public class EnemyController : MonoBehaviour
     private void OnDrawGizmos() //Dibuja el area de efecto en el editor
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, RadiusOfView);            
+        Gizmos.DrawWireSphere(transform.position, RadiusOfView);
     }
 }

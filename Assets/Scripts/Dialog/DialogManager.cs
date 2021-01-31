@@ -40,7 +40,7 @@ public class DialogManager : MonoBehaviour
     }
     public void Next()
     {
-
+        
         if (ConverIndex < Conversation.Count - 1)
         {
             ConverIndex ++;
