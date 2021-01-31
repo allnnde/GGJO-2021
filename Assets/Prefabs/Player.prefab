@@ -139,7 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbae31a180acf548943f56515e6c995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MentalState: 1
+  MentalState: 2
+  AnimPlayerCuerdo: {fileID: 9100000, guid: 026535e666eec41429948c151b3f48f1, type: 2}
+  AnimPlayerNeutro: {fileID: 9100000, guid: bb953325a3ec8ea46b5fbe4f8810ea0a, type: 2}
+  AnimPlayerLoco: {fileID: 9100000, guid: 8064dc4eedc2a8d4cb4d8e4c7937dbac, type: 2}
 --- !u!114 &608852158
 MonoBehaviour:
   m_ObjectHideFlags: 0

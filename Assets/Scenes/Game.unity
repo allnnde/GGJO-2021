@@ -1306,20 +1306,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 608852157, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
       propertyPath: MentalState
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 608852157, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: AnimPlayerLoco
-      value: 
-      objectReference: {fileID: 9100000, guid: 8064dc4eedc2a8d4cb4d8e4c7937dbac, type: 2}
-    - target: {fileID: 608852157, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: AnimPlayerCuerdo
-      value: 
-      objectReference: {fileID: 9100000, guid: 026535e666eec41429948c151b3f48f1, type: 2}
-    - target: {fileID: 608852157, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
-      propertyPath: AnimPlayerNeutro
-      value: 
-      objectReference: {fileID: 9100000, guid: bb953325a3ec8ea46b5fbe4f8810ea0a, type: 2}
     - target: {fileID: 6317251971283352620, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1662,8 +1650,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NeededMetalHealthe: 1
   Puesta: {fileID: 0}
-  Abierto: {fileID: 21300000, guid: abc14209ae9bfd44c9fd7be1d3e472f3, type: 3}
-  Cerrado: {fileID: 21300000, guid: 91efc3b465803874ea46cd1dd705424a, type: 3}
+  Abierto: {fileID: 21300000, guid: c8cd1efa87f19554083911352664bf57, type: 3}
+  Cerrado: {fileID: 21300000, guid: c401f6c91137fb446b187fa32ff3869a, type: 3}
+  NexLevel: Game_LVL02
 --- !u!61 &2065870029
 BoxCollider2D:
   m_ObjectHideFlags: 0

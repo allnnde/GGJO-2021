@@ -22,19 +22,8 @@ public class PlayerController : MonoBehaviour
     public static bool playerCreated;
 
     private void Awake()
-    {
-        if (!playerCreated)
-        {
-            playerCreated = true;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
+    {       
         PlayerMentalHealth = GetComponent<PlayerMentalHealthController>();
-
     }
 
     void Start()

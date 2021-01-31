@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class DoorController : MonoBehaviour
     public Sprite Abierto;
     public Sprite Cerrado;
 
+    public string NexLevel;
     private void Awake()
     {
         dialogManager = FindObjectOfType<DialogManager>();
@@ -27,15 +29,14 @@ public class DoorController : MonoBehaviour
             var playerMentalHealth = collision.GetComponent<PlayerMentalHealthController>();
             if (playerMentalHealth.MentalState == NeededMetalHealthe)
             {
-                Puesta.GetComponent<BoxCollider2D>().isTrigger = true;
                 Puesta.GetComponent<SpriteRenderer>().sprite = Abierto;
                 dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Abierta" });
 
 
+                SceneManager.LoadScene(NexLevel);
             }
             else
             {
-                Puesta.GetComponent<BoxCollider2D>().isTrigger = false;
                 Puesta.GetComponent<SpriteRenderer>().sprite = Cerrado;
                 dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Cerrada" });
 
