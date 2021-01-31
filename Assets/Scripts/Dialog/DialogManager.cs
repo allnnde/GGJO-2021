@@ -25,11 +25,13 @@ public class DialogManager : MonoBehaviour
         DialogPanel.SetActive(true);
         ConverIndex = 0;
         ShowText();
+        Time.timeScale = 0;
     }
 
     public void StopDialog()
     {
         DialogPanel.SetActive(false);
+        Time.timeScale = 1;
 
     }
     public void ShowText()
