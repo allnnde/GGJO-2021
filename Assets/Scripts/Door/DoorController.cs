@@ -35,7 +35,10 @@ public class DoorController : MonoBehaviour
                 if (!string.IsNullOrEmpty(NexLevel))
                     SceneManager.LoadScene(NexLevel);
                 else
+                {
                     dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
+                    Application.Quit();
+                }
 
             }
             else
