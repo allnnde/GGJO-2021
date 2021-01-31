@@ -288,7 +288,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &177962252
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1495,7 +1495,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1821334859
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1996,9 +1996,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 837180869453071233, guid: 1e196cc987d4c9d4dac6303eb9a95388, type: 3}
+      propertyPath: Name
+      value: El Pepo
+      objectReference: {fileID: 0}
+    - target: {fileID: 837180869453071233, guid: 1e196cc987d4c9d4dac6303eb9a95388, type: 3}
       propertyPath: Route
       value: 
       objectReference: {fileID: 1918191882}
+    - target: {fileID: 837180869453071233, guid: 1e196cc987d4c9d4dac6303eb9a95388, type: 3}
+      propertyPath: dialogs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 837180869453071233, guid: 1e196cc987d4c9d4dac6303eb9a95388, type: 3}
+      propertyPath: dialogs.Array.data[0]
+      value: Gato!!! so boletaa!!!!
+      objectReference: {fileID: 0}
     - target: {fileID: 837180869453071234, guid: 1e196cc987d4c9d4dac6303eb9a95388, type: 3}
       propertyPath: m_RootOrder
       value: 3

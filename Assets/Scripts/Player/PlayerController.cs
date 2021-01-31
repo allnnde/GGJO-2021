@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 4.0f;
 
     private bool walking = false;
-    public Vector2 lastMovement = Vector2.zero;
+    private Vector2 lastMovement = Vector2.zero;
 
     private const string horizontal = "Horizontal";
     private const string vertical = "Vertical";
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         {
             walking = true;
             lastMovement = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
-
             playerRb.velocity = lastMovement.normalized * speed;
         }
 
