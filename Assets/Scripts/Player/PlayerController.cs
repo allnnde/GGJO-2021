@@ -32,11 +32,15 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         lastMovement = new Vector2(0, 0);
+
+        Time.timeScale = 1;
     }
 
     void Update()
     {
         walking = false;
+
+
         if (Mathf.Abs(Input.GetAxisRaw(horizontal)) > 0.5f || Mathf.Abs(Input.GetAxisRaw(vertical)) > 0.5)
         {
             walking = true;

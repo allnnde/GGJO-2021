@@ -112,12 +112,6 @@ public class EnemyController : MonoBehaviour
             walking = true;
         }
 
-
-        Debug.Log(dir.x);
-        Debug.Log(dir.y);
-
-        Debug.Log(walking);
-
         anim.SetBool(walkingState, walking);
 
         anim.SetFloat(lastHorizontal, x);

@@ -20,12 +20,12 @@ public class DialogManager : MonoBehaviour
 
     public void Start_Dialog(string npcName, List<string> convo)
     {
+        Time.timeScale = 0;
         NpcNameText.text = npcName;
         Conversation = new List<string>(convo);
         DialogPanel.SetActive(true);
         ConverIndex = 0;
         ShowText();
-        Time.timeScale = 0;
     }
 
     public void StopDialog()
