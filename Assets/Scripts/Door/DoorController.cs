@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorController : MonoBehaviour
 {
-   
+
     public PlayerMentalHealthEnum NeededMetalHealthe;
     public GameObject Puesta;
     private DialogManager dialogManager;
@@ -32,8 +32,11 @@ public class DoorController : MonoBehaviour
                 Puesta.GetComponent<SpriteRenderer>().sprite = Abierto;
                 dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Abierta" });
 
+                if (!string.IsNullOrEmpty(NexLevel))
+                    SceneManager.LoadScene(NexLevel);
+                else
+                    dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
 
-                SceneManager.LoadScene(NexLevel);
             }
             else
             {

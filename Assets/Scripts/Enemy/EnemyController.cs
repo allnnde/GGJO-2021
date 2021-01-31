@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour
         get
         {
             var distancia = Vector3.Distance(CurrentPointRoute, transform.position);
-            return distancia < 0.91f;
+            return distancia < 1.01f;
         }
     } //Variable para indicar si el enemigo llegó al punto
 
@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
         }       
 
         CurrentPointRoute = PointsRoute.FirstOrDefault(); //Asignas al primer punto de la lista al CurrentPointRoute
-
+  
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerMentalHealth = Player.GetComponent<PlayerMentalHealthController>();
 
