@@ -6,61 +6,63 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 4.0f;
 
-    private bool walking = false;
-    private Vector2 lastMovement = Vector2.zero;
-
-    private const string horizontal = "Horizontal";
-    private const string vertical = "Vertical";
-    private const string lastHorizontal = "LastHorizontal";
-    private const string lastVertical = "LastVertical";
-    private const string walkingState = "Walking";
-
+    private const string horizontalLabel = "Horizontal";
+    private const string verticalLabel = "Vertical";
+    private const string WalkingTopLabel = "WalkingTop";
+    private const string WalkingBottomLabel = "WalkingBottom";
+    private const string WalkingLeftLabel = "WalkingLeft";
+    private const string WalkingRightLabel = "WalkingRight";
+    private const string IdleLabel = "Idle";
     private Rigidbody2D playerRb;
     private Animator anim;
-    public PlayerMentalHealthController PlayerMentalHealth { get; private set; }
-
-    public static bool playerCreated;
-
-    private void Awake()
-    {       
-        PlayerMentalHealth = GetComponent<PlayerMentalHealthController>();
-    }
 
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
-        lastMovement = new Vector2(0, 0);
-
-        Time.timeScale = 1;
     }
 
     void Update()
     {
-        walking = false;
 
+        var direcion = GetInputData();
 
-        if (Mathf.Abs(Input.GetAxisRaw(horizontal)) > 0.5f || Mathf.Abs(Input.GetAxisRaw(vertical)) > 0.5)
-        {
-            walking = true;
-            lastMovement = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
-            playerRb.velocity = lastMovement.normalized * speed;
-        }
+        Move(direcion.x, direcion.y);
 
-
-        if (!walking)
-        {
-            playerRb.velocity = Vector2.zero;
-        }
-
-        anim.SetFloat(horizontal, Input.GetAxisRaw(horizontal));
-        anim.SetFloat(vertical, Input.GetAxisRaw(vertical));
-
-        anim.SetBool(walkingState, walking);
-
-        anim.SetFloat(lastHorizontal, lastMovement.x);
-        anim.SetFloat(lastVertical, lastMovement.y);
+        ShowAnimation(direcion.x, direcion.y);
     }
 
+
+    private Vector2 GetInputData()
+    {
+        var horizantal = Input.GetAxisRaw(horizontalLabel);
+        var vertical = Input.GetAxisRaw(verticalLabel);
+
+        return new Vector2(horizantal, vertical);
+    }
+
+    private void ShowAnimation(float horizantal, float vertical)
+    {   
+
+
+        if (vertical > 0 && horizantal == 0)
+            anim.Play(WalkingTopLabel);
+        if (vertical < 0 && horizantal == 0)
+            anim.Play(WalkingBottomLabel);
+
+        if (horizantal < 0 && vertical == 0)
+            anim.Play(WalkingLeftLabel);
+        if (horizantal > 0 && vertical == 0)
+            anim.Play(WalkingRightLabel);
+
+        if (horizantal == 0 && vertical == 0)
+            anim.Play(IdleLabel);
+
+    }
+
+    private void Move(float horizantal, float vertical)
+    {
+        playerRb.velocity = new Vector2(horizantal, vertical).normalized * speed;
+
+    }
 }
