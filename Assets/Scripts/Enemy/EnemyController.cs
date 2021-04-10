@@ -65,7 +65,7 @@ public class EnemyController : MonoBehaviour
     {
         var index = PointsRoute.IndexOf(CurrentPointRoute);
         if (index == -1)
-            return PointsRoute[0]; //Devuelve nada
+            return PointsRoute[0];
 
         if (index + 1 < PointsRoute.Count())
             return PointsRoute[index + 1];
@@ -77,7 +77,7 @@ public class EnemyController : MonoBehaviour
     public void Move(Vector2 point)
     {
 
-        var direction = GetDirection(point);               
+        var direction = GetDirection(point);
 
         ShowMoveAnimation(direction);
 
@@ -86,9 +86,9 @@ public class EnemyController : MonoBehaviour
 
     private void ShowMoveAnimation(Vector2 direction)
     {
-        
-        var walking =    navAgent.remainingDistance > navAgent.stoppingDistance &&
-                         navAgent.hasPath && Mathf.Abs(navAgent.velocity.sqrMagnitude) > 0;
+
+        var walking = navAgent.remainingDistance > navAgent.stoppingDistance &&
+                      navAgent.hasPath && Mathf.Abs(navAgent.velocity.sqrMagnitude) > 0;
 
         if (direction.x == 0 && direction.y > 0 && walking)
             anim.Play(WalkingTopLabel);
