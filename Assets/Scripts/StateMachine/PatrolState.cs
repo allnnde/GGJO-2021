@@ -21,6 +21,6 @@ public class PatrolState : State
             Enemy.CurrentPointRoute = Enemy.GetNextPointRoute(); //El enemigo busca el siguiente punto en Route y lo asigna a current
 
         // TODO caundo tengamos el mapa deberimos ver de agregar logica para que no choque con paredes al regrezar
-        Enemy.MoveToPoint(Enemy.CurrentPointRoute); //El enemigo se mueve a ese punto
+        Enemy.Move(Enemy.CurrentPointRoute); //El enemigo se mueve a ese punto
     }
 }

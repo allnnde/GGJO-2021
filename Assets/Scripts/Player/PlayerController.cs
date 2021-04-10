@@ -25,15 +25,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        var direcion = GetInputData();
+        var direcion = GetDirection();
 
-        Move(direcion.x, direcion.y);
+        Move(direcion);
 
-        ShowAnimation(direcion.x, direcion.y);
+        ShowAnimation(direcion);
     }
 
 
-    private Vector2 GetInputData()
+    private Vector2 GetDirection()
     {
         var horizantal = Input.GetAxisRaw(horizontalLabel);
         var vertical = Input.GetAxisRaw(verticalLabel);
@@ -41,28 +41,24 @@ public class PlayerController : MonoBehaviour
         return new Vector2(horizantal, vertical);
     }
 
-    private void ShowAnimation(float horizantal, float vertical)
+    private void ShowAnimation(Vector2 direction)
     {   
-
-
-        if (vertical > 0 && horizantal == 0)
+        if (direction.x == 0  && direction.y > 0)
             anim.Play(WalkingTopLabel);
-        if (vertical < 0 && horizantal == 0)
+        if (direction.x == 0  && direction.y < 0)
             anim.Play(WalkingBottomLabel);
 
-        if (horizantal < 0 && vertical == 0)
+        if (direction.x < 0 && direction.y == 0)
             anim.Play(WalkingLeftLabel);
-        if (horizantal > 0 && vertical == 0)
+        if (direction.x > 0 && direction.y == 0)
             anim.Play(WalkingRightLabel);
 
-        if (horizantal == 0 && vertical == 0)
+        if (direction.x == 0 && direction.y == 0)
             anim.Play(IdleLabel);
-
     }
 
-    private void Move(float horizantal, float vertical)
+    private void Move(Vector2 direction)
     {
-        playerRb.velocity = new Vector2(horizantal, vertical).normalized * speed;
-
+        playerRb.velocity = direction.normalized * speed;
     }
 }

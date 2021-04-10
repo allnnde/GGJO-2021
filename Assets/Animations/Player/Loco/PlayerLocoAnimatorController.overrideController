@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerLocoAnimator
+  m_Name: PlayerLocoAnimatorController
   m_Controller: {fileID: 9100000, guid: bb953325a3ec8ea46b5fbe4f8810ea0a, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: fdd3bd378c009e840ac3b2a2af731088, type: 2}

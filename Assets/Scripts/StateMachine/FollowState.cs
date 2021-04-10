@@ -16,6 +16,6 @@ public class FollowState : State
     // Update is called once per frame
     void Update()
     {
-        Enemy.MoveToPoint(Enemy.Player.transform.position); //El enemigo persigue al Player
+        Enemy.Move(Enemy.Player.transform.position); //El enemigo persigue al Player
     }
 }
