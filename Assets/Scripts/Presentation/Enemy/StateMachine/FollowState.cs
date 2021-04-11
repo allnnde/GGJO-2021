@@ -1,7 +1,4 @@
 using Assets.Scripts.Presentation.Player;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Scripts.Presentation.Enemy.StateMachine
 {
@@ -15,14 +12,10 @@ namespace Assets.Scripts.Presentation.Enemy.StateMachine
             }
         }
 
-
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             movementBussinessLogic.Move(PlayerController.Instance.transform.position, 0);
-
         }
-
-
     }
 }

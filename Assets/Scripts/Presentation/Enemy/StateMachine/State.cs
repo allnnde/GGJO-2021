@@ -1,9 +1,6 @@
 using Assets.Scripts.Application;
 using Assets.Scripts.Domain.Interfaces;
 using Assets.Scripts.Infrastructure.Enemy;
-using Assets.Scripts.Presentation.Enemy;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Presentation.Enemy.StateMachine
@@ -15,13 +12,15 @@ namespace Assets.Scripts.Presentation.Enemy.StateMachine
     [RequireComponent(typeof(EnemyAIService))]
     public abstract class State : MonoBehaviour
     {
-        protected StateMachine StateMachine;
+        protected EnemyAIBussinessLogic enemyAIBussinessLogic;
+        protected EnemyMovementDirectionService enemyMovementDirectionService;
         protected MovementBussinessLogic movementBussinessLogic;
         protected RouteNavegationBussinessLogic routeNavegationBussinessLogic;
-        protected EnemyMovementDirectionService enemyMovementDirectionService;
-        protected EnemyAIBussinessLogic enemyAIBussinessLogic;
+        protected StateMachine StateMachine;
 
-        void Awake()
+        public abstract void CheckExit();
+
+        private void Awake()
         {
             StateMachine = GetComponent<StateMachine>();
             var enemyMovementController = GetComponent<IMovementService>();
@@ -35,6 +34,6 @@ namespace Assets.Scripts.Presentation.Enemy.StateMachine
             enemyAIBussinessLogic = new EnemyAIBussinessLogic(enemyAIService);
         }
 
-        public abstract void CheckExit(); //Metodo para verificar la salida de los estados
+        //Metodo para verificar la salida de los estados
     }
 }

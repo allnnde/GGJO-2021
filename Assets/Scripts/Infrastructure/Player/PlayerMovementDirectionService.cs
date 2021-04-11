@@ -6,7 +6,6 @@ namespace Assets.Scripts.Infrastructure.Player
 {
     public class PlayerMovementDirectionService : IMovementDirectionService
     {
-
         public Vector2 GetDirection()
         {
             var horizantal = Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel);

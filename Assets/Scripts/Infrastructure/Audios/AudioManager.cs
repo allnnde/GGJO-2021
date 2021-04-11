@@ -1,21 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure.Audios
 {
     public class AudioManager : MonoBehaviour
     {
-        AudioSource audioSource;
-
         public AudioClip TrackCuerdo;
         public AudioClip TrackLoco;
-
-
-        private void Awake()
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
+        private AudioSource audioSource;
 
         public void PlayCuerdo()
         {
@@ -25,22 +16,23 @@ namespace Assets.Scripts.Infrastructure.Audios
 
         public void PlayLoco()
         {
-
             audioSource.clip = TrackLoco;
             audioSource.Play();
         }
 
+        private void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-
         }
     }
 }

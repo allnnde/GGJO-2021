@@ -6,8 +6,11 @@ namespace Assets.Scripts.Domain.Interfaces
     {
         EnemyTypeEnum EnemyType { get; set; }
         float RadiusOfView { get; set; }
+
         void InteractWithPlayer();
+
         bool PlayerInView();
+
         bool ShouldFollowPlayer();
     }
 }

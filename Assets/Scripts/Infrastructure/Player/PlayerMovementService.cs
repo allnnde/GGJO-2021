@@ -1,20 +1,17 @@
 ﻿using Assets.Scripts.Domain.Enums;
 using Assets.Scripts.Domain.Interfaces;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure.Player
 {
     public class PlayerMovementService : MonoBehaviour, IMovementService
     {
-        private Rigidbody2D _playerRb;
         private Animator _anim;
+        private Rigidbody2D _playerRb;
 
-        void Start()
+        public void Move(Vector2 direction, float speed)
         {
-            _playerRb = GetComponent<Rigidbody2D>();
-            _anim = GetComponent<Animator>();
+            _playerRb.velocity = direction.normalized * speed;
         }
 
         public void ShowMoveAnimation(Vector3 direction)
@@ -33,9 +30,10 @@ namespace Assets.Scripts.Infrastructure.Player
                 _anim.Play(AnimationLabelConstants.IdleLabel);
         }
 
-        public void Move(Vector2 direction, float speed)
+        private void Start()
         {
-            _playerRb.velocity = direction.normalized * speed;
+            _playerRb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
         }
     }
 }

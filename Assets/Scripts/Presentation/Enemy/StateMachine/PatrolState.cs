@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Assets.Scripts.Presentation.Enemy.StateMachine
 {
     public class PatrolState : State
@@ -12,17 +8,14 @@ namespace Assets.Scripts.Presentation.Enemy.StateMachine
             {
                 StateMachine.ChangeState<FollowState>();
             }
-
-
         }
-        void Update()
-        {
 
+        private void Update()
+        {
             var currentPoint = routeNavegationBussinessLogic.GetCurrentPointRoute();
             if (routeNavegationBussinessLogic.IsInCurrentPointRoute())
                 currentPoint = routeNavegationBussinessLogic.GetNextPointRoute();
             movementBussinessLogic.Move(currentPoint, 0);
-
         }
     }
 }

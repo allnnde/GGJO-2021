@@ -3,37 +3,37 @@ using Assets.Scripts.Domain.Interfaces;
 using Assets.Scripts.Infrastructure.Audios;
 using Assets.Scripts.Infrastructure.Dialog;
 using Assets.Scripts.Infrastructure.Player;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure.Enemy
 {
     public class EnemyAIService : MonoBehaviour, IEnemyAIService
     {
-
+        public List<string> dialogs;
+        public string Name;
         [SerializeField] private EnemyTypeEnum _enemyType;
+        private AudioManager audioSource;
+        private DialogManager dialogManager;
+        private PlayerMentalHealthService PlayerMentalHealth;
         public EnemyTypeEnum EnemyType { get { return _enemyType; } set { _enemyType = value; } }
         public float RadiusOfView { get; set; } = 4f;
 
-        PlayerMentalHealthService PlayerMentalHealth;
-
-
-        private DialogManager dialogManager;
-        private AudioManager audioSource;
-        public string Name;
-        public List<string> dialogs;
-
-
-        private void Awake()
+        public void InteractWithPlayer()
         {
-            PlayerMentalHealth = FindObjectOfType<PlayerMentalHealthService>();
+            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Cuerdo)
+            {
+                dialogManager.Start_Dialog(Name, dialogs);
+                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
+                audioSource.PlayCuerdo();
+            }
 
-            dialogManager = FindObjectOfType<DialogManager>();
-            audioSource = FindObjectOfType<AudioManager>();
+            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Demente)
+            {
+                dialogManager.Start_Dialog(Name, dialogs);
+                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
+                audioSource.PlayLoco();
+            }
         }
 
         public bool PlayerInView()
@@ -64,22 +64,12 @@ namespace Assets.Scripts.Infrastructure.Enemy
             return false;
         }
 
-        public void InteractWithPlayer()
+        private void Awake()
         {
-            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Cuerdo)
-            {
-                dialogManager.Start_Dialog(Name, dialogs);
-                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
-                audioSource.PlayCuerdo();
-            }
+            PlayerMentalHealth = FindObjectOfType<PlayerMentalHealthService>();
 
-            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Demente)
-            {
-                dialogManager.Start_Dialog(Name, dialogs);
-                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
-                audioSource.PlayLoco();
-            }
+            dialogManager = FindObjectOfType<DialogManager>();
+            audioSource = FindObjectOfType<AudioManager>();
         }
-
     }
 }

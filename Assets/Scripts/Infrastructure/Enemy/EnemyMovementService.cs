@@ -1,7 +1,5 @@
 ﻿using Assets.Scripts.Domain.Enums;
 using Assets.Scripts.Domain.Interfaces;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,21 +7,19 @@ namespace Assets.Scripts.Infrastructure.Enemy
 {
     public class EnemyMovementService : MonoBehaviour, IMovementService
     {
-
         private Animator _anim;
-        private NavMeshAgent _navAgent;
         private IMovementDirectionService _enemyMovementDirectionService;
+        private NavMeshAgent _navAgent;
 
-        void Start()
+        public Vector2 GetDirectionAnimation(Vector3 point)
         {
-            _anim = GetComponent<Animator>();
-            _navAgent = GetComponent<NavMeshAgent>();
-            _enemyMovementDirectionService = new EnemyMovementDirectionService();
+            var position = point - transform.position;
+            var direction = _enemyMovementDirectionService.GetDirection(position);
+            return direction;
         }
 
         public void Move(Vector2 point, float speed = 0)
         {
-
             transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             _navAgent.SetDestination(point);
         }
@@ -50,11 +46,11 @@ namespace Assets.Scripts.Infrastructure.Enemy
                 _anim.Play(AnimationLabelConstants.IdleLabel);
         }
 
-        public Vector2 GetDirectionAnimation(Vector3 point)
+        private void Start()
         {
-            var position = point - transform.position;
-            var direction = _enemyMovementDirectionService.GetDirection(position);
-            return direction;
+            _anim = GetComponent<Animator>();
+            _navAgent = GetComponent<NavMeshAgent>();
+            _enemyMovementDirectionService = new EnemyMovementDirectionService();
         }
     }
 }

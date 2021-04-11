@@ -9,12 +9,11 @@ namespace Assets.Scripts.Presentation.Player
     [RequireComponent(typeof(PlayerMentalHealthService))]
     public class PlayerController : MonoBehaviour
     {
+        public static GameObject Instance;
         public float speed = 4.0f;
 
-        private IMovementDirectionService _movementDirectionService;
         private MovementBussinessLogic _movementBussinessLogic;
-
-        public static GameObject Instance;
+        private IMovementDirectionService _movementDirectionService;
 
         private void Awake()
         {
@@ -26,17 +25,15 @@ namespace Assets.Scripts.Presentation.Player
             {
                 Instance = gameObject;
             }
-
         }
 
-
-        void Start()
+        private void Start()
         {
             _movementDirectionService = new PlayerMovementDirectionService();
             _movementBussinessLogic = new MovementBussinessLogic(GetComponent<PlayerMovementService>());
         }
 
-        void Update()
+        private void Update()
         {
             var direcion = _movementDirectionService.GetDirection();
             _movementBussinessLogic.Move(direcion, speed);

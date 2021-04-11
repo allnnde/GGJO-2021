@@ -12,7 +12,6 @@ namespace Assets.Scripts.Infrastructure.Enemy
 
         public Vector2 GetDirection(Vector2 direction)
         {
-
             var dir = Vector2Int.FloorToInt(direction);
 
             float x = 0;
@@ -29,7 +28,6 @@ namespace Assets.Scripts.Infrastructure.Enemy
             else
                 x = 0;
             return new Vector2(x, y);
-
         }
     }
 }

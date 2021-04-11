@@ -7,28 +7,9 @@ namespace Assets.Scripts.Infrastructure.Enemy
 {
     public class EnemyRouteService : MonoBehaviour, IRouteNavegationService
     {
-
         public GameObject Route;
-        private List<Vector3> _pointsRoute;
         private Vector3 _currentPointRoute;
-
-
-        public void Start()
-        {
-            _pointsRoute = new List<Vector3>();
-            foreach (Transform item in Route?.transform)
-            {
-                _pointsRoute.Add(item.position);
-            }
-
-            _currentPointRoute = _pointsRoute.FirstOrDefault();
-        }
-
-        public bool IsInCurrentPointRoute()
-        {
-            var distancia = Vector3.Distance(_currentPointRoute, transform.position);
-            return distancia < 1.01f;
-        }
+        private List<Vector3> _pointsRoute;
 
         public Vector3 GetCurrentPointRoute()
         {
@@ -47,6 +28,23 @@ namespace Assets.Scripts.Infrastructure.Enemy
                 _currentPointRoute = _pointsRoute[0];
 
             return _currentPointRoute;
+        }
+
+        public bool IsInCurrentPointRoute()
+        {
+            var distancia = Vector3.Distance(_currentPointRoute, transform.position);
+            return distancia < 1.01f;
+        }
+
+        public void Start()
+        {
+            _pointsRoute = new List<Vector3>();
+            foreach (Transform item in Route?.transform)
+            {
+                _pointsRoute.Add(item.position);
+            }
+
+            _currentPointRoute = _pointsRoute.FirstOrDefault();
         }
     }
 }

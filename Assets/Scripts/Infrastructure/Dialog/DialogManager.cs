@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,17 +6,28 @@ namespace Assets.Scripts.Infrastructure.Dialog
 {
     public class DialogManager : MonoBehaviour
     {
-
         public GameObject DialogPanel;
-        public Text NpcNameText;
         public Text DialogText;
-
-        private List<string> Conversation;
+        public Text NpcNameText;
         private int ConverIndex;
-        // Start is called before the first frame update
-        void Start()
+        private List<string> Conversation;
+
+        public void Next()
         {
-            DialogPanel.SetActive(false);
+            if (ConverIndex < Conversation.Count - 1)
+            {
+                ConverIndex++;
+                ShowText();
+            }
+            else
+            {
+                StopDialog();
+            }
+        }
+
+        public void ShowText()
+        {
+            DialogText.text = Conversation[ConverIndex];
         }
 
         public void Start_Dialog(string npcName, List<string> convo)
@@ -34,24 +44,12 @@ namespace Assets.Scripts.Infrastructure.Dialog
         {
             DialogPanel.SetActive(false);
             Time.timeScale = 1;
-
         }
-        public void ShowText()
-        {
-            DialogText.text = Conversation[ConverIndex];
-        }
-        public void Next()
-        {
 
-            if (ConverIndex < Conversation.Count - 1)
-            {
-                ConverIndex++;
-                ShowText();
-            }
-            else
-            {
-                StopDialog();
-            }
+        // Start is called before the first frame update
+        private void Start()
+        {
+            DialogPanel.SetActive(false);
         }
     }
 }

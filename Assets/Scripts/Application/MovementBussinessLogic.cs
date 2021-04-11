@@ -1,9 +1,4 @@
 ﻿using Assets.Scripts.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Application
@@ -17,12 +12,10 @@ namespace Assets.Scripts.Application
             _movementMotor = movementMotor;
         }
 
-
         public void Move(Vector2 direction, float speed)
         {
             _movementMotor.Move(direction, speed);
             _movementMotor.ShowMoveAnimation(direction);
         }
-
     }
 }

@@ -1,31 +1,26 @@
 using Assets.Scripts.Domain.Enums;
 using Assets.Scripts.Infrastructure.Dialog;
 using Assets.Scripts.Infrastructure.Player;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
 namespace Assets.Scripts.Presentation.Door
 {
     public class DoorController : MonoBehaviour
     {
-
+        public Sprite Abierto;
+        public Sprite Cerrado;
         public PlayerMentalHealthEnum NeededMetalHealthe;
+        public string NexLevel;
         public GameObject Puesta;
         private DialogManager dialogManager;
 
-        public Sprite Abierto;
-        public Sprite Cerrado;
-
-        public string NexLevel;
         private void Awake()
         {
             dialogManager = FindObjectOfType<DialogManager>();
             Puesta = transform.parent.gameObject;
         }
-
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -43,19 +38,15 @@ namespace Assets.Scripts.Presentation.Door
                     else
                     {
                         dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
-                        UnityEngine.Application.Quit();                    }
-
+                        UnityEngine.Application.Quit();
+                    }
                 }
                 else
                 {
                     Puesta.GetComponent<SpriteRenderer>().sprite = Cerrado;
                     dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Cerrada" });
-
                 }
-
             }
         }
-
-
     }
 }
