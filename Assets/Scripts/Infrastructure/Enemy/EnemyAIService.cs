@@ -1,5 +1,4 @@
 ﻿using Domain.Enums;
-using Domain.Interfaces;
 using Infrastructure.Audios;
 using Infrastructure.Dialog;
 using Infrastructure.Player;
@@ -8,33 +7,25 @@ using UnityEngine;
 
 namespace Infrastructure.Enemy
 {
-    public class EnemyAIService : MonoBehaviour, IEnemyAIService
+    public abstract class EnemyAIService : MonoBehaviour
     {
+        protected AudioManager audioSource;
+        protected DialogManager dialogManager;
+        protected PlayerMentalHealthService PlayerMentalHealth;
         public List<string> dialogs;
         public string Name;
-        [SerializeField] private EnemyTypeEnum _enemyType;
-        private AudioManager audioSource;
-        private DialogManager dialogManager;
-        private PlayerMentalHealthService PlayerMentalHealth;
-        public EnemyTypeEnum EnemyType { get { return _enemyType; } set { _enemyType = value; } }
+        public abstract EnemyTypeEnum EnemyType { get; }
         public float RadiusOfView { get; set; } = 4f;
 
-        public void InteractWithPlayer()
+        private void Awake()
         {
-            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
-            {
-                dialogManager.Start_Dialog(Name, dialogs);
-                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
-                audioSource.PlayCuerdo();
-            }
+            PlayerMentalHealth = FindObjectOfType<PlayerMentalHealthService>();
 
-            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Demente)
-            {
-                dialogManager.Start_Dialog(Name, dialogs);
-                PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
-                audioSource.PlayLoco();
-            }
+            dialogManager = FindObjectOfType<DialogManager>();
+            audioSource = FindObjectOfType<AudioManager>();
         }
+
+        public abstract void InteractWithPlayer();
 
         public bool PlayerInView()
         {
@@ -50,26 +41,6 @@ namespace Infrastructure.Enemy
             return false;
         }
 
-        public bool ShouldFollowPlayer()
-        {
-            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
-            {
-                return true;
-            }
-
-            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Demente)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private void Awake()
-        {
-            PlayerMentalHealth = FindObjectOfType<PlayerMentalHealthService>();
-
-            dialogManager = FindObjectOfType<DialogManager>();
-            audioSource = FindObjectOfType<AudioManager>();
-        }
+        public abstract bool ShouldFollowPlayer();
     }
 }

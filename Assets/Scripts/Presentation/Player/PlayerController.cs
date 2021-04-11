@@ -9,11 +9,10 @@ namespace Presentation.Player
     [RequireComponent(typeof(PlayerMentalHealthService))]
     public class PlayerController : MonoBehaviour
     {
-        public static GameObject Instance;
-        public float speed = 4.0f;
-
         private MovementBussinessLogic _movementBussinessLogic;
         private IMovementDirectionService _movementDirectionService;
+        public static GameObject Instance;
+        public float speed = 4.0f;
 
         private void Awake()
         {

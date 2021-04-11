@@ -9,6 +9,12 @@ namespace Infrastructure.Player
         private Animator _anim;
         private Rigidbody2D _playerRb;
 
+        private void Start()
+        {
+            _playerRb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
+        }
+
         public void Move(Vector2 direction, float speed)
         {
             _playerRb.velocity = direction.normalized * speed;
@@ -28,12 +34,6 @@ namespace Infrastructure.Player
 
             if (direction.x == 0 && direction.y == 0)
                 _anim.Play(AnimationLabelConstants.IdleLabel);
-        }
-
-        private void Start()
-        {
-            _playerRb = GetComponent<Rigidbody2D>();
-            _anim = GetComponent<Animator>();
         }
     }
 }

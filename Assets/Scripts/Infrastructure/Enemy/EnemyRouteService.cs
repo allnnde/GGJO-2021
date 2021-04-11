@@ -7,9 +7,9 @@ namespace Infrastructure.Enemy
 {
     public class EnemyRouteService : MonoBehaviour, IRouteNavegationService
     {
-        public GameObject Route;
         private Vector3 _currentPointRoute;
         private List<Vector3> _pointsRoute;
+        public GameObject Route;
 
         public Vector3 GetCurrentPointRoute()
         {

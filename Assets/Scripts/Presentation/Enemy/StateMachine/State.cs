@@ -9,7 +9,6 @@ namespace Presentation.Enemy.StateMachine
     [RequireComponent(typeof(EnemyController))]
     [RequireComponent(typeof(EnemyMovementService))]
     [RequireComponent(typeof(EnemyRouteService))]
-    [RequireComponent(typeof(EnemyAIService))]
     public abstract class State : MonoBehaviour
     {
         protected EnemyAIBussinessLogic enemyAIBussinessLogic;
@@ -17,8 +16,6 @@ namespace Presentation.Enemy.StateMachine
         protected MovementBussinessLogic movementBussinessLogic;
         protected RouteNavegationBussinessLogic routeNavegationBussinessLogic;
         protected StateMachine StateMachine;
-
-        public abstract void CheckExit();
 
         private void Awake()
         {
@@ -30,9 +27,11 @@ namespace Presentation.Enemy.StateMachine
             routeNavegationBussinessLogic = new RouteNavegationBussinessLogic(routeNavegationService);
             enemyMovementDirectionService = new EnemyMovementDirectionService();
 
-            var enemyAIService = GetComponent<IEnemyAIService>();
+            var enemyAIService = GetComponent<EnemyAIService>();
             enemyAIBussinessLogic = new EnemyAIBussinessLogic(enemyAIService);
         }
+
+        public abstract void CheckExit();
 
         //Metodo para verificar la salida de los estados
     }

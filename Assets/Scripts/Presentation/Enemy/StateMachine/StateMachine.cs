@@ -6,19 +6,6 @@ namespace Presentation.Enemy.StateMachine
     {
         private State currentState; //El estado
 
-        public void ChangeState<TState>() where TState : State //Metodo que cambia el estado
-        {
-            var newState = GetComponent<TState>(); //Busca el estado que le pasamos al metodo
-            if (newState == null) //Si el nuevo estado equivale a "null", se le asigna automaticamente
-            {
-                newState = gameObject.AddComponent<TState>();
-            }
-
-            currentState.enabled = false; //Desactivamos el estado actual
-            currentState = newState; //Asignamos el nuevo estado al estado actual
-            currentState.enabled = true; //El nuevo estado es activado
-        }
-
         private void Awake()
         {
             currentState = GetComponent<PatrolState>(); //EL estado inicial es el de Patrullaje
@@ -32,6 +19,19 @@ namespace Presentation.Enemy.StateMachine
         private void Update()
         {
             currentState.CheckExit(); //Al estado que se encuentre activo se le verifica su condicion de salida
+        }
+
+        public void ChangeState<TState>() where TState : State //Metodo que cambia el estado
+        {
+            var newState = GetComponent<TState>(); //Busca el estado que le pasamos al metodo
+            if (newState == null) //Si el nuevo estado equivale a "null", se le asigna automaticamente
+            {
+                newState = gameObject.AddComponent<TState>();
+            }
+
+            currentState.enabled = false; //Desactivamos el estado actual
+            currentState = newState; //Asignamos el nuevo estado al estado actual
+            currentState.enabled = true; //El nuevo estado es activado
         }
     }
 }

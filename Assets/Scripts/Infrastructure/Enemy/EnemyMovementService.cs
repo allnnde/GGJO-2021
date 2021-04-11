@@ -11,6 +11,13 @@ namespace Infrastructure.Enemy
         private IMovementDirectionService _enemyMovementDirectionService;
         private NavMeshAgent _navAgent;
 
+        private void Start()
+        {
+            _anim = GetComponent<Animator>();
+            _navAgent = GetComponent<NavMeshAgent>();
+            _enemyMovementDirectionService = new EnemyMovementDirectionService();
+        }
+
         public Vector2 GetDirectionAnimation(Vector3 point)
         {
             var position = point - transform.position;
@@ -44,13 +51,6 @@ namespace Infrastructure.Enemy
 
             if (direction.x == 0 && direction.y == 0 && !walking)
                 _anim.Play(AnimationLabelConstants.IdleLabel);
-        }
-
-        private void Start()
-        {
-            _anim = GetComponent<Animator>();
-            _navAgent = GetComponent<NavMeshAgent>();
-            _enemyMovementDirectionService = new EnemyMovementDirectionService();
         }
     }
 }

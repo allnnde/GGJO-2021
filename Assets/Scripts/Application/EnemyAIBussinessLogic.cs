@@ -1,12 +1,12 @@
-﻿using Domain.Interfaces;
+﻿using Infrastructure.Enemy;
 
 namespace Application
 {
     public class EnemyAIBussinessLogic
     {
-        private readonly IEnemyAIService _enemyAIService;
+        private readonly EnemyAIService _enemyAIService;
 
-        public EnemyAIBussinessLogic(IEnemyAIService enemyAIService)
+        public EnemyAIBussinessLogic(EnemyAIService enemyAIService)
         {
             _enemyAIService = enemyAIService;
         }

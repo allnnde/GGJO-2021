@@ -1,20 +1,20 @@
 using Application;
-using Domain.Interfaces;
+using Infrastructure.Enemy;
 using UnityEngine;
 
 namespace Presentation.Enemy
 {
     public class EnemyController : MonoBehaviour
     {
-        public float Velocity = 5f;
         private EnemyAIBussinessLogic enemyAIBussinessLogic;
+        public float Velocity = 5f;
         public GameObject Player { get; private set; }
 
         private void Awake()
         {
             Player = GameObject.FindGameObjectWithTag("Player");
 
-            var enemyAIService = GetComponent<IEnemyAIService>();
+            var enemyAIService = GetComponent<EnemyAIService>();
             enemyAIBussinessLogic = new EnemyAIBussinessLogic(enemyAIService);
         }
 

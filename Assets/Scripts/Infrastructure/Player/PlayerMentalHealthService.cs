@@ -6,11 +6,16 @@ namespace Infrastructure.Player
 {
     public class PlayerMentalHealthService : MonoBehaviour, IMentalHealthService
     {
+        private Animator anim;
         public RuntimeAnimatorController AnimPlayerCuerdo;
         public RuntimeAnimatorController AnimPlayerLoco;
         public RuntimeAnimatorController AnimPlayerNeutro;
         public PlayerMentalHealthEnum MentalState;
-        private Animator anim;
+
+        private void Awake()
+        {
+            anim = GetComponent<Animator>();
+        }
 
         public void ChangeMentalHealth(PlayerMentalHealthEnum newMentalHealth)
         {
@@ -33,11 +38,6 @@ namespace Infrastructure.Player
                 default:
                     break;
             }
-        }
-
-        private void Awake()
-        {
-            anim = GetComponent<Animator>();
         }
     }
 }

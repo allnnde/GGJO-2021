@@ -4,21 +4,9 @@ namespace Infrastructure.Audios
 {
     public class AudioManager : MonoBehaviour
     {
+        private AudioSource audioSource;
         public AudioClip TrackCuerdo;
         public AudioClip TrackLoco;
-        private AudioSource audioSource;
-
-        public void PlayCuerdo()
-        {
-            audioSource.clip = TrackCuerdo;
-            audioSource.Play();
-        }
-
-        public void PlayLoco()
-        {
-            audioSource.clip = TrackLoco;
-            audioSource.Play();
-        }
 
         private void Awake()
         {
@@ -33,6 +21,18 @@ namespace Infrastructure.Audios
         // Update is called once per frame
         private void Update()
         {
+        }
+
+        public void PlayCuerdo()
+        {
+            audioSource.clip = TrackCuerdo;
+            audioSource.Play();
+        }
+
+        public void PlayLoco()
+        {
+            audioSource.clip = TrackLoco;
+            audioSource.Play();
         }
     }
 }

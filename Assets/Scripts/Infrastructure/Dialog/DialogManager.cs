@@ -6,11 +6,17 @@ namespace Infrastructure.Dialog
 {
     public class DialogManager : MonoBehaviour
     {
+        private int ConverIndex;
+        private List<string> Conversation;
         public GameObject DialogPanel;
         public Text DialogText;
         public Text NpcNameText;
-        private int ConverIndex;
-        private List<string> Conversation;
+
+        // Start is called before the first frame update
+        private void Start()
+        {
+            DialogPanel.SetActive(false);
+        }
 
         public void Next()
         {
@@ -44,12 +50,6 @@ namespace Infrastructure.Dialog
         {
             DialogPanel.SetActive(false);
             Time.timeScale = 1;
-        }
-
-        // Start is called before the first frame update
-        private void Start()
-        {
-            DialogPanel.SetActive(false);
         }
     }
 }

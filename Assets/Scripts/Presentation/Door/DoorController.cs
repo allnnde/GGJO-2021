@@ -9,12 +9,12 @@ namespace Presentation.Door
 {
     public class DoorController : MonoBehaviour
     {
+        private DialogManager dialogManager;
         public Sprite Abierto;
         public Sprite Cerrado;
         public PlayerMentalHealthEnum NeededMetalHealthe;
         public string NexLevel;
         public GameObject Puesta;
-        private DialogManager dialogManager;
 
         private void Awake()
         {
