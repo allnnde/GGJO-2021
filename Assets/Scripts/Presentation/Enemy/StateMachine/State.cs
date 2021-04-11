@@ -1,4 +1,5 @@
-using Application;
+using Application.Common;
+using Application.Enemy;
 using Domain.Interfaces;
 using Infrastructure.Enemy;
 using UnityEngine;

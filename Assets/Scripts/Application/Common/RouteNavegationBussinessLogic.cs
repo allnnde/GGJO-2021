@@ -1,7 +1,7 @@
 ﻿using Domain.Interfaces;
 using UnityEngine;
 
-namespace Application
+namespace Application.Common
 {
     public class RouteNavegationBussinessLogic
     {

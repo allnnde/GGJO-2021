@@ -1,4 +1,4 @@
-﻿using Application;
+﻿using Application.Common;
 using Domain.Interfaces;
 using Infrastructure.Player;
 using UnityEngine;

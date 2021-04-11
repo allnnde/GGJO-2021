@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Enemy;
 
-namespace Application
+namespace Application.Enemy
 {
     public class EnemyAIBussinessLogic
     {
