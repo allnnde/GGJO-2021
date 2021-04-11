@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-    public class AnimationLabelConstants
+namespace Assets.Scripts.Domain.Enums
+{
+    public static class AnimationLabelConstants
     {
         public const string WalkingTopLabel = "WalkingTop";
         public const string WalkingBottomLabel = "WalkingBottom";
@@ -15,4 +15,4 @@ using System.Threading.Tasks;
         public const string IdleLabel = "Idle";
 
     }
-
+}

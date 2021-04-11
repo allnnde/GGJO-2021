@@ -1,24 +1,28 @@
+using Assets.Scripts.Presentation.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowState : State
+namespace Assets.Scripts.Presentation.Enemy.StateMachine
 {
-    public override void CheckExit() 
+    public class FollowState : State
     {
-        if (!enemyAIBussinessLogic.PlayerInView() || !enemyAIBussinessLogic.ShouldFollowPlayer()) 
+        public override void CheckExit()
         {
-            StateMachine.ChangeState<PatrolState>();
+            if (!enemyAIBussinessLogic.PlayerInView() || !enemyAIBussinessLogic.ShouldFollowPlayer())
+            {
+                StateMachine.ChangeState<PatrolState>();
+            }
         }
+
+
+        // Update is called once per frame
+        void Update()
+        {
+            movementBussinessLogic.Move(PlayerController.Instance.transform.position, 0);
+
+        }
+
+
     }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        movementBussinessLogic.Move(PlayerController.Instance.transform.position, 0);
-
-    }
-
- 
 }

@@ -1,38 +1,41 @@
+using Assets.Scripts.Application;
+using Assets.Scripts.Domain.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class EnemyController : MonoBehaviour
+namespace Assets.Scripts.Presentation.Enemy
 {
-    public float Velocity = 5f;
-    public GameObject Player { get; private set; }
-
-
-    private EnemyAIBussinessLogic enemyAIBussinessLogic;
-
-    private void Awake()
+    public class EnemyController : MonoBehaviour
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        public float Velocity = 5f;
+        public GameObject Player { get; private set; }
 
-        var enemyAIService = GetComponent<IEnemyAIService>();
-        enemyAIBussinessLogic = new EnemyAIBussinessLogic(enemyAIService);
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        private EnemyAIBussinessLogic enemyAIBussinessLogic;
+
+        private void Awake()
         {
-            enemyAIBussinessLogic.InteractWithPlayer();
+            Player = GameObject.FindGameObjectWithTag("Player");
+
+            var enemyAIService = GetComponent<IEnemyAIService>();
+            enemyAIBussinessLogic = new EnemyAIBussinessLogic(enemyAIService);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                enemyAIBussinessLogic.InteractWithPlayer();
+            }
+        }
+
+        private void OnDrawGizmos() //Dibuja el area de efecto en el editor
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, enemyAIBussinessLogic?.GetRadiusOfView() ?? 0);
         }
     }
-
-    private void OnDrawGizmos() //Dibuja el area de efecto en el editor
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemyAIBussinessLogic?.GetRadiusOfView() ?? 0);
-    }
 }
-

@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public interface IMovementDirectionService
+namespace Assets.Scripts.Domain.Interfaces
 {
-    Vector2 GetDirection();
-    Vector2 GetDirection(Vector2 direction);
+    public interface IMovementDirectionService
+    {
+        Vector2 GetDirection();
+        Vector2 GetDirection(Vector2 direction);
+    }
 }

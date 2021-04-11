@@ -1,8 +1,13 @@
-﻿public interface IEnemyAIService
+﻿using Assets.Scripts.Domain.Enums;
+
+namespace Assets.Scripts.Domain.Interfaces
 {
-    EnemyTypeEnum EnemyType { get; set; }
-    float RadiusOfView { get; set; }
-    void InteractWithPlayer();
-    bool PlayerInView();
-    bool ShouldFollowPlayer();
+    public interface IEnemyAIService
+    {
+        EnemyTypeEnum EnemyType { get; set; }
+        float RadiusOfView { get; set; }
+        void InteractWithPlayer();
+        bool PlayerInView();
+        bool ShouldFollowPlayer();
+    }
 }

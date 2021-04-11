@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Domain.Enums
 {
-    public static class AxisLabelConstants
+    public enum PlayerMentalHealthEnum
     {
-        public const string HorizontalLabel = "Horizontal";
-        public const string VerticalLabel = "Vertical";
+        Demente,
+        Cuerdo,
+        Neutro
     }
 }

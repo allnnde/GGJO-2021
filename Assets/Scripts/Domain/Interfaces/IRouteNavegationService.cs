@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public interface IRouteNavegationService
+namespace Assets.Scripts.Domain.Interfaces
 {
-    bool IsInCurrentPointRoute();
-    Vector3 GetCurrentPointRoute();
-    Vector3 GetNextPointRoute();
+    public interface IRouteNavegationService
+    {
+        bool IsInCurrentPointRoute();
+        Vector3 GetCurrentPointRoute();
+        Vector3 GetNextPointRoute();
+    }
 }

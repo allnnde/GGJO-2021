@@ -1,37 +1,39 @@
-﻿using System;
+﻿using Assets.Scripts.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-public class EnemyAIBussinessLogic
+namespace Assets.Scripts.Application
 {
-    private readonly IEnemyAIService _enemyAIService;
-
-    public EnemyAIBussinessLogic(IEnemyAIService enemyAIService)
+    public class EnemyAIBussinessLogic
     {
-        _enemyAIService = enemyAIService;
-    }
-    public bool PlayerInView()
-    {
-        return _enemyAIService.PlayerInView();
-    }
+        private readonly IEnemyAIService _enemyAIService;
 
-    public bool ShouldFollowPlayer()
-    {
-        return _enemyAIService.ShouldFollowPlayer();
-    }
+        public EnemyAIBussinessLogic(IEnemyAIService enemyAIService)
+        {
+            _enemyAIService = enemyAIService;
+        }
+        public bool PlayerInView()
+        {
+            return _enemyAIService.PlayerInView();
+        }
+
+        public bool ShouldFollowPlayer()
+        {
+            return _enemyAIService.ShouldFollowPlayer();
+        }
 
 
-    public void InteractWithPlayer()
-    {
-        _enemyAIService.InteractWithPlayer();
-    }
+        public void InteractWithPlayer()
+        {
+            _enemyAIService.InteractWithPlayer();
+        }
 
-    public float GetRadiusOfView()
-    {
-        return _enemyAIService.RadiusOfView;
+        public float GetRadiusOfView()
+        {
+            return _enemyAIService.RadiusOfView;
+        }
     }
 }

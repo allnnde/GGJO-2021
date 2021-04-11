@@ -1,17 +1,22 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Domain.Enums;
+using Assets.Scripts.Domain.Interfaces;
+using UnityEngine;
 
-public class PlayerMovementDirectionService : IMovementDirectionService
+namespace Assets.Scripts.Infrastructure.Player
 {
-
-    public Vector2 GetDirection()
+    public class PlayerMovementDirectionService : IMovementDirectionService
     {
-        var horizantal = Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel);
-        var vertical = Input.GetAxisRaw(AxisLabelConstants.VerticalLabel);
-        return new Vector2(horizantal, vertical);
-    }
 
-    public Vector2 GetDirection(Vector2 direction)
-    {
-        throw new System.NotImplementedException();
+        public Vector2 GetDirection()
+        {
+            var horizantal = Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel);
+            var vertical = Input.GetAxisRaw(AxisLabelConstants.VerticalLabel);
+            return new Vector2(horizantal, vertical);
+        }
+
+        public Vector2 GetDirection(Vector2 direction)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

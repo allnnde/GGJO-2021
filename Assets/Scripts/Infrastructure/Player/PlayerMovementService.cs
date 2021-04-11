@@ -1,36 +1,41 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Domain.Enums;
+using Assets.Scripts.Domain.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementService : MonoBehaviour, IMovementService
+namespace Assets.Scripts.Infrastructure.Player
 {
-    private Rigidbody2D _playerRb;
-    private Animator _anim;
-
-    void Start()
+    public class PlayerMovementService : MonoBehaviour, IMovementService
     {
-        _playerRb = GetComponent<Rigidbody2D>();
-        _anim = GetComponent<Animator>();
-    }
+        private Rigidbody2D _playerRb;
+        private Animator _anim;
 
-    public void ShowMoveAnimation(Vector3 direction)
-    {
-        if (direction.x == 0 && direction.y > 0)
-            _anim.Play(AnimationLabelConstants.WalkingTopLabel);
-        if (direction.x == 0 && direction.y < 0)
-            _anim.Play(AnimationLabelConstants.WalkingBottomLabel);
+        void Start()
+        {
+            _playerRb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
+        }
 
-        if (direction.x < 0 && direction.y == 0)
-            _anim.Play(AnimationLabelConstants.WalkingLeftLabel);
-        if (direction.x > 0 && direction.y == 0)
-            _anim.Play(AnimationLabelConstants.WalkingRightLabel);
+        public void ShowMoveAnimation(Vector3 direction)
+        {
+            if (direction.x == 0 && direction.y > 0)
+                _anim.Play(AnimationLabelConstants.WalkingTopLabel);
+            if (direction.x == 0 && direction.y < 0)
+                _anim.Play(AnimationLabelConstants.WalkingBottomLabel);
 
-        if (direction.x == 0 && direction.y == 0)
-            _anim.Play(AnimationLabelConstants.IdleLabel);
-    }
+            if (direction.x < 0 && direction.y == 0)
+                _anim.Play(AnimationLabelConstants.WalkingLeftLabel);
+            if (direction.x > 0 && direction.y == 0)
+                _anim.Play(AnimationLabelConstants.WalkingRightLabel);
 
-    public void Move(Vector2 direction, float speed)
-    {
-        _playerRb.velocity = direction.normalized * speed;
+            if (direction.x == 0 && direction.y == 0)
+                _anim.Play(AnimationLabelConstants.IdleLabel);
+        }
+
+        public void Move(Vector2 direction, float speed)
+        {
+            _playerRb.velocity = direction.normalized * speed;
+        }
     }
 }

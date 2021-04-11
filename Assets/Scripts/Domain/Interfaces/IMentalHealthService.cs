@@ -1,4 +1,9 @@
-﻿public interface IMentalHealthService
+﻿using Assets.Scripts.Domain.Enums;
+
+namespace Assets.Scripts.Domain.Interfaces
 {
-    void ChangeMentalHealth(PlayerMentalHealthEnum newMentalHealth);
+    public interface IMentalHealthService
+    {
+        void ChangeMentalHealth(PlayerMentalHealthEnum newMentalHealth);
+    }
 }

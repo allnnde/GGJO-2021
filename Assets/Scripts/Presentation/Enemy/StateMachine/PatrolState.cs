@@ -2,24 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : State
+namespace Assets.Scripts.Presentation.Enemy.StateMachine
 {
-    public override void CheckExit() 
+    public class PatrolState : State
     {
-        if (enemyAIBussinessLogic.PlayerInView() && enemyAIBussinessLogic.ShouldFollowPlayer()) 
+        public override void CheckExit()
         {
-            StateMachine.ChangeState<FollowState>();
+            if (enemyAIBussinessLogic.PlayerInView() && enemyAIBussinessLogic.ShouldFollowPlayer())
+            {
+                StateMachine.ChangeState<FollowState>();
+            }
+
+
         }
+        void Update()
+        {
 
+            var currentPoint = routeNavegationBussinessLogic.GetCurrentPointRoute();
+            if (routeNavegationBussinessLogic.IsInCurrentPointRoute())
+                currentPoint = routeNavegationBussinessLogic.GetNextPointRoute();
+            movementBussinessLogic.Move(currentPoint, 0);
 
-    }
-    void Update()
-    {
-
-        var currentPoint = routeNavegationBussinessLogic.GetCurrentPointRoute();
-        if (routeNavegationBussinessLogic.IsInCurrentPointRoute())
-            currentPoint = routeNavegationBussinessLogic.GetNextPointRoute();
-        movementBussinessLogic.Move(currentPoint, 0);
-
+        }
     }
 }
