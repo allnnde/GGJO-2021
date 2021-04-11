@@ -6,7 +6,7 @@ public class FollowState : State
 {
     public override void CheckExit() 
     {
-        if (!Enemy.PlayerInView() || !Enemy.ShouldFollowPlayer()) 
+        if (!enemyAIBussinessLogic.PlayerInView() || !enemyAIBussinessLogic.ShouldFollowPlayer()) 
         {
             StateMachine.ChangeState<PatrolState>();
         }
@@ -16,11 +16,7 @@ public class FollowState : State
     // Update is called once per frame
     void Update()
     {
-        movementController.Move(Enemy.Player.transform.position, 0);
-
-        Vector2 direction = GetDirectionAnimation(Enemy.Player.transform.position);
-
-        movementController.ShowMoveAnimation(direction);
+        movementBussinessLogic.Move(PlayerController.Instance.transform.position, 0);
 
     }
 

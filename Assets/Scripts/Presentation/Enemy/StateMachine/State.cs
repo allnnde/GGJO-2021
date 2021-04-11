@@ -4,28 +4,29 @@ using UnityEngine;
 
 [RequireComponent(typeof(StateMachine))]
 [RequireComponent(typeof(EnemyController))]
+[RequireComponent(typeof(EnemyMovementService))]
+[RequireComponent(typeof(EnemyRouteService))]
+[RequireComponent(typeof(EnemyAIService))]
 public abstract class State : MonoBehaviour
 {
-    protected StateMachine StateMachine; 
-    protected EnemyController Enemy;
-    protected MovementBussinessLogic movementController;
-    protected EnemyMovementDirectionService _enemyMovementDirectionService;
+    protected StateMachine StateMachine;     
+    protected MovementBussinessLogic movementBussinessLogic;
+    protected RouteNavegationBussinessLogic routeNavegationBussinessLogic;
+    protected EnemyMovementDirectionService enemyMovementDirectionService;
+    protected EnemyAIBussinessLogic enemyAIBussinessLogic;
 
     void Awake()
     {
         StateMachine = GetComponent<StateMachine>();
-        Enemy = GetComponent<EnemyController>();
-        var enemyMovementController = Enemy.GetComponent<IMovementMotor>();
-        movementController = new MovementBussinessLogic(enemyMovementController);
-        _enemyMovementDirectionService = new EnemyMovementDirectionService();
-    }
+        var enemyMovementController = GetComponent<IMovementService>();
+        movementBussinessLogic = new MovementBussinessLogic(enemyMovementController);
 
-    protected Vector2 GetDirectionAnimation(Vector3 point)
-    {
-        transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
-        var position = point - transform.position;
-        var direction = _enemyMovementDirectionService.GetDirection(position);
-        return direction;
+        var routeNavegationService = GetComponent<IRouteNavegationService>();
+        routeNavegationBussinessLogic = new RouteNavegationBussinessLogic(routeNavegationService);
+        enemyMovementDirectionService = new EnemyMovementDirectionService();
+
+        var enemyAIService = GetComponent<IEnemyAIService>();
+        enemyAIBussinessLogic = new EnemyAIBussinessLogic(enemyAIService);
     }
 
     public abstract void CheckExit(); //Metodo para verificar la salida de los estados

@@ -3,29 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovementService : MonoBehaviour, IMovementMotor
+public class EnemyMovementService : MonoBehaviour, IMovementService
 {
     
     private Animator _anim;
-    private NavMeshAgent navAgent;
-    
+    private NavMeshAgent _navAgent;
+    private IMovementDirectionService _enemyMovementDirectionService;
 
     void Start()
     {
         _anim = GetComponent<Animator>();
-        navAgent = GetComponent<NavMeshAgent>();
+        _navAgent = GetComponent<NavMeshAgent>();
+        _enemyMovementDirectionService = new EnemyMovementDirectionService();
     }
 
     public void Move(Vector2 point, float speed = 0)
     {
-        navAgent.SetDestination(point);
+
+        transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
+        _navAgent.SetDestination(point);
     }
 
-    public void ShowMoveAnimation(Vector2 direction)
+    public void ShowMoveAnimation(Vector3 point)
     {
+        var position = point - transform.position;
+        var direction = _enemyMovementDirectionService.GetDirection(position);
 
-        var walking = navAgent.remainingDistance > navAgent.stoppingDistance &&
-                      navAgent.hasPath && Mathf.Abs(navAgent.velocity.sqrMagnitude) > 0;
+        var walking = _navAgent.remainingDistance > _navAgent.stoppingDistance &&
+                      _navAgent.hasPath && Mathf.Abs(_navAgent.velocity.sqrMagnitude) > 0;
 
         if (direction.x == 0 && direction.y > 0 && walking)
             _anim.Play(AnimationLabelConstants.WalkingTopLabel);
@@ -39,5 +44,12 @@ public class EnemyMovementService : MonoBehaviour, IMovementMotor
 
         if (direction.x == 0 && direction.y == 0 && !walking)
             _anim.Play(AnimationLabelConstants.IdleLabel);
+    }
+
+    public Vector2 GetDirectionAnimation(Vector3 point)
+    {
+        var position = point - transform.position;
+        var direction = _enemyMovementDirectionService.GetDirection(position);
+        return direction;
     }
 }

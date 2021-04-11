@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementService : MonoBehaviour, IMovementMotor
+public class PlayerMovementService : MonoBehaviour, IMovementService
 {
     private Rigidbody2D _playerRb;
     private Animator _anim;
@@ -13,7 +13,7 @@ public class PlayerMovementService : MonoBehaviour, IMovementMotor
         _anim = GetComponent<Animator>();
     }
 
-    public void ShowMoveAnimation(Vector2 direction)
+    public void ShowMoveAnimation(Vector3 direction)
     {
         if (direction.x == 0 && direction.y > 0)
             _anim.Play(AnimationLabelConstants.WalkingTopLabel);

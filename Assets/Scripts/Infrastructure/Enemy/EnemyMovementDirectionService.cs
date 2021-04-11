@@ -2,7 +2,6 @@
 
 public class EnemyMovementDirectionService : IMovementDirectionService
 {
-
     public Vector2 GetDirection()
     {
         throw new System.NotImplementedException();
@@ -11,7 +10,7 @@ public class EnemyMovementDirectionService : IMovementDirectionService
     public Vector2 GetDirection(Vector2 direction)
     {
 
-        var dir = Vector2Int.FloorToInt(direction );
+        var dir = Vector2Int.FloorToInt(direction);
 
         float x = 0;
         float y = 0;
@@ -26,7 +25,6 @@ public class EnemyMovementDirectionService : IMovementDirectionService
             y = 0;
         else
             x = 0;
-
         return new Vector2(x, y);
 
     }

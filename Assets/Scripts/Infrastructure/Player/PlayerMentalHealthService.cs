@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMentalHealthController : MonoBehaviour
+public class PlayerMentalHealthService : MonoBehaviour, IMentalHealthService
 {
 
     public PlayerMentalHealthEnum MentalState;

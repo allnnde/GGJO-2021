@@ -26,7 +26,7 @@ public class DoorController : MonoBehaviour
         Debug.Log(collision.name);
         if (collision.CompareTag("Player"))
         {
-            var playerMentalHealth = collision.GetComponent<PlayerMentalHealthController>();
+            var playerMentalHealth = collision.GetComponent<PlayerMentalHealthService>();
             if (playerMentalHealth.MentalState == NeededMetalHealthe)
             {
                 Puesta.GetComponent<SpriteRenderer>().sprite = Abierto;

@@ -6,26 +6,21 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-    public class MovementBussinessLogic
+public class MovementBussinessLogic
+{
+    private readonly IMovementService _movementMotor;
+
+    public MovementBussinessLogic(IMovementService movementMotor)
     {
-        private readonly IMovementMotor _movementMotor;
-
-        public MovementBussinessLogic(IMovementMotor movementMotor)
-        {
-            _movementMotor = movementMotor;
-        }
+        _movementMotor = movementMotor;
+    }
 
 
-        public void Move(Vector2 direction, float speed)
-        {
-            _movementMotor.Move(direction, speed);
-        }
-
-        public void ShowMoveAnimation(Vector2 direction)
-        {
-            _movementMotor.ShowMoveAnimation(direction);
-        }
-
+    public void Move(Vector2 direction, float speed)
+    {
+        _movementMotor.Move(direction, speed);
+        _movementMotor.ShowMoveAnimation(direction);
+    }
 
 }
 

@@ -6,7 +6,7 @@ public class PatrolState : State
 {
     public override void CheckExit() 
     {
-        if (Enemy.PlayerInView() && Enemy.ShouldFollowPlayer()) 
+        if (enemyAIBussinessLogic.PlayerInView() && enemyAIBussinessLogic.ShouldFollowPlayer()) 
         {
             StateMachine.ChangeState<FollowState>();
         }
@@ -15,11 +15,11 @@ public class PatrolState : State
     }
     void Update()
     {
-        if (Enemy.InCurrentPointRoute) 
-            Enemy.CurrentPointRoute = Enemy.GetNextPointRoute();
-        movementController.Move(Enemy.CurrentPointRoute,0);
-        Vector2 direction = GetDirectionAnimation(Enemy.CurrentPointRoute);
-        movementController.ShowMoveAnimation(direction);
+
+        var currentPoint = routeNavegationBussinessLogic.GetCurrentPointRoute();
+        if (routeNavegationBussinessLogic.IsInCurrentPointRoute())
+            currentPoint = routeNavegationBussinessLogic.GetNextPointRoute();
+        movementBussinessLogic.Move(currentPoint, 0);
 
     }
 }
