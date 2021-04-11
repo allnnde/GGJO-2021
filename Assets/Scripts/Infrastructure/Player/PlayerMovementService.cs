@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoventService : MonoBehaviour, IMovementMotor
+public class PlayerMovementService : MonoBehaviour, IMovementMotor
 {
     private Rigidbody2D _playerRb;
     private Animator _anim;
@@ -12,7 +12,6 @@ public class PlayerMoventService : MonoBehaviour, IMovementMotor
         _playerRb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
-
 
     public void ShowMoveAnimation(Vector2 direction)
     {

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-    public class MovementController
+    public class MovementBussinessLogic
     {
         private readonly IMovementMotor _movementMotor;
 
-        public MovementController(IMovementMotor movementMotor)
+        public MovementBussinessLogic(IMovementMotor movementMotor)
         {
             _movementMotor = movementMotor;
         }
@@ -19,9 +19,13 @@ using UnityEngine;
         public void Move(Vector2 direction, float speed)
         {
             _movementMotor.Move(direction, speed);
+        }
+
+        public void ShowMoveAnimation(Vector2 direction)
+        {
             _movementMotor.ShowMoveAnimation(direction);
         }
 
 
-    }
+}
 
