@@ -383,8 +383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialogPanel: {fileID: 6886335529449827623}
-  NpcNameText: {fileID: 6886335529606863340}
   DialogText: {fileID: 6886335528968026541}
+  NpcNameText: {fileID: 6886335529606863340}
 --- !u!1 &6886335529606863342
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 6886335529801910543}
   - component: {fileID: 6886335529801910528}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: DialogSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

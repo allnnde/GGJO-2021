@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Domain.Enums;
-using Assets.Scripts.Domain.Interfaces;
+﻿using Domain.Enums;
+using Domain.Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Assets.Scripts.Infrastructure.Enemy
+namespace Infrastructure.Enemy
 {
     public class EnemyMovementService : MonoBehaviour, IMovementService
     {

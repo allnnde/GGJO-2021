@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Presentation.Enemy.StateMachine
+namespace Presentation.Enemy.StateMachine
 {
     public class StateMachine : MonoBehaviour
     {

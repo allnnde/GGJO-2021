@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9109505367353303162}
   - component: {fileID: 713915576203643975}
   - component: {fileID: 804746123194779508}
+  - component: {fileID: 1227387353}
   m_Layer: 9
   m_Name: Enemy_Pacient
   m_TagString: Enemy
@@ -100,13 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41f06aa16401454aba0409ef5e3b310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Route: {fileID: 0}
   Velocity: 5
-  RadiusOfView: 3
-  EnemyType: 0
-  Name: Paciente 1101
-  dialogs:
-  - Hola, ahora estas loco
 --- !u!114 &837180869453071232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +162,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 3.11, y: 0.0001}
+  m_Size: {x: 3.11, y: 1}
   m_Direction: 0
 --- !u!95 &804746123194779508
 Animator:
@@ -179,7 +174,7 @@ Animator:
   m_GameObject: {fileID: 837180869453071236}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e5a2d41d034c6234499850081fa372b0, type: 2}
+  m_Controller: {fileID: 22100000, guid: d6fd9aecdb80c1e4093366efc87a9bda, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -188,3 +183,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1227387353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837180869453071236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527c852304bbb37478340ed65f0df8d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

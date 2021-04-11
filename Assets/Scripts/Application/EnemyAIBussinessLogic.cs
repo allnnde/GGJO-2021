@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Domain.Interfaces;
+﻿using Domain.Interfaces;
 
-namespace Assets.Scripts.Application
+namespace Application
 {
     public class EnemyAIBussinessLogic
     {

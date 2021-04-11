@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Domain.Enums;
+﻿using Domain.Enums;
 
-namespace Assets.Scripts.Domain.Interfaces
+namespace Domain.Interfaces
 {
     public interface IEnemyAIService
     {

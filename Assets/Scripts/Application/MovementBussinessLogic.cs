@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.Domain.Interfaces;
+﻿using Domain.Interfaces;
 using UnityEngine;
 
-namespace Assets.Scripts.Application
+namespace Application
 {
     public class MovementBussinessLogic
     {

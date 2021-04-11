@@ -1,9 +1,9 @@
-using Assets.Scripts.Application;
-using Assets.Scripts.Domain.Interfaces;
-using Assets.Scripts.Infrastructure.Enemy;
+using Application;
+using Domain.Interfaces;
+using Infrastructure.Enemy;
 using UnityEngine;
 
-namespace Assets.Scripts.Presentation.Enemy.StateMachine
+namespace Presentation.Enemy.StateMachine
 {
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(EnemyController))]

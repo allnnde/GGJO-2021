@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Domain.Enums
+﻿namespace Domain.Enums
 {
     public enum EnemyTypeEnum
     {

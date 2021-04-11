@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Domain.Interfaces;
+﻿using Domain.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrastructure.Enemy
+namespace Infrastructure.Enemy
 {
     public class EnemyRouteService : MonoBehaviour, IRouteNavegationService
     {

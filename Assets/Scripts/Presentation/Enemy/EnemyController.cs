@@ -1,8 +1,8 @@
-using Assets.Scripts.Application;
-using Assets.Scripts.Domain.Interfaces;
+using Application;
+using Domain.Interfaces;
 using UnityEngine;
 
-namespace Assets.Scripts.Presentation.Enemy
+namespace Presentation.Enemy
 {
     public class EnemyController : MonoBehaviour
     {

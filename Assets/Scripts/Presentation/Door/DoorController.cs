@@ -1,11 +1,11 @@
-using Assets.Scripts.Domain.Enums;
-using Assets.Scripts.Infrastructure.Dialog;
-using Assets.Scripts.Infrastructure.Player;
+using Domain.Enums;
+using Infrastructure.Dialog;
+using Infrastructure.Player;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Presentation.Door
+namespace Presentation.Door
 {
     public class DoorController : MonoBehaviour
     {

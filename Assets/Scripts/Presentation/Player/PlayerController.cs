@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Application;
-using Assets.Scripts.Domain.Interfaces;
-using Assets.Scripts.Infrastructure.Player;
+﻿using Application;
+using Domain.Interfaces;
+using Infrastructure.Player;
 using UnityEngine;
 
-namespace Assets.Scripts.Presentation.Player
+namespace Presentation.Player
 {
     [RequireComponent(typeof(PlayerMovementService))]
     [RequireComponent(typeof(PlayerMentalHealthService))]

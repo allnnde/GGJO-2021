@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Domain.Enums;
-using Assets.Scripts.Domain.Interfaces;
+﻿using Domain.Enums;
+using Domain.Interfaces;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrastructure.Player
+namespace Infrastructure.Player
 {
     public class PlayerMovementDirectionService : IMovementDirectionService
     {

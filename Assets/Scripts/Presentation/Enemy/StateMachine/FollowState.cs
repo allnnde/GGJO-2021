@@ -1,6 +1,6 @@
-using Assets.Scripts.Presentation.Player;
+using Presentation.Player;
 
-namespace Assets.Scripts.Presentation.Enemy.StateMachine
+namespace Presentation.Enemy.StateMachine
 {
     public class FollowState : State
     {

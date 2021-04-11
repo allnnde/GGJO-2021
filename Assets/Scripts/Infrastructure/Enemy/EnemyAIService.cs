@@ -1,12 +1,12 @@
-﻿using Assets.Scripts.Domain.Enums;
-using Assets.Scripts.Domain.Interfaces;
-using Assets.Scripts.Infrastructure.Audios;
-using Assets.Scripts.Infrastructure.Dialog;
-using Assets.Scripts.Infrastructure.Player;
+﻿using Domain.Enums;
+using Domain.Interfaces;
+using Infrastructure.Audios;
+using Infrastructure.Dialog;
+using Infrastructure.Player;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrastructure.Enemy
+namespace Infrastructure.Enemy
 {
     public class EnemyAIService : MonoBehaviour, IEnemyAIService
     {
@@ -21,7 +21,7 @@ namespace Assets.Scripts.Infrastructure.Enemy
 
         public void InteractWithPlayer()
         {
-            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Cuerdo)
+            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
             {
                 dialogManager.Start_Dialog(Name, dialogs);
                 PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);

@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145cc2d5cfb72ee4fab7544fbaa23050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeededMetalHealthe: 1
-  Puesta: {fileID: 0}
   Abierto: {fileID: 21300000, guid: c8cd1efa87f19554083911352664bf57, type: 3}
   Cerrado: {fileID: 21300000, guid: c401f6c91137fb446b187fa32ff3869a, type: 3}
-  NexLevel: Game_LVL02
+  NeededMetalHealthe: 1
+  NexLevel: Game_LVL2
+  Puesta: {fileID: 0}

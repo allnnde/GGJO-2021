@@ -1,6 +1,6 @@
 {
     "name": "Infrastructure",
-    "rootNamespace": "",
+    "rootNamespace": "Infrastructure",
     "references": [
         "GUID:f16c49f56368b6b4690ac0cb286aa1bf"
     ],

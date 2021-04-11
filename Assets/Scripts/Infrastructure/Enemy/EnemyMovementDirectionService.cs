@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.Domain.Interfaces;
+﻿using Domain.Interfaces;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrastructure.Enemy
+namespace Infrastructure.Enemy
 {
     public class EnemyMovementDirectionService : IMovementDirectionService
     {

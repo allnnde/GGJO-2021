@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Domain.Interfaces
+namespace Domain.Interfaces
 {
     public interface IMovementDirectionService
     {

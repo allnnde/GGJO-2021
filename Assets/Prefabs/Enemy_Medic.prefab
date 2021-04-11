@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9109505367353303162}
   - component: {fileID: 3276803634139810313}
   - component: {fileID: -6399272226527589561}
+  - component: {fileID: 2043405649}
   m_Layer: 9
   m_Name: Enemy_Medic
   m_TagString: Enemy
@@ -100,13 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41f06aa16401454aba0409ef5e3b310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Route: {fileID: 0}
   Velocity: 5
-  RadiusOfView: 3
-  EnemyType: 1
-  Name: Doctora
-  dialogs:
-  - Estas cuerdo, sal por la puerta
 --- !u!114 &837180869453071232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +174,7 @@ Animator:
   m_GameObject: {fileID: 837180869453071236}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5ef5af1f88f916c46bc683e1434df9f7, type: 2}
+  m_Controller: {fileID: 22100000, guid: 81cfd7d95b118d24f897feaaa881d9d8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -188,3 +183,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2043405649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837180869453071236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527c852304bbb37478340ed65f0df8d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
