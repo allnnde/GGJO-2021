@@ -35,7 +35,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           allowDirtyBuild: true
-          versioning: Semantic          
+          versioning: none          
 
       # Output
       - uses: actions/upload-artifact@v2
