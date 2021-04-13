@@ -1,10 +1,10 @@
-name: Actions
+name: deploy
 
 on: [push]
 
 jobs:
   build:
-    name: Build my project ✨
+    name: Build my project
     runs-on: ubuntu-latest
     steps:
       # Checkout
