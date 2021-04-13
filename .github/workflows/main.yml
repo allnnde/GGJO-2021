@@ -35,7 +35,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           allowDirtyBuild: true
-          versioning: none          
+          versioning: Tag          
 
       # Output
       - uses: actions/upload-artifact@v2
