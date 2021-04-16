@@ -529,8 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a88069ab642eb542b701f6236d988a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogs:
-  - Estas loco, no puedes salir
+  message: Ahora estas loco, no puedes salir
   Name: Paciente
 --- !u!1 &996951393
 GameObject:
@@ -815,8 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4732fe60ce53da42a2168f192bb6024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogs:
-  - Ya estas cuerdo, puede salir por la puerta
+  message: Ya estas cuerdo, sal por la puerta
   Name: Medica
 --- !u!1 &1721219472
 GameObject:
@@ -961,8 +959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a88069ab642eb542b701f6236d988a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogs:
-  - Estas loco, no puedes salir
+  message: Ahora estas loco, no puedes salir
   Name: Paciente
 --- !u!1 &1748599998
 GameObject:
@@ -1037,6 +1034,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6886335528980090940, guid: d11b18d948343154fadfd463930a972a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopDialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886335528980090940, guid: d11b18d948343154fadfd463930a972a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Infrastructure.Dialog.DialogService, Infrastructure
+      objectReference: {fileID: 0}
     - target: {fileID: 6886335529801910529, guid: d11b18d948343154fadfd463930a972a, type: 3}
       propertyPath: m_Name
       value: DialogSystem
