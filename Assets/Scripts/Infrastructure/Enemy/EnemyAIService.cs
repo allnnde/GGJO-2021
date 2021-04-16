@@ -10,9 +10,9 @@ namespace Infrastructure.Enemy
     public abstract class EnemyAIService : MonoBehaviour
     {
         protected AudioManager audioSource;
-        protected DialogManager dialogManager;
+        protected DialogService dialogService;
         protected PlayerMentalHealthService PlayerMentalHealth;
-        public List<string> dialogs;
+        public string message;
         public string Name;
         public abstract EnemyTypeEnum EnemyType { get; }
         public float RadiusOfView { get; set; } = 4f;
@@ -20,8 +20,7 @@ namespace Infrastructure.Enemy
         private void Awake()
         {
             PlayerMentalHealth = FindObjectOfType<PlayerMentalHealthService>();
-
-            dialogManager = FindObjectOfType<DialogManager>();
+            dialogService = FindObjectOfType<DialogService>();
             audioSource = FindObjectOfType<AudioManager>();
         }
 

@@ -10,7 +10,7 @@ namespace Infrastructure.Enemy
         {
             if (PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Demente)
             {
-                dialogManager.Start_Dialog(Name, dialogs);
+                dialogService.StartDialog(Name, message);
                 PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
                 audioSource.PlayLoco();
             }

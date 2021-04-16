@@ -24,14 +24,11 @@ namespace Presentation.Player
             {
                 Instance = gameObject;
             }
-        }
 
-        private void Start()
-        {
             _movementDirectionService = new PlayerMovementDirectionService();
             _movementBussinessLogic = new MovementBussinessLogic(GetComponent<PlayerMovementService>());
-        }
 
+        }
         private void Update()
         {
             var direcion = _movementDirectionService.GetDirection();

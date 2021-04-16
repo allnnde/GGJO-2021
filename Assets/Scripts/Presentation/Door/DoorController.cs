@@ -1,3 +1,4 @@
+using Application.Common;
 using Domain.Enums;
 using Infrastructure.Dialog;
 using Infrastructure.Player;
@@ -9,17 +10,22 @@ namespace Presentation.Door
 {
     public class DoorController : MonoBehaviour
     {
-        private DialogManager dialogManager;
-        public Sprite Abierto;
-        public Sprite Cerrado;
+        public Sprite Open;
+        public Sprite Close;
         public PlayerMentalHealthEnum NeededMetalHealthe;
         public string NexLevel;
-        public GameObject Puesta;
+        private SpriteRenderer _spriteRenderer;
+        private DialogBussinessLogic dialogManager;
+
+        private GameObject _door;
+        private const string nombre = "Puesta";
 
         private void Awake()
         {
-            dialogManager = FindObjectOfType<DialogManager>();
-            Puesta = transform.parent.gameObject;
+            var dialogservice = FindObjectOfType<DialogService>();
+            dialogManager = new DialogBussinessLogic(dialogservice);
+            _door = transform.parent.gameObject;
+            _spriteRenderer = _door.GetComponent<SpriteRenderer>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -30,23 +36,28 @@ namespace Presentation.Door
                 var playerMentalHealth = collision.GetComponent<PlayerMentalHealthService>();
                 if (playerMentalHealth.MentalState == NeededMetalHealthe)
                 {
-                    Puesta.GetComponent<SpriteRenderer>().sprite = Abierto;
-                    dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Abierta" });
+                    changeDoorSprite(Open);
+                    dialogManager.StartDialog(nombre, "Puesta Abierta");
 
                     if (!string.IsNullOrEmpty(NexLevel))
                         SceneManager.LoadScene(NexLevel);
                     else
                     {
-                        dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
+                        dialogManager.StartDialog(nombre, "Pudiste escapar, felicidades");
                         UnityEngine.Application.Quit();
                     }
                 }
                 else
                 {
-                    Puesta.GetComponent<SpriteRenderer>().sprite = Cerrado;
-                    dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Cerrada" });
+                    changeDoorSprite(Close);
+                    dialogManager.StartDialog(nombre, "Puesta Cerrada");
                 }
             }
+        }
+
+        private void changeDoorSprite(Sprite sprite)
+        {
+            _spriteRenderer.sprite = sprite;
         }
     }
 }

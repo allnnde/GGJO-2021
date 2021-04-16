@@ -14,7 +14,7 @@ namespace Presentation.Enemy.StateMachine
         {
             if (!enemyAIBussinessLogic.PlayerInView() || !enemyAIBussinessLogic.ShouldFollowPlayer())
             {
-                StateMachine.ChangeState<PatrolState>();
+                stateMachine.ChangeState<PatrolState>();
             }
         }
     }

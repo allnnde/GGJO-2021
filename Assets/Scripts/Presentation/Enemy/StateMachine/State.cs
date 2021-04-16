@@ -16,11 +16,11 @@ namespace Presentation.Enemy.StateMachine
         protected EnemyMovementDirectionService enemyMovementDirectionService;
         protected MovementBussinessLogic movementBussinessLogic;
         protected RouteNavegationBussinessLogic routeNavegationBussinessLogic;
-        protected StateMachine StateMachine;
+        protected StateMachine stateMachine;
 
         private void Awake()
         {
-            StateMachine = GetComponent<StateMachine>();
+            stateMachine = GetComponent<StateMachine>();
             var enemyMovementController = GetComponent<IMovementService>();
             movementBussinessLogic = new MovementBussinessLogic(enemyMovementController);
 

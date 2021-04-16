@@ -7,13 +7,9 @@ namespace Presentation.Enemy
     public class EnemyController : MonoBehaviour
     {
         private EnemyAIBussinessLogic enemyAIBussinessLogic;
-        public float Velocity = 5f;
-        public GameObject Player { get; private set; }
 
         private void Awake()
         {
-            Player = GameObject.FindGameObjectWithTag("Player");
-
             var enemyAIService = GetComponent<EnemyAIService>();
             enemyAIBussinessLogic = new EnemyAIBussinessLogic(enemyAIService);
         }
