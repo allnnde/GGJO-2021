@@ -33,7 +33,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: StandaloneWindows64
+          targetPlatform: StandaloneWindows
           allowDirtyBuild: true
           versioning: None          
 
