@@ -211,16 +211,16 @@ build-StandaloneWindows64:
 #    - mac
 #  needs: ["build-ios-xcode"]
 
-pages:
-  image: alpine:latest
-  stage: deploy
-  script:
-    - mv "$UNITY_DIR/Builds/WebGL/${BUILD_NAME}" public
-  artifacts:
-    paths:
-      - public
-  only:
-   - master
+#pages:
+#  image: alpine:latest
+#  stage: deploy
+#  script:
+#    - mv "$UNITY_DIR/Builds/WebGL/${BUILD_NAME}" public
+#  artifacts:
+#    paths:
+#      - public
+#  only:
+#   - master
 
 workflow:
   rules:
