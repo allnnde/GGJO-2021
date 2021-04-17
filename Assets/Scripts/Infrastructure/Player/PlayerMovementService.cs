@@ -31,7 +31,6 @@ namespace Infrastructure.Player
                 _anim.Play(AnimationLabelConstants.WalkingLeftLabel);
             if (direction.x > 0 && direction.y == 0)
                 _anim.Play(AnimationLabelConstants.WalkingRightLabel);
-
             if (direction.x == 0 && direction.y == 0)
                 _anim.Play(AnimationLabelConstants.IdleLabel);
         }
