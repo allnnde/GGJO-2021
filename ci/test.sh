@@ -32,8 +32,16 @@ else
   echo "Unexpected exit code $UNITY_EXIT_CODE";
 fi
 
+for file in $UNITY_DIR/$TEST_PLATFORM-coverage/*; do
+    echo "$(basename "$file")"
+done
+
+for file in $UNITY_DIR/*; do
+    echo "$(basename "$file")"
+done
+
 if grep $CODE_COVERAGE_PACKAGE $PACKAGE_MANIFEST_PATH; then
-  cat $UNITY_DIR/$TEST_PLATFORM-coverage/Summary.xml | grep Linecoverage
+  cat $UNITY_DIR/$TEST_PLATFORM-coverage/Report/Summary.xml | grep Linecoverage
   mv $UNITY_DIR/$TEST_PLATFORM-coverage/$CI_PROJECT_NAME-opencov/*Mode/TestCoverageResults_*.xml $UNITY_DIR/$TEST_PLATFORM-coverage/coverage.xml
   rm -r $UNITY_DIR/$TEST_PLATFORM-coverage/$CI_PROJECT_NAME-opencov/
 else
