@@ -1,7 +1,7 @@
 stages:
   - activation
-  - build
   - test
+  - build
   - deploy
 
 # If you are looking for a place where to add 'UNITY_LICENSE_FILE' and other secrets, please visit your project's gitlab page:
@@ -79,7 +79,7 @@ test-editmode:
   <<: *license
   script:
     - chmod +x ./ci/build.sh && ./ci/build.sh
-  needs: ["test"]
+  needs: ["test-editmode","test-playmode"]
   artifacts:
     paths:
       - $UNITY_DIR/Builds/
