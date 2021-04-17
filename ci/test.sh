@@ -17,7 +17,7 @@ ${UNITY_EXECUTABLE:-xvfb-run --auto-servernum --server-args='-screen 0 640x480x2
   -nographics \
   -enableCodeCoverage \
   -coverageResultsPath $UNITY_DIR/$TEST_PLATFORM-coverage \
-  -coverageOptions "generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;assemblyFilters:+Assembly-CSharp" \
+  -coverageOptions "generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;assemblyFilters:+Assembly-CSharp;verbosity:verbose" \
   -debugCodeOptimization
 
 UNITY_EXIT_CODE=$?
@@ -32,12 +32,8 @@ else
   echo "Unexpected exit code $UNITY_EXIT_CODE";
 fi
 
-for file in $UNITY_DIR/$TEST_PLATFORM-coverage/*; do
-    echo "$(basename "$file")"
-done
-
-for file in $UNITY_DIR/*; do
-    echo "$(basename "$file")"
+for file in $UNITY_DIR/$TEST_PLATFORM-coverage/Report/*; do
+    echo "$("$file")"
 done
 
 if grep $CODE_COVERAGE_PACKAGE $PACKAGE_MANIFEST_PATH; then
