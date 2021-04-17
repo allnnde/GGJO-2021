@@ -115,6 +115,7 @@ test-editmode:
   <<: *unity_before_script
   <<: *cache
   <<: *license
+  <<: *test
   script:
     - chmod +x ./ci/build.sh && ./ci/build.sh
   artifacts:
