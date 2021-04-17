@@ -79,7 +79,7 @@ test-editmode:
   <<: *license
   script:
     - chmod +x ./ci/build.sh && ./ci/build.sh
-  needs: ["test-editmode","test-playmode"]
+  needs: ["test"]
   artifacts:
     paths:
       - $UNITY_DIR/Builds/
