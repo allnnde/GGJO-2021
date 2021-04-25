@@ -40,6 +40,8 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.1
         if: always()
+        run:|
+            ls -la
         with:
           branch: main # The branch the action should deploy to.
           folder: CodeCoverage/Report # The folder the action should deploy.
