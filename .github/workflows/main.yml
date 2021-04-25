@@ -27,11 +27,15 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}    
           customParameters: -enableCodeCoverage -coverageOptions "generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;" -debugCodeOptimization
-          
-      - name: Open Web Client Directory
+      
+      - name: Open proyect Directory        
+        run: |
+            ls
+            
+      - name: Open CodeCoverage Directory
         working-directory: CodeCoverage
         run: |
-            ls -la
+            ls
       # Output
       - uses: actions/upload-artifact@v2
         with:
