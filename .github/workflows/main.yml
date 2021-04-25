@@ -26,12 +26,8 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}    
-          customParameters: -enableCodeCoverage -coverageOptions "generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;" -debugCodeOptimization
-      
-      - name: Open CodeCoverage Directory
-        working-directory: CodeCoverage
-        run: |
-            ls
+          customParameters: -enableCodeCoverage -coverageOptions "generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;" -debugCodeOptimization -assemblyfilters:+Application;+Domain;+Infrastructure;+Presentation
+
       # Output
       - uses: actions/upload-artifact@v2
         if: always()
@@ -42,47 +38,46 @@ jobs:
             CodeCoverage
 
           
-#  build:
-#    name: Build
-#    needs: Test
-#    runs-on: ubuntu-latest
-#    steps:
-#      # Checkout
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-#        with:
-#          lfs: true
-#          
-#      # Cache
-#      - uses: actions/cache@v2
-#        with:
-#          path: Library
-#          key: Library
-#
-#      # Build
-#      - name: Build project
-#        uses: game-ci/unity-builder@v2
-#        id: build
-#        env:
-#          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-#        with:
-#          targetPlatform: StandaloneWindows
-#          allowDirtyBuild: true
-#          versioning: Semantic 
-#          buildName: GAMEJAM 20201
-#          
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-#        with:
-#          tag_name: ${{ steps.build.outputs.buildVersion }}
-#          release_name: Release ${{ steps.build.outputs.buildVersion }}
-#
-#      # Output
-#      - uses: actions/upload-artifact@v2
-#        with:
-#          name: Build
-#          path: build
-#
+  build:
+    name: Build
+    needs: Test
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+          
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        id: build
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: StandaloneWindows
+          allowDirtyBuild: true
+          versioning: Semantic 
+          buildName: GAMEJAM 20201
+          
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ steps.build.outputs.buildVersion }}
+          release_name: Release ${{ steps.build.outputs.buildVersion }}
+
+      # Output
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: build
