@@ -35,7 +35,8 @@ jobs:
         with:
           targetPlatform: StandaloneWindows
           allowDirtyBuild: true
-          versioning: Semantic          
+          versioning: Semantic 
+          buildName: GAMEJAM 20201
 
       # Output
       - uses: actions/upload-artifact@v2
