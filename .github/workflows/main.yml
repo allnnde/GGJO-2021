@@ -26,7 +26,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}    
-          customParameters: -enableCodeCoverage -coverageOptions generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;
+          customParameters: -enableCodeCoverage -coverageOptions "generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;"
 
       # Output
       - uses: actions/upload-artifact@v2
