@@ -3,8 +3,8 @@ name: Deploy
 on: [push]
 
 jobs:
-  build:
-    name: Build
+  Test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       # Checkout
@@ -25,7 +25,31 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}    
+
+      # Output
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Test results
+          path: artifacts
+
+          
+  build:
+    name: Build
+    needs: Test
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+          
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
 
       # Build
       - name: Build project
