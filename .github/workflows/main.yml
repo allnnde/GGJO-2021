@@ -28,10 +28,6 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}    
           customParameters: -enableCodeCoverage -coverageOptions "generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;" -debugCodeOptimization
       
-      - name: Open proyect Directory        
-        run: |
-            ls
-            
       - name: Open CodeCoverage Directory
         working-directory: CodeCoverage
         run: |

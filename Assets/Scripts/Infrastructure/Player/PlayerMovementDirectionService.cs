@@ -15,7 +15,7 @@ namespace Infrastructure.Player
 
         public Vector2 GetDirection(Vector2 direction)
         {
-            throw new System.NotImplementedException();
+            return direction;
         }
     }
 }
