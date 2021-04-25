@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Build my project
+    name: Build
     runs-on: ubuntu-latest
     steps:
       # Checkout
@@ -35,7 +35,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows
           allowDirtyBuild: true
-          versioning: None          
+          versioning: Semantic          
 
       # Output
       - uses: actions/upload-artifact@v2
