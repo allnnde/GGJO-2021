@@ -37,15 +37,6 @@ jobs:
             artifacts
             CodeCoverage
             
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
-        if: always()
-        run: |
-            ls
-        with:
-          branch: main # The branch the action should deploy to.
-          folder: CodeCoverage/Report # The folder the action should deploy.
-
           
   build:
     name: Build
@@ -76,8 +67,7 @@ jobs:
           versioning: Semantic 
           buildName: GAMEJAM 20201
           
-      - name: Create Release
-        id: create_release
+      - name: Push version
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
