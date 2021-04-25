@@ -3,42 +3,39 @@ name: Deploy
 on: [push]
 
 jobs:
-  testAllModes:
-    name: Test in ${{ matrix.testMode }}
+  Test:
+    name: Test
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        projectPath:
-          - test-project
-        testMode:
-          - playmode
-          - editmode
     steps:
-      - uses: actions/checkout@v2
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           lfs: true
+
       # Cache
       - uses: actions/cache@v2
         with:
           path: Library
           key: Library
-      - uses: game-ci/unity-test-runner@v2
-        id: tests
+
+      # Test
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          testMode: ${{ matrix.testMode }}
-          artifactsPath: ${{ matrix.testMode }}-artifacts
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          checkName: ${{ matrix.testMode }} Test Results
-          customParameters: -enableCodeCoverage -coverageOptions generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport; ./CodeCoverage/${{ matrix.testMode }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}    
+          customParameters: -enableCodeCoverage -coverageOptions "generateAdditionalMetrics;generateHtmlReport;generateHtmlReportHistory;generateBadgeReport;"
+
+      # Output
       - uses: actions/upload-artifact@v2
-        if: always()
         with:
-          name: Test results for ${{ matrix.testMode }}
-          path: CodeCoverage
-          
+          name: Test results
+          path: |
+            artifacts
+            CodeCoverage
+
           
   build:
     name: Build
