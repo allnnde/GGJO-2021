@@ -6,62 +6,40 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 4.0f;
 
-    private bool walking = false;
-    private Vector2 lastMovement = Vector2.zero;
-
     private const string horizontal = "Horizontal";
     private const string vertical = "Vertical";
-    private const string lastHorizontal = "LastHorizontal";
-    private const string lastVertical = "LastVertical";
-    private const string walkingState = "Walking";
 
     private Rigidbody2D _playerRb;
     private Animator _anim;
-    public PlayerMentalHealthController PlayerMentalHealth { get; private set; }
 
     private IMovimentBL _movimentBL;
 
     private void Awake()
     {
-        PlayerMentalHealth = GetComponent<PlayerMentalHealthController>();
         _playerRb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
 
         _movimentBL = new PlayerMovimentBL();
-
         _movimentBL.MoveEvent += Move;
-        _movimentBL.MoveAnimationEvent += Move;
+        _movimentBL.MoveAnimationEvent += MoveAnimation;
 
     }
 
     void Start()
     {
-
-        lastMovement = new Vector2(0, 0);
-
         Time.timeScale = 1;
     }
 
     void Update()
     {
         var lastMovement = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
-        _movimentBL.Move(lastMovement.normalized, speed);
+        _movimentBL.Move(lastMovement, speed);
     }
 
 
-    public void MoveAnimation(Vector3 direction)
+    public void MoveAnimation(string animation)
     {
-        if (direction.x == 0 && direction.y > 0)
-            _anim.Play(AnimationLabelConstants.WalkingTopLabel);
-        if (direction.x == 0 && direction.y < 0)
-            _anim.Play(AnimationLabelConstants.WalkingBottomLabel);
-
-        if (direction.x < 0 && direction.y == 0)
-            _anim.Play(AnimationLabelConstants.WalkingLeftLabel);
-        if (direction.x > 0 && direction.y == 0)
-            _anim.Play(AnimationLabelConstants.WalkingRightLabel);
-        if (direction.x == 0 && direction.y == 0)
-            _anim.Play(AnimationLabelConstants.IdleLabel);
+        _anim.Play(animation);
     }
 
 
