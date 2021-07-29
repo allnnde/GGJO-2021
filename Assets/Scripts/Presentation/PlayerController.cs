@@ -21,15 +21,20 @@ public class PlayerController : MonoBehaviour
 
     public static bool playerCreated;
 
+    private IMovimentBL movimentBL;
+
     private void Awake()
-    {       
+    {
         PlayerMentalHealth = GetComponent<PlayerMentalHealthController>();
+        playerRb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        movimentBL = new PlayerMovimentBL();
+        movimentBL.MoveEvent += Move;
     }
 
     void Start()
     {
-        playerRb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
 
         lastMovement = new Vector2(0, 0);
 
@@ -45,13 +50,12 @@ public class PlayerController : MonoBehaviour
         {
             walking = true;
             lastMovement = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
-            playerRb.velocity = lastMovement.normalized * speed;
+            movimentBL.Move(lastMovement.normalized, speed);
         }
-
 
         if (!walking)
         {
-            playerRb.velocity = Vector2.zero;
+            movimentBL.Move(Vector2.zero, speed);
         }
 
         anim.SetFloat(horizontal, Input.GetAxisRaw(horizontal));
@@ -61,6 +65,11 @@ public class PlayerController : MonoBehaviour
 
         anim.SetFloat(lastHorizontal, lastMovement.x);
         anim.SetFloat(lastVertical, lastMovement.y);
+    }
+
+    private void Move(Vector2 direction)
+    {
+        playerRb.velocity = direction;
     }
 
 }
