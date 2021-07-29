@@ -34,7 +34,7 @@ public class PlayerMovimentBL : IMovimentBL
         if (direction.x == 0 && direction.y == 0)
             return (AnimationLabelConstants.IdleLabel);
 
-        return "";
+        return string.Empty;
     }
 
     private Vector2 CalculateVectorMoviment(Vector2 direction, float speed)

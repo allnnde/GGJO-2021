@@ -6,6 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 4.0f;
 
+    public PlayerMentalHealthEnum CurrentMentalState;
+
+    public RuntimeAnimatorController AnimPlayerCuerdo;
+    public RuntimeAnimatorController AnimPlayerNeutro;
+    public RuntimeAnimatorController AnimPlayerLoco;
+
+    private Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController> _mentalHealthDictionary;
+
+
     private const string horizontal = "Horizontal";
     private const string vertical = "Vertical";
 
@@ -13,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
 
     private IMovimentBL _movimentBL;
+    private IMentalHealthBL _mentalHealthBL;
+
+    
 
     private void Awake()
     {
@@ -22,6 +34,14 @@ public class PlayerController : MonoBehaviour
         _movimentBL = new PlayerMovimentBL();
         _movimentBL.MoveEvent += Move;
         _movimentBL.MoveAnimationEvent += MoveAnimation;
+
+        _mentalHealthDictionary = new Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController>();
+        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Cuerdo, AnimPlayerCuerdo);
+        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Demente, AnimPlayerLoco);
+        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Neutro, AnimPlayerNeutro);
+
+        _mentalHealthBL = new PlayerMentalHealthBL(_mentalHealthDictionary);
+        _mentalHealthBL.ChangeMentalHealthAnimatorEvent += ChangeMentalHealthAnimator;
 
     }
 
@@ -39,7 +59,14 @@ public class PlayerController : MonoBehaviour
 
     public void MoveAnimation(string animation)
     {
+        if(!animation.Equals(string.Empty))
         _anim.Play(animation);
+    }
+
+    public void ChangeMentalHealth(PlayerMentalHealthEnum playerMentalHealth)
+    {
+        CurrentMentalState = playerMentalHealth;
+        _mentalHealthBL.ChangeMentalHealthAnimator(CurrentMentalState);
     }
 
 
@@ -48,4 +75,8 @@ public class PlayerController : MonoBehaviour
         _playerRb.velocity = direction;
     }
 
+    private void ChangeMentalHealthAnimator(RuntimeAnimatorController aminPlayer)
+    {
+        _anim.runtimeAnimatorController = aminPlayer;
+    }
 }

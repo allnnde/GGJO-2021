@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     public float Velocity = 5f; //Velocidad de moviento del Enemigo
     public float RadiusOfView = 2f; //Radio de visión del Enemigo
     public GameObject Player { get; private set; } //Personaje
-    public PlayerMentalHealthController PlayerMentalHealth { get; private set; }
+    public PlayerController PlayerMentalHealth { get; private set; }
 
     private NavMeshAgent navAgent; //Agente de navegacion
 
@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
         CurrentPointRoute = PointsRoute.FirstOrDefault(); //Asignas al primer punto de la lista al CurrentPointRoute
   
         Player = GameObject.FindGameObjectWithTag("Player");
-        PlayerMentalHealth = Player.GetComponent<PlayerMentalHealthController>();
+        PlayerMentalHealth = Player.GetComponent<PlayerController>();
 
         dialogManager = FindObjectOfType<DialogManager>();
         audioSource = FindObjectOfType<AudioManager>();
@@ -136,12 +136,12 @@ public class EnemyController : MonoBehaviour
 
     public bool ShouldFollowPlayer() //Saber si el Player se encuentra dentro del rango de visión
     {
-        if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Demente)
+        if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.CurrentMentalState == PlayerMentalHealthEnum.Demente)
         {
             return true;
         }
 
-        if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState == PlayerMentalHealthEnum.Cuerdo)
+        if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.CurrentMentalState == PlayerMentalHealthEnum.Cuerdo)
         {
             return true;
         }
@@ -155,15 +155,15 @@ public class EnemyController : MonoBehaviour
         {
 
             Debug.Log("EnemyType " + EnemyType);
-            Debug.Log("PlayerMentalHealth.MentalState " + PlayerMentalHealth.MentalState);
-            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Cuerdo)
+            Debug.Log("PlayerMentalHealth.MentalState " + PlayerMentalHealth.CurrentMentalState);
+            if (EnemyType == EnemyTypeEnum.Medico && PlayerMentalHealth.CurrentMentalState != PlayerMentalHealthEnum.Cuerdo)
             {
                 dialogManager.Start_Dialog(Name, dialogs);
                 PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
                 audioSource.PlayCuerdo();
             }
 
-            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.MentalState != PlayerMentalHealthEnum.Demente)
+            if (EnemyType == EnemyTypeEnum.Paciente && PlayerMentalHealth.CurrentMentalState != PlayerMentalHealthEnum.Demente)
             {
                 dialogManager.Start_Dialog(Name, dialogs);
                 PlayerMentalHealth.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
