@@ -15,22 +15,23 @@ public class PlayerController : MonoBehaviour
     private const string lastVertical = "LastVertical";
     private const string walkingState = "Walking";
 
-    private Rigidbody2D playerRb;
-    private Animator anim;
+    private Rigidbody2D _playerRb;
+    private Animator _anim;
     public PlayerMentalHealthController PlayerMentalHealth { get; private set; }
 
-    public static bool playerCreated;
-
-    private IMovimentBL movimentBL;
+    private IMovimentBL _movimentBL;
 
     private void Awake()
     {
         PlayerMentalHealth = GetComponent<PlayerMentalHealthController>();
-        playerRb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        _playerRb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
 
-        movimentBL = new PlayerMovimentBL();
-        movimentBL.MoveEvent += Move;
+        _movimentBL = new PlayerMovimentBL();
+
+        _movimentBL.MoveEvent += Move;
+        _movimentBL.MoveAnimationEvent += Move;
+
     }
 
     void Start()
@@ -43,33 +44,30 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        walking = false;
-
-
-        if (Mathf.Abs(Input.GetAxisRaw(horizontal)) > 0.5f || Mathf.Abs(Input.GetAxisRaw(vertical)) > 0.5)
-        {
-            walking = true;
-            lastMovement = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
-            movimentBL.Move(lastMovement.normalized, speed);
-        }
-
-        if (!walking)
-        {
-            movimentBL.Move(Vector2.zero, speed);
-        }
-
-        anim.SetFloat(horizontal, Input.GetAxisRaw(horizontal));
-        anim.SetFloat(vertical, Input.GetAxisRaw(vertical));
-
-        anim.SetBool(walkingState, walking);
-
-        anim.SetFloat(lastHorizontal, lastMovement.x);
-        anim.SetFloat(lastVertical, lastMovement.y);
+        var lastMovement = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
+        _movimentBL.Move(lastMovement.normalized, speed);
     }
+
+
+    public void MoveAnimation(Vector3 direction)
+    {
+        if (direction.x == 0 && direction.y > 0)
+            _anim.Play(AnimationLabelConstants.WalkingTopLabel);
+        if (direction.x == 0 && direction.y < 0)
+            _anim.Play(AnimationLabelConstants.WalkingBottomLabel);
+
+        if (direction.x < 0 && direction.y == 0)
+            _anim.Play(AnimationLabelConstants.WalkingLeftLabel);
+        if (direction.x > 0 && direction.y == 0)
+            _anim.Play(AnimationLabelConstants.WalkingRightLabel);
+        if (direction.x == 0 && direction.y == 0)
+            _anim.Play(AnimationLabelConstants.IdleLabel);
+    }
+
 
     private void Move(Vector2 direction)
     {
-        playerRb.velocity = direction;
+        _playerRb.velocity = direction;
     }
 
 }
