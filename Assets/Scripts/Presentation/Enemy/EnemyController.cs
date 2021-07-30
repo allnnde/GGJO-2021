@@ -42,15 +42,19 @@ public class EnemyController : MonoBehaviour
         CurrentPointRoute = PointsRoute.FirstOrDefault(); //Asignas al primer punto de la lista al CurrentPointRoute
 
         Player = FindObjectOfType<PlayerController>();
-
         dialogManager = FindObjectOfType<DialogManager>();
         audioSource = FindObjectOfType<AudioManager>();
         _anim = GetComponent<Animator>();
 
+        Configuration();
+    }
+
+    private void Configuration()
+    {
         MovimentBL = ServiceLocator.Instance.GetService<IEnemyMovimentBL>(ServicesLifecycleEnum.Scoped);
         MovimentBL.MoveEvent += Move;
         MovimentBL.MoveAnimationEvent += MoveAnimation;
-    }  
+    }
 
     private void Move(Vector2 point)
     {

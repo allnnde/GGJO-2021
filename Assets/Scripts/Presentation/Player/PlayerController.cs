@@ -20,14 +20,19 @@ public class PlayerController : MonoBehaviour
     {
         _playerRb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        
+
+        Configuration();
+
+    }
+
+    private void Configuration()
+    {
         _movimentBL = ServiceLocator.Instance.GetService<IPlayerMovimentBL>();
         _mentalHealthBL = ServiceLocator.Instance.GetService<IMentalHealthBL>();
 
         _movimentBL.MoveEvent += Move;
         _movimentBL.MoveAnimationEvent += MoveAnimation;
         _mentalHealthBL.ChangeMentalHealthAnimatorEvent += ChangeMentalHealthAnimator;
-
     }
 
     void Start()
