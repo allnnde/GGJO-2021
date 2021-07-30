@@ -8,39 +8,24 @@ public class PlayerController : MonoBehaviour
 
     public PlayerMentalHealthEnum CurrentMentalState;
 
-    public RuntimeAnimatorController AnimPlayerCuerdo;
-    public RuntimeAnimatorController AnimPlayerNeutro;
-    public RuntimeAnimatorController AnimPlayerLoco;
-
     private Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController> _mentalHealthDictionary;
-
-
-    private const string horizontal = "Horizontal";
-    private const string vertical = "Vertical";
 
     private Rigidbody2D _playerRb;
     private Animator _anim;
 
-    private IMovimentBL _movimentBL;
+    private IPlayerMovimentBL _movimentBL;
     private IMentalHealthBL _mentalHealthBL;
-
-    
 
     private void Awake()
     {
         _playerRb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+        
+        _movimentBL = ServiceLocator.Instance.GetService<IPlayerMovimentBL>();
+        _mentalHealthBL = ServiceLocator.Instance.GetService<IMentalHealthBL>();
 
-        _movimentBL = new PlayerMovimentBL();
         _movimentBL.MoveEvent += Move;
         _movimentBL.MoveAnimationEvent += MoveAnimation;
-
-        _mentalHealthDictionary = new Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController>();
-        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Cuerdo, AnimPlayerCuerdo);
-        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Demente, AnimPlayerLoco);
-        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Neutro, AnimPlayerNeutro);
-
-        _mentalHealthBL = new PlayerMentalHealthBL(_mentalHealthDictionary);
         _mentalHealthBL.ChangeMentalHealthAnimatorEvent += ChangeMentalHealthAnimator;
 
     }
@@ -52,12 +37,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        var lastMovement = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
+        var lastMovement = new Vector2(Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel), Input.GetAxisRaw(AxisLabelConstants.VerticalLabel));
         _movimentBL.Move(lastMovement, speed);
     }
 
 
-    public void MoveAnimation(string animation)
+    private void MoveAnimation(string animation)
     {
         if(!animation.Equals(string.Empty))
         _anim.Play(animation);

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class PlayerMovimentBL : IMovimentBL
+public class PlayerMovimentBL : IPlayerMovimentBL
 {
     public Action<Vector2> MoveEvent { get; set; }
     public Action<string> MoveAnimationEvent { get; set; }

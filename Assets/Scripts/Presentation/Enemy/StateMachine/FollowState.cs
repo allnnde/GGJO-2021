@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FollowState : State
 {
-    public override void CheckExit() //Condicion de Salida
+    public override void CheckExit() 
     {
-        if (!Enemy.PlayerInView() || !Enemy.ShouldFollowPlayer()) //Si el NO enemigo detecta al Player
+        if (!MovimentBL.PlayerInView(Enemy.transform.position, Enemy.RadiusOfView) || !MovimentBL.ShouldFollowPlayer(Enemy.EnemyType, Enemy.Player.CurrentMentalState)) //Si el NO enemigo detecta al Player
         {
-            StateMachine.ChangeState<PatrolState>();//La maquina de estado cambia al estado de Patrullaje
+            StateMachine.ChangeState<PatrolState>(); 
         }
     }
 

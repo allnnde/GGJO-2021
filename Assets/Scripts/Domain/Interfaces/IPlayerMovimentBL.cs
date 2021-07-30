@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public interface IMovimentBL
+public interface IPlayerMovimentBL
 {
     Action<Vector2> MoveEvent { get; set; }
     Action<string> MoveAnimationEvent { get; set; }
