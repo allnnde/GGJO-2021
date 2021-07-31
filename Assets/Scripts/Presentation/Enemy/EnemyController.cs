@@ -4,46 +4,42 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
     public GameObject Route; 
     public List<Vector3> PointsRoute { get; set; } 
     public Vector3 CurrentPointRoute { get; set; } 
     public float Velocity = 5f;
     public float RadiusOfView = 2f;
-    public PlayerController Player { get; private set; } //Personaje
+    public PlayerController Player { get; private set; }
 
-    private NavMeshAgent _navAgent; //Agente de navegacion
+    private NavMeshAgent _navAgent;
 
+    //TODO esto se puede eliminar, ahi que modificar el ShouldFollowPlayer
     public EnemyTypeEnum EnemyType;
 
-    private DialogManager dialogManager;
+    protected DialogManager dialogManager;
 
     private Animator _anim;
 
     public string Name;
+
     public List<string> dialogs;
-
-
     public IEnemyMovimentBL MovimentBL;
-
-
-    private AudioManager audioSource;
 
     private void Awake()
     {
-        _navAgent = GetComponent<NavMeshAgent>(); //Consigues el NavMesh
-        PointsRoute = new List<Vector3>(); //Creas la lista de puntos en Route
+        _navAgent = GetComponent<NavMeshAgent>(); 
+        PointsRoute = new List<Vector3>(); 
         foreach (Transform item in Route?.transform)
         {
-            PointsRoute.Add(item.position); //añadís puntos a la lista
+            PointsRoute.Add(item.position);
         }
 
-        CurrentPointRoute = PointsRoute.FirstOrDefault(); //Asignas al primer punto de la lista al CurrentPointRoute
+        CurrentPointRoute = PointsRoute.FirstOrDefault();
 
         Player = FindObjectOfType<PlayerController>();
         dialogManager = FindObjectOfType<DialogManager>();
-        audioSource = FindObjectOfType<AudioManager>();
         _anim = GetComponent<Animator>();
 
         Configuration();
@@ -51,7 +47,7 @@ public class EnemyController : MonoBehaviour
 
     private void Configuration()
     {
-        MovimentBL = ServiceLocator.Instance.GetService<IEnemyMovimentBL>(ServicesLifecycleEnum.Scoped);
+        MovimentBL = ServiceLocator.Instance.GetServiceScoped<IEnemyMovimentBL>();
         MovimentBL.MoveEvent += Move;
         MovimentBL.MoveAnimationEvent += MoveAnimation;
     }
@@ -80,22 +76,11 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (EnemyType == EnemyTypeEnum.Medico && Player.CurrentMentalState != PlayerMentalHealthEnum.Cuerdo)
-            {
-                dialogManager.Start_Dialog(Name, dialogs);
-                Player.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
-                audioSource.PlayCuerdo();
-            }
-
-            if (EnemyType == EnemyTypeEnum.Paciente && Player.CurrentMentalState != PlayerMentalHealthEnum.Demente)
-            {
-                dialogManager.Start_Dialog(Name, dialogs);
-                Player.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
-                audioSource.PlayLoco();
-
-            }
+            InteractuePlayer();
         }
     }
+
+    public abstract void InteractuePlayer();
 
 
     private void OnDrawGizmos() //Dibuja el area de efecto en el editor

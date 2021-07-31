@@ -20,7 +20,6 @@ public class EnemyMovimentBL : IEnemyMovimentBL
         MoveEvent?.Invoke(point);
 
         var animation = GetAnimationName(point, position, walking);
-
         MoveAnimationEvent?.Invoke(animation);
 
     }
@@ -53,8 +52,6 @@ public class EnemyMovimentBL : IEnemyMovimentBL
 
     public bool ShouldFollowPlayer(EnemyTypeEnum enemyType, PlayerMentalHealthEnum playerMentalHealth)
     {
-        Debug.Log(enemyType);
-        Debug.Log(playerMentalHealth);
         if (enemyType == EnemyTypeEnum.Medico && playerMentalHealth == PlayerMentalHealthEnum.Demente)
         {
             return true;
@@ -66,9 +63,6 @@ public class EnemyMovimentBL : IEnemyMovimentBL
         }
         return false;
     }
-
-
-
     private Vector2 GetDirection(Vector2 direction)
     {
         var dir = Vector2Int.FloorToInt(direction);
@@ -88,10 +82,6 @@ public class EnemyMovimentBL : IEnemyMovimentBL
             x = 0;
         return new Vector2(x, y);
     }
-
-
-
-
     private string GetAnimationName(Vector2 point, Vector2 position, bool walking)
     {
         var pos = point - position;
@@ -114,10 +104,10 @@ public class EnemyMovimentBL : IEnemyMovimentBL
         return string.Empty;
     }
 
-    public bool InCurrentPointRoute(Vector3 currentPointRoute, Vector3 position)
+    public bool InCurrentPointRoute(Vector3 currentPointRoute, Vector3 position, float tolerance = 1.01f)
     {
         var distancia = Vector3.Distance(currentPointRoute, position);
-        return distancia < 1.01f;
+        return distancia < tolerance;
     }
 }
 

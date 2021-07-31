@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6317251971283352623}
   - component: {fileID: 608852156}
   - component: {fileID: 608852155}
-  - component: {fileID: 608852157}
   - component: {fileID: 608852158}
   - component: {fileID: 7978546893362464541}
   m_Layer: 9
@@ -127,22 +126,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &608852157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6317251971283352620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bbae31a180acf548943f56515e6c995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MentalState: 1
-  AnimPlayerCuerdo: {fileID: 9100000, guid: 026535e666eec41429948c151b3f48f1, type: 2}
-  AnimPlayerNeutro: {fileID: 9100000, guid: bb953325a3ec8ea46b5fbe4f8810ea0a, type: 2}
-  AnimPlayerLoco: {fileID: 9100000, guid: 8064dc4eedc2a8d4cb4d8e4c7937dbac, type: 2}
 --- !u!114 &608852158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  CurrentMentalState: 2
 --- !u!70 &7978546893362464541
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

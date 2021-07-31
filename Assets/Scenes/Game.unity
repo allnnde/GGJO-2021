@@ -448,6 +448,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &766442187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 837180869453071236, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
+  m_PrefabInstance: {fileID: 8840054701925052712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &766442188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766442187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 724a2de6b0e09d744ba3fecdae547bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Route: {fileID: 1237050294}
+  Velocity: 5
+  RadiusOfView: 2
+  EnemyType: 1
+  Name: dotora
+  dialogs:
+  - CUerdo
 --- !u!1 &996951393
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +681,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1593934700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 837180869453071236, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+  m_PrefabInstance: {fileID: 1873252749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1593934701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593934700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ed79649511ce846b72cc64d90bf1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Route: {fileID: 1968950891}
+  Velocity: 5
+  RadiusOfView: 2
+  EnemyType: 0
+  Name: Loquito
+  dialogs: []
 --- !u!1 &1633785984
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,6 +964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 6886335529801910529, guid: d11b18d948343154fadfd463930a972a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6886335529801910541, guid: d11b18d948343154fadfd463930a972a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1120,6 +1171,29 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 16468b439142fd3498318e7c9bc68660, type: 2}
+--- !u!1 &1808425259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 837180869453071236, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+  m_PrefabInstance: {fileID: 2671102185012567931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1808425260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808425259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ed79649511ce846b72cc64d90bf1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Route: {fileID: 1446038609}
+  Velocity: 5
+  RadiusOfView: 2
+  EnemyType: 0
+  Name: Loquito
+  dialogs: []
 --- !u!1001 &1835708784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1150,6 +1224,10 @@ PrefabInstance:
     - target: {fileID: 6317251971283352620, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317251971283352620, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6317251971283352622, guid: 93d6445e9c1351646904acdf4d6bcae1, type: 3}
       propertyPath: m_RootOrder
@@ -1265,7 +1343,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 837180869453071233, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
 --- !u!4 &1879415642 stripped
 Transform:
@@ -1437,6 +1516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2114384549}
+  - component: {fileID: 2114384551}
   - component: {fileID: 2114384548}
   - component: {fileID: 2114384547}
   - component: {fileID: 2114384550}
@@ -1547,6 +1627,23 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2114384551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114384546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d9575f06484edc4e8e09bc8a49781a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimPlayerCuerdo: {fileID: 22100000, guid: 5bb0aac1426fb3548b8add02a442dd0c, type: 2}
+  AnimPlayerNeutro: {fileID: 9100000, guid: bb953325a3ec8ea46b5fbe4f8810ea0a, type: 2}
+  AnimPlayerLoco: {fileID: 22100000, guid: 9a351d60df870e94cb307831f8f4cbf5, type: 2}
+  ClipPlayerCuerdo: {fileID: 0}
+  ClipPlayerLoco: {fileID: 0}
 --- !u!1 &2130441684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,9 +1831,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 837180869453071236, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 837180869453071233, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
 --- !u!1001 &4412425931701627084
 PrefabInstance:
@@ -1793,6 +1891,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Puerta
       objectReference: {fileID: 0}
+    - target: {fileID: 4412425930674805958, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
       propertyPath: NexLevel
       value: Game_LVL2
@@ -1809,6 +1911,10 @@ PrefabInstance:
     - target: {fileID: 5185565838288476535, guid: 7977bb03c546e5340998254b50bda3f1, type: 3}
       propertyPath: m_Name
       value: Audio Source
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185565838288476535, guid: 7977bb03c546e5340998254b50bda3f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5185565838288476536, guid: 7977bb03c546e5340998254b50bda3f1, type: 3}
       propertyPath: m_RootOrder
@@ -1931,5 +2037,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 837180869453071233, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}

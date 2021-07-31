@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,18 +9,21 @@ public class PlayerController : MonoBehaviour
 
     public PlayerMentalHealthEnum CurrentMentalState;
 
-    private Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController> _mentalHealthDictionary;
-
     private Rigidbody2D _playerRb;
     private Animator _anim;
 
     private IPlayerMovimentBL _movimentBL;
     private IMentalHealthBL _mentalHealthBL;
 
+
+    private AudioController _audioSource;
+
+
     private void Awake()
     {
         _playerRb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+        _audioSource = FindObjectOfType<AudioController>();
 
         Configuration();
 
@@ -27,8 +31,8 @@ public class PlayerController : MonoBehaviour
 
     private void Configuration()
     {
-        _movimentBL = ServiceLocator.Instance.GetService<IPlayerMovimentBL>();
-        _mentalHealthBL = ServiceLocator.Instance.GetService<IMentalHealthBL>();
+        _movimentBL = ServiceLocator.Instance.GetServiceSingleton<IPlayerMovimentBL>();
+        _mentalHealthBL = ServiceLocator.Instance.GetServiceSingleton<IMentalHealthBL>();
 
         _movimentBL.MoveEvent += Move;
         _movimentBL.MoveAnimationEvent += MoveAnimation;
@@ -57,6 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         CurrentMentalState = playerMentalHealth;
         _mentalHealthBL.ChangeMentalHealthAnimator(CurrentMentalState);
+        _audioSource.PlayClipToMentalHealth(CurrentMentalState);
     }
 
 
@@ -69,4 +74,6 @@ public class PlayerController : MonoBehaviour
     {
         _anim.runtimeAnimatorController = aminPlayer;
     }
+
+  
 }

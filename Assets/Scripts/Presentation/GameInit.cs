@@ -10,6 +10,10 @@ public class GameInit : MonoBehaviour
     public RuntimeAnimatorController AnimPlayerNeutro;
     public RuntimeAnimatorController AnimPlayerLoco;
 
+
+    public AudioClip ClipPlayerCuerdo;
+    public AudioClip ClipPlayerLoco;
+
     private void Awake()
     {
 
@@ -29,6 +33,18 @@ public class GameInit : MonoBehaviour
 
         var enemyMovimentBL = new EnemyMovimentBL();
         ServiceLocator.Instance.RegisterService<IEnemyMovimentBL>(enemyMovimentBL);
+
+
+
+        var _audioDictionary = new Dictionary<PlayerMentalHealthEnum, AudioClip>();
+        _audioDictionary.Add(PlayerMentalHealthEnum.Cuerdo, ClipPlayerCuerdo);
+        _audioDictionary.Add(PlayerMentalHealthEnum.Demente, ClipPlayerLoco);
+
+        var audioBL = new AudioBL(_audioDictionary);
+        ServiceLocator.Instance.RegisterService<IAudioBL>(audioBL);
+
+
+        
 
 
     }

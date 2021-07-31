@@ -6,7 +6,7 @@ public class FollowState : State
 {
     public override void CheckExit() 
     {
-        if (!MovimentBL.PlayerInView(Enemy.transform.position, Enemy.RadiusOfView) || !MovimentBL.ShouldFollowPlayer(Enemy.EnemyType, Enemy.Player.CurrentMentalState)) //Si el NO enemigo detecta al Player
+        if (!MovimentBL.PlayerInView(Enemy.transform.position, Enemy.RadiusOfView) || !MovimentBL.ShouldFollowPlayer(Enemy.EnemyType, Enemy.Player.CurrentMentalState))
         {
             StateMachine.ChangeState<PatrolState>(); 
         }

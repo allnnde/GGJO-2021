@@ -28,7 +28,7 @@ public class ServiceLocator
         _services.Add(type, service);
     }
 
-    public T GetService<T>()
+    public T GetServiceSingleton<T>()
     {
         var type = typeof(T);
         if (!_services.TryGetValue(type, out var service))
@@ -39,20 +39,12 @@ public class ServiceLocator
         return (T)service;
     }
 
-    public T GetService<T>(ServicesLifecycleEnum servicesLifecycle)
+    public T GetServiceScoped<T>()
     {
-        var service = GetService<T>();
-        switch (servicesLifecycle)
-        {
-            case ServicesLifecycleEnum.Singleton:
-                return service;
-            case ServicesLifecycleEnum.Scoped:
-                var json = JsonConvert.SerializeObject(service);
-                var obj = JsonConvert.DeserializeObject(json, service.GetType());
-                return (T) obj;
-            default:
-                throw new Exception($"Lifecycle {servicesLifecycle.ToString()} not found");
-        }
+        var service = GetServiceSingleton<T>();
+        var json = JsonConvert.SerializeObject(service);
+        var obj = JsonConvert.DeserializeObject(json, service.GetType());
+        return (T)obj;
     }
 
 }
