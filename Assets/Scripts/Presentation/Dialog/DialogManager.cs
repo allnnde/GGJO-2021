@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,50 +6,39 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
-
     public GameObject DialogPanel;
     public Text NpcNameText;
     public Text DialogText;
+    private IDialogBL dialogBL;
 
-    private List<string> Conversation;
-    private int ConverIndex;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        DialogPanel.SetActive(false);
+        var buttonNextText = GetComponentInChildren<Button>();
+        buttonNextText.onClick.AddListener(Next);
+
+        dialogBL = ServiceLocator.Instance.GetServiceSingleton<IDialogBL>();
+
+        dialogBL.DialogActive += DialogPanel.SetActive;
+        dialogBL.ShowText += ShowText;
+        dialogBL.HiddenDialog();
     }
 
     public void Start_Dialog(string npcName, List<string> convo)
     {
-        Time.timeScale = 0;
         NpcNameText.text = npcName;
-        Conversation = new List<string>(convo);
-        DialogPanel.SetActive(true);
-        ConverIndex = 0;
-        ShowText();
+
+        dialogBL.ShowDialog();
+        dialogBL.StartDialog(convo);
     }
 
-    public void StopDialog()
+    public void ShowText(string text)
     {
-        DialogPanel.SetActive(false);
-        Time.timeScale = 1;
+        DialogText.text = text;
+    }
 
-    }
-    public void ShowText()
-    {
-        DialogText.text = Conversation[ConverIndex];
-    }
     public void Next()
     {
-        
-        if (ConverIndex < Conversation.Count - 1)
-        {
-            ConverIndex ++;
-            ShowText();
-        }
-        else
-        {
-            StopDialog();
-        }
+        dialogBL.NextText();
     }
 }

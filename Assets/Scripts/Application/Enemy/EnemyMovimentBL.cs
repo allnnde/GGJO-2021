@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-
 public class EnemyMovimentBL : IEnemyMovimentBL
 {
     public Action<Vector2> MoveEvent { get; set; }
@@ -21,14 +20,13 @@ public class EnemyMovimentBL : IEnemyMovimentBL
 
         var animation = GetAnimationName(point, position, walking);
         MoveAnimationEvent?.Invoke(animation);
-
     }
 
     public Vector3 GetNextPointRoute(List<Vector3> pointsRoute, Vector3 currentPointRoute)
     {
         var index = pointsRoute.IndexOf(currentPointRoute);
         if (index == -1)
-            return pointsRoute[0]; 
+            return pointsRoute[0];
 
         if (index + 1 < pointsRoute.Count())
             return pointsRoute[index + 1];
@@ -36,7 +34,7 @@ public class EnemyMovimentBL : IEnemyMovimentBL
             return pointsRoute[0];
     }
 
-    public bool PlayerInView(Vector2 position, float radiusOfView) 
+    public bool PlayerInView(Vector2 position, float radiusOfView)
     {
         var colliders = Physics2D.OverlapCircleAll(position, radiusOfView);
         if (colliders != null)
@@ -63,6 +61,7 @@ public class EnemyMovimentBL : IEnemyMovimentBL
         }
         return false;
     }
+
     private Vector2 GetDirection(Vector2 direction)
     {
         var dir = Vector2Int.FloorToInt(direction);
@@ -82,6 +81,7 @@ public class EnemyMovimentBL : IEnemyMovimentBL
             x = 0;
         return new Vector2(x, y);
     }
+
     private string GetAnimationName(Vector2 point, Vector2 position, bool walking)
     {
         var pos = point - position;
@@ -100,7 +100,6 @@ public class EnemyMovimentBL : IEnemyMovimentBL
         if (direction.x == 0 && direction.y == 0 && !walking)
             return (AnimationLabelConstants.IdleLabel);
 
-
         return string.Empty;
     }
 
@@ -110,4 +109,3 @@ public class EnemyMovimentBL : IEnemyMovimentBL
         return distancia < tolerance;
     }
 }
-

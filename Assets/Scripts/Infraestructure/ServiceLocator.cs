@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.Assertions;
 
-
-
 public class ServiceLocator
 {
     public static ServiceLocator Instance => _instance ?? (_instance = new ServiceLocator());
@@ -47,5 +45,8 @@ public class ServiceLocator
         return (T)obj;
     }
 
+    public void UnRegisterAllServices()
+    {
+        _services.Clear();
+    }
 }
-

@@ -6,16 +6,15 @@ using UnityEngine.AI;
 
 public abstract class EnemyController : MonoBehaviour
 {
-    public GameObject Route; 
-    public List<Vector3> PointsRoute { get; set; } 
-    public Vector3 CurrentPointRoute { get; set; } 
+    public GameObject Route;
+    public List<Vector3> PointsRoute { get; set; }
+    public Vector3 CurrentPointRoute { get; set; }
     public float Velocity = 5f;
     public float RadiusOfView = 2f;
     public PlayerController Player { get; private set; }
 
     private NavMeshAgent _navAgent;
 
-    //TODO esto se puede eliminar, ahi que modificar el ShouldFollowPlayer
     public EnemyTypeEnum EnemyType;
 
     protected DialogManager dialogManager;
@@ -29,8 +28,8 @@ public abstract class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        _navAgent = GetComponent<NavMeshAgent>(); 
-        PointsRoute = new List<Vector3>(); 
+        _navAgent = GetComponent<NavMeshAgent>();
+        PointsRoute = new List<Vector3>();
         foreach (Transform item in Route?.transform)
         {
             PointsRoute.Add(item.position);
@@ -69,7 +68,6 @@ public abstract class EnemyController : MonoBehaviour
                      _navAgent.hasPath && Mathf.Abs(_navAgent.velocity.sqrMagnitude) > 0;
 
         MovimentBL.Move(point, transform.position, walking);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,7 +79,6 @@ public abstract class EnemyController : MonoBehaviour
     }
 
     public abstract void InteractuePlayer();
-
 
     private void OnDrawGizmos() //Dibuja el area de efecto en el editor
     {

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class DoorController : MonoBehaviour
 {
-
     public PlayerMentalHealthEnum NeededMetalHealthe;
     public GameObject Puesta;
     private DialogManager dialogManager;
@@ -14,12 +13,12 @@ public class DoorController : MonoBehaviour
     public Sprite Cerrado;
 
     public string NexLevel;
+
     private void Awake()
     {
         dialogManager = FindObjectOfType<DialogManager>();
         Puesta = transform.parent.gameObject;
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,17 +38,12 @@ public class DoorController : MonoBehaviour
                     dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
                     Application.Quit();
                 }
-
             }
             else
             {
                 Puesta.GetComponent<SpriteRenderer>().sprite = Cerrado;
                 dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Cerrada" });
-
             }
-
         }
     }
-
-
 }

@@ -12,6 +12,7 @@ public class GameInit : MonoBehaviour
 
     private void Awake()
     {
+        ServiceLocator.Instance.UnRegisterAllServices();
         var _movimentBL = new PlayerMovimentBL();
 
         var _mentalHealthDictionary = new Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController>();
@@ -33,5 +34,8 @@ public class GameInit : MonoBehaviour
 
         var audioBL = new AudioBL(_audioDictionary);
         ServiceLocator.Instance.RegisterService<IAudioBL>(audioBL);
+
+        var dialogBl = new DialogBL();
+        ServiceLocator.Instance.RegisterService<IDialogBL>(dialogBl);
     }
 }

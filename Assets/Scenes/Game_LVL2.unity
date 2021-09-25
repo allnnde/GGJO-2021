@@ -559,6 +559,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 766442188, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
+      propertyPath: Route
+      value: 
+      objectReference: {fileID: 2142028479}
     - target: {fileID: 837180869453071233, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
       propertyPath: Route
       value: 
@@ -805,7 +809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1446038610}
   m_Layer: 0
-  m_Name: Route_Loco_2
+  m_Name: Route_Loco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1534,6 +1538,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1593934701, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
+      propertyPath: Route
+      value: 
+      objectReference: {fileID: 1446038609}
     - target: {fileID: 837180869453071233, guid: a55ac8e0e6a6c734a90ccd618c6a02a7, type: 3}
       propertyPath: Route
       value: 
@@ -1664,7 +1672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1968950892}
   m_Layer: 0
-  m_Name: Route_Loco_1
+  m_Name: Route_Medica_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1795,6 +1803,7 @@ GameObject:
   - component: {fileID: 2114384548}
   - component: {fileID: 2114384547}
   - component: {fileID: 2114384550}
+  - component: {fileID: 2114384551}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1902,6 +1911,23 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2114384551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114384546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d9575f06484edc4e8e09bc8a49781a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimPlayerCuerdo: {fileID: 22100000, guid: 5bb0aac1426fb3548b8add02a442dd0c, type: 2}
+  AnimPlayerNeutro: {fileID: 9100000, guid: bb953325a3ec8ea46b5fbe4f8810ea0a, type: 2}
+  AnimPlayerLoco: {fileID: 22100000, guid: 9a351d60df870e94cb307831f8f4cbf5, type: 2}
+  ClipPlayerCuerdo: {fileID: 8300000, guid: 8943479c1ca6cd94cb5b8c542c9fd8f5, type: 3}
+  ClipPlayerLoco: {fileID: 8300000, guid: 782effb274e7c12429b3fabaaf0238ad, type: 3}
 --- !u!1 &2130441684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2142028480}
   m_Layer: 0
-  m_Name: Route_Loco_1 (1)
+  m_Name: Route_Medica_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2198,6 +2224,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 766442188, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
+      propertyPath: Route
+      value: 
+      objectReference: {fileID: 1968950891}
     - target: {fileID: 837180869453071233, guid: cb68fac14b0a0ef48ae6305ee951c98f, type: 3}
       propertyPath: Route
       value: 

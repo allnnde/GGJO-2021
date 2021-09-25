@@ -278,19 +278,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6886335528980090939}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6886335529449827621}
-        m_TargetAssemblyTypeName: DialogManager, Assembly-CSharp
-        m_MethodName: Next
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6886335529449827623
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,10 +367,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6886335529449827623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c72715941b30c546a68f9d54e2b2ae6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8929f3dd65dce7e49bb9feaf7ad00fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogPanel: {fileID: 6886335529449827623}
+  DialogPanel: {fileID: 6886335529801910529}
   NpcNameText: {fileID: 6886335529606863340}
   DialogText: {fileID: 6886335528968026541}
 --- !u!1 &6886335529606863342
@@ -477,7 +465,7 @@ GameObject:
   - component: {fileID: 6886335529801910543}
   - component: {fileID: 6886335529801910528}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: DialogSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
