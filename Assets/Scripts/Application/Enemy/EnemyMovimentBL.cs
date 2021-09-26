@@ -34,34 +34,6 @@ public class EnemyMovimentBL : IEnemyMovimentBL
             return pointsRoute[0];
     }
 
-    public bool PlayerInView(Vector2 position, float radiusOfView)
-    {
-        var colliders = Physics2D.OverlapCircleAll(position, radiusOfView);
-        if (colliders != null)
-        {
-            foreach (var item in colliders)
-            {
-                if (item.CompareTag("Player"))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    public bool ShouldFollowPlayer(EnemyTypeEnum enemyType, PlayerMentalHealthEnum playerMentalHealth)
-    {
-        if (enemyType == EnemyTypeEnum.Medico && playerMentalHealth == PlayerMentalHealthEnum.Demente)
-        {
-            return true;
-        }
-
-        if (enemyType == EnemyTypeEnum.Paciente && playerMentalHealth == PlayerMentalHealthEnum.Cuerdo)
-        {
-            return true;
-        }
-        return false;
-    }
-
     private Vector2 GetDirection(Vector2 direction)
     {
         var dir = Vector2Int.FloorToInt(direction);

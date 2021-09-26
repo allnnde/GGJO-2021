@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class PatrolState : State
 {
-    public override void CheckExit() 
+    public override void CheckExit()
     {
-        if (MovimentBL.PlayerInView(Enemy.transform.position, Enemy.RadiusOfView) && MovimentBL.ShouldFollowPlayer(Enemy.EnemyType, Enemy.Player.CurrentMentalState)) 
+        if (Enemy.PlayerInView() && Enemy.ShouldFollowPlayer())
         {
             StateMachine.ChangeState<FollowState>();
         }
-
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (MovimentBL.InCurrentPointRoute(Enemy.CurrentPointRoute, Enemy.transform.position)) 
-            Enemy.CurrentPointRoute = MovimentBL.GetNextPointRoute(Enemy.PointsRoute, Enemy.CurrentPointRoute);
-
-        Enemy.MoveToPoint(Enemy.CurrentPointRoute); 
+        if (Enemy.InCurrentPointRoute())
+            Enemy.GetNextPointRoute();
+        Enemy.MoveToPoint(Enemy.CurrentPointRoute);
     }
 }

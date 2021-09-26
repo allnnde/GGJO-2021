@@ -16,12 +16,16 @@ public class DialogManager : MonoBehaviour
     {
         var buttonNextText = GetComponentInChildren<Button>();
         buttonNextText.onClick.AddListener(Next);
+        Configure();
+        dialogBL.HiddenDialog();
+    }
 
+    private void Configure()
+    {
         dialogBL = ServiceLocator.Instance.GetServiceSingleton<IDialogBL>();
 
         dialogBL.DialogActive += DialogPanel.SetActive;
         dialogBL.ShowText += ShowText;
-        dialogBL.HiddenDialog();
     }
 
     public void Start_Dialog(string npcName, List<string> convo)

@@ -66,8 +66,32 @@ public abstract class EnemyController : MonoBehaviour
     {
         var walking = _navAgent.remainingDistance > _navAgent.stoppingDistance &&
                      _navAgent.hasPath && Mathf.Abs(_navAgent.velocity.sqrMagnitude) > 0;
-
         MovimentBL.Move(point, transform.position, walking);
+    }
+
+    public bool PlayerInView()
+    {
+        var colliders = Physics2D.OverlapCircleAll(transform.position, RadiusOfView);
+        if (colliders != null)
+        {
+            foreach (var item in colliders)
+            {
+                if (item.CompareTag("Player"))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public bool InCurrentPointRoute()
+    {
+        return MovimentBL.InCurrentPointRoute(CurrentPointRoute, transform.position);
+    }
+
+    public Vector3 GetNextPointRoute()
+    {
+        CurrentPointRoute = MovimentBL.GetNextPointRoute(PointsRoute, CurrentPointRoute);
+        return CurrentPointRoute;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -79,6 +103,8 @@ public abstract class EnemyController : MonoBehaviour
     }
 
     public abstract void InteractuePlayer();
+
+    public abstract bool ShouldFollowPlayer();
 
     private void OnDrawGizmos() //Dibuja el area de efecto en el editor
     {

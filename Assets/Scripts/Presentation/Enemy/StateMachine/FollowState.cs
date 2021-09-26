@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class FollowState : State
 {
-    public override void CheckExit() 
+    public override void CheckExit()
     {
-        if (!MovimentBL.PlayerInView(Enemy.transform.position, Enemy.RadiusOfView) || !MovimentBL.ShouldFollowPlayer(Enemy.EnemyType, Enemy.Player.CurrentMentalState))
+        if (!Enemy.PlayerInView() || !Enemy.ShouldFollowPlayer())
         {
-            StateMachine.ChangeState<PatrolState>(); 
+            StateMachine.ChangeState<PatrolState>();
         }
     }
 
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Enemy.MoveToPoint(Enemy.Player.transform.position); //El enemigo persigue al Player
+        Enemy.MoveToPoint(Enemy.Player.transform.position);
     }
 }

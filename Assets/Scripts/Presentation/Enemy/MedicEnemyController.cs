@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 public class MedicEnemyController : EnemyController
 {
     public override void InteractuePlayer()
@@ -14,5 +13,14 @@ public class MedicEnemyController : EnemyController
             dialogManager.Start_Dialog(Name, dialogs);
             Player.ChangeMentalHealth(PlayerMentalHealthEnum.Cuerdo);
         }
+    }
+
+    public override bool ShouldFollowPlayer()
+    {
+        if (Player.CurrentMentalState == PlayerMentalHealthEnum.Demente)
+        {
+            return true;
+        }
+        return false;
     }
 }

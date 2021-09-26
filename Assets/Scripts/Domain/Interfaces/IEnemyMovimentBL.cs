@@ -9,8 +9,8 @@ public interface IEnemyMovimentBL
     Action<Vector2> MoveEvent { get; set; }
 
     Vector3 GetNextPointRoute(List<Vector3> pointsRoute, Vector3 currentPointRoute);
+
     void Move(Vector2 point, Vector2 position, bool walking);
-    bool PlayerInView(Vector2 position, float radiusOfView);
-    bool ShouldFollowPlayer(EnemyTypeEnum enemyType, PlayerMentalHealthEnum playerMentalHealth);
+
     bool InCurrentPointRoute(Vector3 currentPointRoute, Vector3 position, float tolerance = 1.01f);
 }

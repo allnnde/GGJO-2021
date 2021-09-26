@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 public class PacientEnemyController : EnemyController
 {
     public override void InteractuePlayer()
@@ -15,5 +14,13 @@ public class PacientEnemyController : EnemyController
             Player.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
         }
     }
-}
 
+    public override bool ShouldFollowPlayer()
+    {
+        if (Player.CurrentMentalState == PlayerMentalHealthEnum.Cuerdo)
+        {
+            return true;
+        }
+        return false;
+    }
+}
