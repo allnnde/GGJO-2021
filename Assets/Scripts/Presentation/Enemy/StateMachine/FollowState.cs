@@ -6,7 +6,7 @@ public class FollowState : State
 {
     public override void CheckExit()
     {
-        if (!Enemy.PlayerInView() || !Enemy.ShouldFollowPlayer())
+        if (!Enemy.IsPlayerInView() || !Enemy.ShouldFollowPlayer())
         {
             StateMachine.ChangeState<PatrolState>();
         }

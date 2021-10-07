@@ -14,10 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private IPlayerMovimentBL _movimentBL;
     private IMentalHealthBL _mentalHealthBL;
-
-
     private AudioController _audioSource;
-
 
     private void Awake()
     {
@@ -26,7 +23,6 @@ public class PlayerController : MonoBehaviour
         _audioSource = FindObjectOfType<AudioController>();
 
         Configuration();
-
     }
 
     private void Configuration()
@@ -34,27 +30,26 @@ public class PlayerController : MonoBehaviour
         _movimentBL = ServiceLocator.Instance.GetServiceSingleton<IPlayerMovimentBL>();
         _mentalHealthBL = ServiceLocator.Instance.GetServiceSingleton<IMentalHealthBL>();
 
-        _movimentBL.MoveEvent += Move;
-        _movimentBL.MoveAnimationEvent += MoveAnimation;
-        _mentalHealthBL.ChangeMentalHealthAnimatorEvent += ChangeMentalHealthAnimator;
+        _movimentBL.OnMove += Move;
+        _movimentBL.OnMoveAnimation += MoveAnimation;
+        _mentalHealthBL.OnChangeMentalHealthAnimator += ChangeMentalHealthAnimator;
     }
 
-    void Start()
+    private void Start()
     {
         Time.timeScale = 1;
     }
 
-    void Update()
+    private void Update()
     {
         var lastMovement = new Vector2(Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel), Input.GetAxisRaw(AxisLabelConstants.VerticalLabel));
         _movimentBL.Move(lastMovement, speed);
     }
 
-
     private void MoveAnimation(string animation)
     {
-        if(!animation.Equals(string.Empty))
-        _anim.Play(animation);
+        if (!animation.Equals(string.Empty))
+            _anim.Play(animation);
     }
 
     public void ChangeMentalHealth(PlayerMentalHealthEnum playerMentalHealth)
@@ -63,7 +58,6 @@ public class PlayerController : MonoBehaviour
         _mentalHealthBL.ChangeMentalHealthAnimator(CurrentMentalState);
         _audioSource.PlayClipToMentalHealth(CurrentMentalState);
     }
-
 
     private void Move(Vector2 direction)
     {
@@ -74,6 +68,4 @@ public class PlayerController : MonoBehaviour
     {
         _anim.runtimeAnimatorController = aminPlayer;
     }
-
-  
 }

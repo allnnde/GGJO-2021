@@ -16,5 +16,5 @@ public abstract class State : MonoBehaviour
         Enemy = GetComponent<EnemyController>();
     }
 
-    public abstract void CheckExit(); //Metodo para verificar la salida de los estados
+    public abstract void CheckExit();
 }

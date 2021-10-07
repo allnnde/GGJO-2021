@@ -24,8 +24,8 @@ public class DialogManager : MonoBehaviour
     {
         dialogBL = ServiceLocator.Instance.GetServiceSingleton<IDialogBL>();
 
-        dialogBL.DialogActive += DialogPanel.SetActive;
-        dialogBL.ShowText += ShowText;
+        dialogBL.OnDialogActive += DialogPanel.SetActive;
+        dialogBL.OnShowText += ShowText;
     }
 
     public void Start_Dialog(string npcName, List<string> convo)

@@ -6,43 +6,44 @@ using UnityEngine.SceneManagement;
 public class DoorController : MonoBehaviour
 {
     public PlayerMentalHealthEnum NeededMetalHealthe;
-    public GameObject Puesta;
-    private DialogManager dialogManager;
+    public GameObject Door;
+    private DialogManager _dialogManager;
+    private SpriteRenderer _doorSpriteRenderer;
 
-    public Sprite Abierto;
-    public Sprite Cerrado;
+    public Sprite Opened;
+    public Sprite Closed;
 
-    public string NexLevel;
+    public string NextLevel;
 
     private void Awake()
     {
-        dialogManager = FindObjectOfType<DialogManager>();
-        Puesta = transform.parent.gameObject;
+        _dialogManager = FindObjectOfType<DialogManager>();
+        Door = transform.parent.gameObject;
+        _doorSpriteRenderer = Door.GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (collision.CompareTag("Player"))
         {
             var playerMentalHealth = collision.GetComponent<PlayerController>();
             if (playerMentalHealth.CurrentMentalState == NeededMetalHealthe)
             {
-                Puesta.GetComponent<SpriteRenderer>().sprite = Abierto;
-                dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Abierta" });
+                _doorSpriteRenderer.sprite = Opened;
+                _dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Abierta" });
 
-                if (!string.IsNullOrEmpty(NexLevel))
-                    SceneManager.LoadScene(NexLevel);
+                if (!string.IsNullOrEmpty(NextLevel))
+                    SceneManager.LoadScene(NextLevel);
                 else
                 {
-                    dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
+                    _dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
                     Application.Quit();
                 }
             }
             else
             {
-                Puesta.GetComponent<SpriteRenderer>().sprite = Cerrado;
-                dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Cerrada" });
+                _doorSpriteRenderer.sprite = Closed;
+                _dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Cerrada" });
             }
         }
     }

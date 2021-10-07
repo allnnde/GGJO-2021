@@ -10,7 +10,7 @@ public class PlayerMentalHealthBL : IMentalHealthBL
 {
     private readonly Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController> _mentalHealthDictionary;
 
-    public Action<RuntimeAnimatorController> ChangeMentalHealthAnimatorEvent { get; set; }
+    public Action<RuntimeAnimatorController> OnChangeMentalHealthAnimator { get; set; }
     public PlayerMentalHealthBL(Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController> mentalHealthDictionary)
     {
         _mentalHealthDictionary = mentalHealthDictionary;
@@ -19,11 +19,11 @@ public class PlayerMentalHealthBL : IMentalHealthBL
     public void ChangeMentalHealthAnimator(PlayerMentalHealthEnum mentalHealth)
     {
 
-        Assert.IsNotNull(ChangeMentalHealthAnimatorEvent, "ChangeMentalHealthAnimatorEvent es null en implmentacion de PlayerMentalHealthBL");
+        Assert.IsNotNull(OnChangeMentalHealthAnimator, "ChangeMentalHealthAnimatorEvent es null en implmentacion de PlayerMentalHealthBL");
 
         var mh = _mentalHealthDictionary[mentalHealth];
 
-        ChangeMentalHealthAnimatorEvent?.Invoke(mh);
+        OnChangeMentalHealthAnimator?.Invoke(mh);
     }
 
 

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public interface IDialogBL
 {
-    Action<bool> DialogActive { get; set; }
-    Action<string> ShowText { get; set; }
+    Action<bool> OnDialogActive { get; set; }
+    Action<string> OnShowText { get; set; }
 
     void HiddenDialog();
 

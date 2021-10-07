@@ -7,19 +7,19 @@ using UnityEngine;
 
 public class DialogBL : IDialogBL
 {
-    public Action<bool> DialogActive { get; set; }
-    public Action<string> ShowText { get; set; }
+    public Action<bool> OnDialogActive { get; set; }
+    public Action<string> OnShowText { get; set; }
     private List<string> _conversation;
     private int _converIndex;
 
     public void HiddenDialog()
     {
-        DialogActive?.Invoke(false);
+        OnDialogActive?.Invoke(false);
     }
 
     public void ShowDialog()
     {
-        DialogActive?.Invoke(true);
+        OnDialogActive?.Invoke(true);
     }
 
     public void StartDialog(List<string> conversation)
@@ -27,7 +27,7 @@ public class DialogBL : IDialogBL
         Time.timeScale = 0;
         _conversation = conversation;
         _converIndex = 0;
-        ShowText?.Invoke(_conversation[_converIndex]);
+        OnShowText?.Invoke(_conversation[_converIndex]);
     }
 
     public void NextText()
@@ -35,18 +35,18 @@ public class DialogBL : IDialogBL
         if (_converIndex < _conversation.Count - 1)
         {
             _converIndex++;
-            ShowText?.Invoke(_conversation[_converIndex]);
+            OnShowText?.Invoke(_conversation[_converIndex]);
         }
         else
         {
             StopDialog();
         }
-        ShowText?.Invoke(_conversation[_converIndex]);
+        OnShowText?.Invoke(_conversation[_converIndex]);
     }
 
     private void StopDialog()
     {
-        DialogActive?.Invoke(false);
+        OnDialogActive?.Invoke(false);
         Time.timeScale = 1;
     }
 }

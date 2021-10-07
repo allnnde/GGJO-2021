@@ -3,6 +3,6 @@ using UnityEngine;
 
 public interface IMentalHealthBL
 {
-    public Action<RuntimeAnimatorController> ChangeMentalHealthAnimatorEvent { get; set; }
+    public Action<RuntimeAnimatorController> OnChangeMentalHealthAnimator { get; set; }
     void ChangeMentalHealthAnimator(PlayerMentalHealthEnum mentalHealth);
 }

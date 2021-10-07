@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    AudioSource _audioSource;
-    IAudioBL _audioBL;
+    private AudioSource _audioSource;
+    private IAudioBL _audioBL;
 
     private void Awake()
     {

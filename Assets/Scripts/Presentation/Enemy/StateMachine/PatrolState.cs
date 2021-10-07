@@ -6,7 +6,7 @@ public class PatrolState : State
 {
     public override void CheckExit()
     {
-        if (Enemy.PlayerInView() && Enemy.ShouldFollowPlayer())
+        if (Enemy.IsPlayerInView() && Enemy.ShouldFollowPlayer())
         {
             StateMachine.ChangeState<FollowState>();
         }
@@ -15,7 +15,7 @@ public class PatrolState : State
     // Update is called once per frame
     private void Update()
     {
-        if (Enemy.InCurrentPointRoute())
+        if (Enemy.IsPointInCurrentRoute())
             Enemy.GetNextPointRoute();
         Enemy.MoveToPoint(Enemy.CurrentPointRoute);
     }

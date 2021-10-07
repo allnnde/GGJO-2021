@@ -47,8 +47,8 @@ public abstract class EnemyController : MonoBehaviour
     private void Configuration()
     {
         MovimentBL = ServiceLocator.Instance.GetServiceScoped<IEnemyMovimentBL>();
-        MovimentBL.MoveEvent += Move;
-        MovimentBL.MoveAnimationEvent += MoveAnimation;
+        MovimentBL.OnMove += Move;
+        MovimentBL.OnMoveAnimation += MoveAnimation;
     }
 
     private void Move(Vector2 point)
@@ -69,7 +69,7 @@ public abstract class EnemyController : MonoBehaviour
         MovimentBL.Move(point, transform.position, walking);
     }
 
-    public bool PlayerInView()
+    public bool IsPlayerInView()
     {
         var colliders = Physics2D.OverlapCircleAll(transform.position, RadiusOfView);
         if (colliders != null)
@@ -83,9 +83,9 @@ public abstract class EnemyController : MonoBehaviour
         return false;
     }
 
-    public bool InCurrentPointRoute()
+    public bool IsPointInCurrentRoute()
     {
-        return MovimentBL.InCurrentPointRoute(CurrentPointRoute, transform.position);
+        return MovimentBL.IsPointInCurrentRoute(CurrentPointRoute, transform.position);
     }
 
     public Vector3 GetNextPointRoute()

@@ -4,20 +4,20 @@ using UnityEngine.Assertions;
 
 public class PlayerMovimentBL : IPlayerMovimentBL
 {
-    public Action<Vector2> MoveEvent { get; set; }
-    public Action<string> MoveAnimationEvent { get; set; }
+    public Action<Vector2> OnMove { get; set; }
+    public Action<string> OnMoveAnimation { get; set; }
 
     public void Move(Vector2 direction, float speed)
     {
 
-        Assert.IsNotNull(MoveEvent, "MoveEvent es null en implmentacion de PlayerMovimentBL");
-        Assert.IsNotNull(MoveAnimationEvent, "MoveAnimationEvent es null en implmentacion de PlayerMovimentBL");
+        Assert.IsNotNull(OnMove, "MoveEvent es null en implmentacion de PlayerMovimentBL");
+        Assert.IsNotNull(OnMoveAnimation, "MoveAnimationEvent es null en implmentacion de PlayerMovimentBL");
 
         var res = CalculateVectorMoviment(direction, speed);
-        MoveEvent?.Invoke(res);
+        OnMove?.Invoke(res);
 
         var animation = GetAnimationName(direction);
-        MoveAnimationEvent?.Invoke(animation);
+        OnMoveAnimation?.Invoke(animation);
     }
 
     private string GetAnimationName(Vector2 direction)

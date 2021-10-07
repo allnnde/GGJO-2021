@@ -8,18 +8,18 @@ using UnityEngine.Assertions;
 
 public class EnemyMovimentBL : IEnemyMovimentBL
 {
-    public Action<Vector2> MoveEvent { get; set; }
-    public Action<string> MoveAnimationEvent { get; set; }
+    public Action<Vector2> OnMove { get; set; }
+    public Action<string> OnMoveAnimation { get; set; }
 
     public void Move(Vector2 point, Vector2 position, bool walking)
     {
-        Assert.IsNotNull(MoveEvent, "MoveEvent es null en implmentacion de PlayerMovimentBL");
-        Assert.IsNotNull(MoveAnimationEvent, "MoveAnimationEvent es null en implmentacion de PlayerMovimentBL");
+        Assert.IsNotNull(OnMove, "MoveEvent es null en implmentacion de PlayerMovimentBL");
+        Assert.IsNotNull(OnMoveAnimation, "MoveAnimationEvent es null en implmentacion de PlayerMovimentBL");
 
-        MoveEvent?.Invoke(point);
+        OnMove?.Invoke(point);
 
         var animation = GetAnimationName(point, position, walking);
-        MoveAnimationEvent?.Invoke(animation);
+        OnMoveAnimation?.Invoke(animation);
     }
 
     public Vector3 GetNextPointRoute(List<Vector3> pointsRoute, Vector3 currentPointRoute)
@@ -63,19 +63,17 @@ public class EnemyMovimentBL : IEnemyMovimentBL
             return (AnimationLabelConstants.WalkingTopLabel);
         if (direction.x == 0 && direction.y < 0 && walking)
             return (AnimationLabelConstants.WalkingBottomLabel);
-
         if (direction.x < 0 && direction.y == 0 && walking)
             return (AnimationLabelConstants.WalkingLeftLabel);
         if (direction.x > 0 && direction.y == 0 && walking)
             return (AnimationLabelConstants.WalkingRightLabel);
-
         if (direction.x == 0 && direction.y == 0 && !walking)
             return (AnimationLabelConstants.IdleLabel);
 
         return string.Empty;
     }
 
-    public bool InCurrentPointRoute(Vector3 currentPointRoute, Vector3 position, float tolerance = 1.01f)
+    public bool IsPointInCurrentRoute(Vector3 currentPointRoute, Vector3 position, float tolerance = 1.01f)
     {
         var distancia = Vector3.Distance(currentPointRoute, position);
         return distancia < tolerance;

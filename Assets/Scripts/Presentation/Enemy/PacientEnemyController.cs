@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 public class PacientEnemyController : EnemyController
 {
+    private const PlayerMentalHealthEnum playerMentalHealthInteractive = PlayerMentalHealthEnum.Demente;
+
     public override void InteractuePlayer()
     {
-        if (Player.CurrentMentalState != PlayerMentalHealthEnum.Demente)
+        if (Player.CurrentMentalState != playerMentalHealthInteractive)
         {
             dialogManager.Start_Dialog(Name, dialogs);
-            Player.ChangeMentalHealth(PlayerMentalHealthEnum.Demente);
+            Player.ChangeMentalHealth(playerMentalHealthInteractive);
         }
     }
 
     public override bool ShouldFollowPlayer()
     {
-        if (Player.CurrentMentalState == PlayerMentalHealthEnum.Cuerdo)
-        {
-            return true;
-        }
-        return false;
+        return Player.CurrentMentalState == PlayerMentalHealthEnum.Cuerdo;
     }
 }
