@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowState : State
+namespace Presentation.Enemy.StateMachine
 {
-    public override void CheckExit()
+    public class FollowState : State
     {
-        if (!Enemy.IsPlayerInView() || !Enemy.ShouldFollowPlayer())
+        public override void CheckExit()
         {
-            StateMachine.ChangeState<PatrolState>();
+            if (!Enemy.IsPlayerInView() || !Enemy.ShouldFollowPlayer())
+            {
+                StateMachine.ChangeState<PatrolState>();
+            }
         }
-    }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        Enemy.MoveToPoint(Enemy.Player.transform.position);
+        // Update is called once per frame
+        private void Update()
+        {
+            Enemy.MoveToPoint(Enemy.Player.transform.position);
+        }
     }
 }

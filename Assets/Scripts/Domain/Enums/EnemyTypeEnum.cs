@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public enum EnemyTypeEnum
+namespace Domain.Enums
 {
-    Paciente,
-    Medico
+    public enum EnemyTypeEnum
+    {
+        Paciente,
+        Medico
+    }
 }
-

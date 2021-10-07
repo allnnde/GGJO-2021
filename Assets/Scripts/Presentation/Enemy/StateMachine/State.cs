@@ -1,20 +1,25 @@
+using Domain.Interfaces;
+using Presentation.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(StateMachine))]
-[RequireComponent(typeof(EnemyController))]
-public abstract class State : MonoBehaviour
+namespace Presentation.Enemy.StateMachine
 {
-    protected StateMachine StateMachine;
-    protected EnemyController Enemy;
-    protected IEnemyMovimentBL MovimentBL;
-
-    private void Awake()
+    [RequireComponent(typeof(StateMachine))]
+    [RequireComponent(typeof(EnemyController))]
+    public abstract class State : MonoBehaviour
     {
-        StateMachine = GetComponent<StateMachine>();
-        Enemy = GetComponent<EnemyController>();
-    }
+        protected StateMachine StateMachine;
+        protected EnemyController Enemy;
+        protected IEnemyMovimentService MovimentBL;
 
-    public abstract void CheckExit();
+        private void Awake()
+        {
+            StateMachine = GetComponent<StateMachine>();
+            Enemy = GetComponent<EnemyController>();
+        }
+
+        public abstract void CheckExit();
+    }
 }

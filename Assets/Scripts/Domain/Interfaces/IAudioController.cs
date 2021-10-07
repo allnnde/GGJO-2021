@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
-
-    public enum ServicesLifecycleEnum
+namespace Domain.Interfaces
+{
+    public interface IAudioController
     {
-        Singleton,
-        Scoped
+        void PlayClip(AudioClip clip);
     }
+}

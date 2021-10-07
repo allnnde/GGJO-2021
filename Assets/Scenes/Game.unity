@@ -247,6 +247,11 @@ Transform:
   m_Father: {fileID: 1237050295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &115511448 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4412425931619992582, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+  m_PrefabInstance: {fileID: 4412425931701627084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &295138104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1740,22 @@ PrefabInstance:
     - target: {fileID: 4412425930674805958, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
       propertyPath: m_Name
       value: Puerta
+      objectReference: {fileID: 0}
+    - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+      propertyPath: Door
+      value: 
+      objectReference: {fileID: 115511448}
+    - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+      propertyPath: Closed
+      value: 
+      objectReference: {fileID: 21300000, guid: c401f6c91137fb446b187fa32ff3869a, type: 3}
+    - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+      propertyPath: Opened
+      value: 
+      objectReference: {fileID: 21300000, guid: c8cd1efa87f19554083911352664bf57, type: 3}
+    - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+      propertyPath: NextLevel
+      value: Game_LVL2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}

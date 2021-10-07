@@ -1,24 +1,28 @@
-﻿using System;
+﻿using Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class PacientEnemyController : EnemyController
+namespace Presentation.Enemy
 {
-    private const PlayerMentalHealthEnum playerMentalHealthInteractive = PlayerMentalHealthEnum.Demente;
-
-    public override void InteractuePlayer()
+    public class PacientEnemyController : EnemyController
     {
-        if (Player.CurrentMentalState != playerMentalHealthInteractive)
+        private const PlayerMentalHealthEnum playerMentalHealthInteractive = PlayerMentalHealthEnum.Demente;
+
+        public override void InteractuePlayer()
         {
-            dialogManager.Start_Dialog(Name, dialogs);
-            Player.ChangeMentalHealth(playerMentalHealthInteractive);
+            if (Player.CurrentMentalState != playerMentalHealthInteractive)
+            {
+                dialogManager.Start_Dialog(Name, dialogs);
+                Player.ChangeMentalHealth(playerMentalHealthInteractive);
+            }
         }
-    }
 
-    public override bool ShouldFollowPlayer()
-    {
-        return Player.CurrentMentalState == PlayerMentalHealthEnum.Cuerdo;
+        public override bool ShouldFollowPlayer()
+        {
+            return Player.CurrentMentalState == PlayerMentalHealthEnum.Cuerdo;
+        }
     }
 }

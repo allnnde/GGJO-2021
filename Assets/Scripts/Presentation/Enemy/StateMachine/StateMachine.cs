@@ -2,35 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+namespace Presentation.Enemy.StateMachine
 {
-    private State currentState; 
-
-    void Awake()
+    public class StateMachine : MonoBehaviour
     {
-        currentState = GetComponent<PatrolState>();
-        if (currentState == null)
+        private State currentState;
+
+        private void Awake()
         {
-            currentState = gameObject.AddComponent<PatrolState>();
-        }
-        currentState.enabled = true;
-    }
-
-    void Update()
-    {
-        currentState.CheckExit(); 
-    }
-
-    public void ChangeState<TState>() where TState : State
-    {
-        var newState = GetComponent<TState>(); 
-        if (newState == null) 
-        {
-            newState = gameObject.AddComponent<TState>();
+            currentState = GetComponent<PatrolState>();
+            if (currentState == null)
+            {
+                currentState = gameObject.AddComponent<PatrolState>();
+            }
+            currentState.enabled = true;
         }
 
-        currentState.enabled = false;
-        currentState = newState;
-        currentState.enabled = true;
+        private void Update()
+        {
+            currentState.CheckExit();
+        }
+
+        public void ChangeState<TState>() where TState : State
+        {
+            var newState = GetComponent<TState>();
+            if (newState == null)
+            {
+                newState = gameObject.AddComponent<TState>();
+            }
+
+            currentState.enabled = false;
+            currentState = newState;
+            currentState.enabled = true;
+        }
     }
 }

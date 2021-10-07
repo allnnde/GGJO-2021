@@ -1,21 +1,35 @@
+using Domain.Enums;
+using Domain.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioController : MonoBehaviour
+namespace Presentation.Audio
 {
-    private AudioSource _audioSource;
-    private IAudioBL _audioBL;
-
-    private void Awake()
+    public class AudioController : MonoBehaviour, IAudioController
     {
-        _audioSource = GetComponent<AudioSource>();
-        _audioBL = ServiceLocator.Instance.GetServiceSingleton<IAudioBL>();
-    }
+        private AudioSource _audioSource;
+        private IAudioService _audioService;
 
-    public void PlayClipToMentalHealth(PlayerMentalHealthEnum playerMentalHealth)
-    {
-        _audioSource.clip = _audioBL.GetAudio(playerMentalHealth);
-        _audioSource.Play();
+        private void Awake()
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
+
+        public void Configuration(IAudioService audioService)
+        {
+            _audioService = audioService;
+        }
+
+        public void PlayClipToMentalHealth(PlayerMentalHealthEnum playerMentalHealth)
+        {
+            _audioService.PlayAudio(playerMentalHealth);
+        }
+
+        public void PlayClip(AudioClip clip)
+        {
+            _audioSource.clip = clip;
+            _audioSource.Play();
+        }
     }
 }

@@ -1,48 +1,52 @@
+using Domain.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogManager : MonoBehaviour
+namespace Presentation.Dialog
 {
-    public GameObject DialogPanel;
-    public Text NpcNameText;
-    public Text DialogText;
-    private IDialogBL dialogBL;
-
-    // Start is called before the first frame update
-    private void Start()
+    public class DialogManager : MonoBehaviour, IDialogManager
     {
-        var buttonNextText = GetComponentInChildren<Button>();
-        buttonNextText.onClick.AddListener(Next);
-        Configure();
-        dialogBL.HiddenDialog();
-    }
+        public GameObject DialogPanel;
+        public Text NpcNameText;
+        public Text DialogText;
+        private IDialogService _dialogService;
 
-    private void Configure()
-    {
-        dialogBL = ServiceLocator.Instance.GetServiceSingleton<IDialogBL>();
+        // Start is called before the first frame update
+        private void Start()
+        {
+            var buttonNextText = GetComponentInChildren<Button>();
+            buttonNextText.onClick.AddListener(Next);
+            _dialogService.HiddenDialog();
+        }
 
-        dialogBL.OnDialogActive += DialogPanel.SetActive;
-        dialogBL.OnShowText += ShowText;
-    }
+        public void Configuration(IDialogService dialogService)
+        {
+            _dialogService = dialogService;
+        }
 
-    public void Start_Dialog(string npcName, List<string> convo)
-    {
-        NpcNameText.text = npcName;
+        public void Start_Dialog(string npcName, List<string> convo)
+        {
+            NpcNameText.text = npcName;
+            _dialogService.ShowDialog();
+            _dialogService.StartDialog(convo);
+        }
 
-        dialogBL.ShowDialog();
-        dialogBL.StartDialog(convo);
-    }
+        public void ShowText(string text)
+        {
+            DialogText.text = text;
+        }
 
-    public void ShowText(string text)
-    {
-        DialogText.text = text;
-    }
+        public void Next()
+        {
+            _dialogService.NextText();
+        }
 
-    public void Next()
-    {
-        dialogBL.NextText();
+        public void DialogActive(bool active)
+        {
+            DialogPanel.SetActive(active);
+        }
     }
 }

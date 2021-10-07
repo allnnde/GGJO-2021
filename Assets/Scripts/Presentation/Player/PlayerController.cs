@@ -1,71 +1,70 @@
-﻿using System;
+﻿using Domain.Enums;
+using Domain.Interfaces;
+using Presentation.Audio;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace Presentation.Player
 {
-    public float speed = 4.0f;
-
-    public PlayerMentalHealthEnum CurrentMentalState;
-
-    private Rigidbody2D _playerRb;
-    private Animator _anim;
-
-    private IPlayerMovimentBL _movimentBL;
-    private IMentalHealthBL _mentalHealthBL;
-    private AudioController _audioSource;
-
-    private void Awake()
+    public class PlayerController : MonoBehaviour, IPlayerMentalHealthController, IPlayerMovimentController
     {
-        _playerRb = GetComponent<Rigidbody2D>();
-        _anim = GetComponent<Animator>();
-        _audioSource = FindObjectOfType<AudioController>();
+        public float speed = 4.0f;
+        public PlayerMentalHealthEnum CurrentMentalState;
 
-        Configuration();
-    }
+        private Rigidbody2D _playerRb;
+        private Animator _anim;
 
-    private void Configuration()
-    {
-        _movimentBL = ServiceLocator.Instance.GetServiceSingleton<IPlayerMovimentBL>();
-        _mentalHealthBL = ServiceLocator.Instance.GetServiceSingleton<IMentalHealthBL>();
+        private IPlayerMovimentService _movimentService;
+        private IMentalHealthService _mentalHealthService;
+        private AudioController _audioSource;
 
-        _movimentBL.OnMove += Move;
-        _movimentBL.OnMoveAnimation += MoveAnimation;
-        _mentalHealthBL.OnChangeMentalHealthAnimator += ChangeMentalHealthAnimator;
-    }
+        private void Awake()
+        {
+            _playerRb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
+            _audioSource = FindObjectOfType<AudioController>();
+        }
 
-    private void Start()
-    {
-        Time.timeScale = 1;
-    }
+        public void Configuration(IMentalHealthService mentalHealthService, IPlayerMovimentService playerMovimentService)
+        {
+            _movimentService = playerMovimentService;
+            _mentalHealthService = mentalHealthService;
+        }
 
-    private void Update()
-    {
-        var lastMovement = new Vector2(Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel), Input.GetAxisRaw(AxisLabelConstants.VerticalLabel));
-        _movimentBL.Move(lastMovement, speed);
-    }
+        private void Start()
+        {
+            Time.timeScale = 1;
+        }
 
-    private void MoveAnimation(string animation)
-    {
-        if (!animation.Equals(string.Empty))
-            _anim.Play(animation);
-    }
+        private void Update()
+        {
+            var lastMovement = new Vector2(Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel), Input.GetAxisRaw(AxisLabelConstants.VerticalLabel));
+            _movimentService.Move(lastMovement, speed);
+        }
 
-    public void ChangeMentalHealth(PlayerMentalHealthEnum playerMentalHealth)
-    {
-        CurrentMentalState = playerMentalHealth;
-        _mentalHealthBL.ChangeMentalHealthAnimator(CurrentMentalState);
-        _audioSource.PlayClipToMentalHealth(CurrentMentalState);
-    }
+        public void MoveAnimation(string animation)
+        {
+            if (!animation.Equals(string.Empty))
+                _anim.Play(animation);
+        }
 
-    private void Move(Vector2 direction)
-    {
-        _playerRb.velocity = direction;
-    }
+        public void ChangeMentalHealth(PlayerMentalHealthEnum playerMentalHealth)
+        {
+            CurrentMentalState = playerMentalHealth;
+            _mentalHealthService.ChangeMentalHealthAnimator(CurrentMentalState);
+            _audioSource.PlayClipToMentalHealth(CurrentMentalState);
+        }
 
-    private void ChangeMentalHealthAnimator(RuntimeAnimatorController aminPlayer)
-    {
-        _anim.runtimeAnimatorController = aminPlayer;
+        public void Move(Vector2 direction)
+        {
+            _playerRb.velocity = direction;
+        }
+
+        public void ChangeMentalHealthAnimator(RuntimeAnimatorController aminPlayer)
+        {
+            _anim.runtimeAnimatorController = aminPlayer;
+        }
     }
 }

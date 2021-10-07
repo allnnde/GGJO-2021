@@ -2135,6 +2135,18 @@ PrefabInstance:
       value: Puerta
       objectReference: {fileID: 0}
     - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+      propertyPath: Door
+      value: 
+      objectReference: {fileID: 4412425931701627085}
+    - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+      propertyPath: Closed
+      value: 
+      objectReference: {fileID: 21300000, guid: f96692f6970cfc84ca7a01c1b97343ce, type: 3}
+    - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+      propertyPath: Opened
+      value: 
+      objectReference: {fileID: 21300000, guid: c59e7e4885bdde242b5120e3fcfff335, type: 3}
+    - target: {fileID: 4412425931619992576, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
       propertyPath: Abierto
       value: 
       objectReference: {fileID: 21300000, guid: c59e7e4885bdde242b5120e3fcfff335, type: 3}
@@ -2152,6 +2164,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+--- !u!1 &4412425931701627085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4412425931619992582, guid: 12fae64883a4b2e4195eb3798c019da2, type: 3}
+  m_PrefabInstance: {fileID: 4412425931701627084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5185565837134422321
 PrefabInstance:
   m_ObjectHideFlags: 0
