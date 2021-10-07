@@ -39,7 +39,7 @@ namespace Presentation.Dialog
             DialogText.text = text;
         }
 
-        public void Next()
+        private void Next()
         {
             _dialogService.NextText();
         }
