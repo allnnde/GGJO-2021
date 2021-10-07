@@ -1,71 +1,77 @@
-﻿using System;
+﻿using Domain.Emuns;
+using Domain.Interfaces;
+using Presentation.Audio;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace Presentation.Player
 {
-    public float speed = 4.0f;
-
-    public PlayerMentalHealthEnum CurrentMentalState;
-
-    private Rigidbody2D _playerRb;
-    private Animator _anim;
-
-    private IPlayerMovimentBL _movimentBL;
-    private IMentalHealthBL _mentalHealthBL;
-    private AudioController _audioSource;
-
-    private void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        _playerRb = GetComponent<Rigidbody2D>();
-        _anim = GetComponent<Animator>();
-        _audioSource = FindObjectOfType<AudioController>();
+        public float speed = 4.0f;
 
-        Configuration();
-    }
+        public PlayerMentalHealthEnum CurrentMentalState;
 
-    private void Configuration()
-    {
-        _movimentBL = ServiceLocator.Instance.GetServiceSingleton<IPlayerMovimentBL>();
-        _mentalHealthBL = ServiceLocator.Instance.GetServiceSingleton<IMentalHealthBL>();
+        private Rigidbody2D _playerRb;
+        private Animator _anim;
 
-        _movimentBL.OnMove += Move;
-        _movimentBL.OnMoveAnimation += MoveAnimation;
-        _mentalHealthBL.OnChangeMentalHealthAnimator += ChangeMentalHealthAnimator;
-    }
+        private IPlayerMovimentService _movimentService;
+        private IMentalHealthService _mentalHealthService;
+        private AudioController _audioSource;
 
-    private void Start()
-    {
-        Time.timeScale = 1;
-    }
+        private void Awake()
+        {
+            _playerRb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
+            _audioSource = FindObjectOfType<AudioController>();
 
-    private void Update()
-    {
-        var lastMovement = new Vector2(Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel), Input.GetAxisRaw(AxisLabelConstants.VerticalLabel));
-        _movimentBL.Move(lastMovement, speed);
-    }
+            Configuration();
+        }
 
-    private void MoveAnimation(string animation)
-    {
-        if (!animation.Equals(string.Empty))
-            _anim.Play(animation);
-    }
+        private void Configuration()
+        {
+            _movimentService = ServiceLocator.Instance.GetServiceSingleton<IPlayerMovimentService>();
+            _mentalHealthService = ServiceLocator.Instance.GetServiceSingleton<IMentalHealthService>();
 
-    public void ChangeMentalHealth(PlayerMentalHealthEnum playerMentalHealth)
-    {
-        CurrentMentalState = playerMentalHealth;
-        _mentalHealthBL.ChangeMentalHealthAnimator(CurrentMentalState);
-        _audioSource.PlayClipToMentalHealth(CurrentMentalState);
-    }
+            _movimentService.OnMove += Move;
+            _movimentService.OnMoveAnimation += MoveAnimation;
+            _mentalHealthService.OnChangeMentalHealthAnimator += ChangeMentalHealthAnimator;
+        }
 
-    private void Move(Vector2 direction)
-    {
-        _playerRb.velocity = direction;
-    }
+        private void Start()
+        {
+            Time.timeScale = 1;
+        }
 
-    private void ChangeMentalHealthAnimator(RuntimeAnimatorController aminPlayer)
-    {
-        _anim.runtimeAnimatorController = aminPlayer;
+        private void Update()
+        {
+            var lastMovement = new Vector2(Input.GetAxisRaw(AxisLabelConstants.HorizontalLabel), Input.GetAxisRaw(AxisLabelConstants.VerticalLabel));
+            _movimentService.Move(lastMovement, speed);
+        }
+
+        private void MoveAnimation(string animation)
+        {
+            if (!animation.Equals(string.Empty))
+                _anim.Play(animation);
+        }
+
+        public void ChangeMentalHealth(PlayerMentalHealthEnum playerMentalHealth)
+        {
+            CurrentMentalState = playerMentalHealth;
+            _mentalHealthService.ChangeMentalHealthAnimator(CurrentMentalState);
+            _audioSource.PlayClipToMentalHealth(CurrentMentalState);
+        }
+
+        private void Move(Vector2 direction)
+        {
+            _playerRb.velocity = direction;
+        }
+
+        private void ChangeMentalHealthAnimator(RuntimeAnimatorController aminPlayer)
+        {
+            _anim.runtimeAnimatorController = aminPlayer;
+        }
     }
 }

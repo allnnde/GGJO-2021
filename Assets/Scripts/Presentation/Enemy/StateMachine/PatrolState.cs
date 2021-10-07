@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : State
+namespace Presentation.Enemy.StateMachine
 {
-    public override void CheckExit()
+    public class PatrolState : State
     {
-        if (Enemy.IsPlayerInView() && Enemy.ShouldFollowPlayer())
+        public override void CheckExit()
         {
-            StateMachine.ChangeState<FollowState>();
+            if (Enemy.IsPlayerInView() && Enemy.ShouldFollowPlayer())
+            {
+                StateMachine.ChangeState<FollowState>();
+            }
         }
-    }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (Enemy.IsPointInCurrentRoute())
-            Enemy.GetNextPointRoute();
-        Enemy.MoveToPoint(Enemy.CurrentPointRoute);
+        // Update is called once per frame
+        private void Update()
+        {
+            if (Enemy.IsPointInCurrentRoute())
+                Enemy.GetNextPointRoute();
+            Enemy.MoveToPoint(Enemy.CurrentPointRoute);
+        }
     }
 }

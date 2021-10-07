@@ -1,5 +1,8 @@
-﻿public static class AxisLabelConstants
+﻿namespace Domain.Emuns
 {
-    public const string HorizontalLabel = "Horizontal";
-    public const string VerticalLabel = "Vertical";
+    public static class AxisLabelConstants
+    {
+        public const string HorizontalLabel = "Horizontal";
+        public const string VerticalLabel = "Vertical";
+    }
 }

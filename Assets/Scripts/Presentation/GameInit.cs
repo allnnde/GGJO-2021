@@ -1,41 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Emuns;
+using Domain.Interfaces;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GameInit : MonoBehaviour
+namespace Presentation
 {
-    public RuntimeAnimatorController AnimPlayerCuerdo;
-    public RuntimeAnimatorController AnimPlayerNeutro;
-    public RuntimeAnimatorController AnimPlayerLoco;
-
-    public AudioClip ClipPlayerCuerdo;
-    public AudioClip ClipPlayerLoco;
-
-    private void Awake()
+    public class GameInit : MonoBehaviour
     {
-        ServiceLocator.Instance.UnRegisterAllServices();
-        var _movimentBL = new PlayerMovimentBL();
+        public RuntimeAnimatorController AnimPlayerCuerdo;
+        public RuntimeAnimatorController AnimPlayerNeutro;
+        public RuntimeAnimatorController AnimPlayerLoco;
 
-        var _mentalHealthDictionary = new Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController>();
-        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Cuerdo, AnimPlayerCuerdo);
-        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Demente, AnimPlayerLoco);
-        _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Neutro, AnimPlayerNeutro);
+        public AudioClip ClipPlayerCuerdo;
+        public AudioClip ClipPlayerLoco;
 
-        var _mentalHealthBL = new PlayerMentalHealthBL(_mentalHealthDictionary);
+        private void Awake()
+        {
+            ServiceLocator.Instance.UnRegisterAllServices();
+            var _movimentService = new PlayerMovimentService();
 
-        ServiceLocator.Instance.RegisterService<IPlayerMovimentBL>(_movimentBL);
-        ServiceLocator.Instance.RegisterService<IMentalHealthBL>(_mentalHealthBL);
+            var _mentalHealthDictionary = new Dictionary<PlayerMentalHealthEnum, RuntimeAnimatorController>();
+            _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Cuerdo, AnimPlayerCuerdo);
+            _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Demente, AnimPlayerLoco);
+            _mentalHealthDictionary.Add(PlayerMentalHealthEnum.Neutro, AnimPlayerNeutro);
 
-        var enemyMovimentBL = new EnemyMovimentBL();
-        ServiceLocator.Instance.RegisterService<IEnemyMovimentBL>(enemyMovimentBL);
+            var _mentalHealthService = new PlayerMentalHealthService(_mentalHealthDictionary);
 
-        var _audioDictionary = new Dictionary<PlayerMentalHealthEnum, AudioClip>();
-        _audioDictionary.Add(PlayerMentalHealthEnum.Cuerdo, ClipPlayerCuerdo);
-        _audioDictionary.Add(PlayerMentalHealthEnum.Demente, ClipPlayerLoco);
+            ServiceLocator.Instance.RegisterService<IPlayerMovimentService>(_movimentService);
+            ServiceLocator.Instance.RegisterService<IMentalHealthService>(_mentalHealthService);
 
-        var audioBL = new AudioBL(_audioDictionary);
-        ServiceLocator.Instance.RegisterService<IAudioBL>(audioBL);
+            var enemyMovimentService = new EnemyMovimentService();
+            ServiceLocator.Instance.RegisterService<IEnemyMovimentService>(enemyMovimentService);
 
-        var dialogBl = new DialogBL();
-        ServiceLocator.Instance.RegisterService<IDialogBL>(dialogBl);
+            var _audioDictionary = new Dictionary<PlayerMentalHealthEnum, AudioClip>();
+            _audioDictionary.Add(PlayerMentalHealthEnum.Cuerdo, ClipPlayerCuerdo);
+            _audioDictionary.Add(PlayerMentalHealthEnum.Demente, ClipPlayerLoco);
+
+            var audioService = new AudioService(_audioDictionary);
+            ServiceLocator.Instance.RegisterService<IAudioService>(audioService);
+
+            var dialogService = new DialogService();
+            ServiceLocator.Instance.RegisterService<IDialogService>(dialogService);
+        }
     }
 }

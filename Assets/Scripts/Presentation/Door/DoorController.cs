@@ -1,49 +1,55 @@
+using Domain.Emuns;
+using Presentation.Dialog;
+using Presentation.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DoorController : MonoBehaviour
+namespace Presentation.Door
 {
-    public PlayerMentalHealthEnum NeededMetalHealthe;
-    public GameObject Door;
-    private DialogManager _dialogManager;
-    private SpriteRenderer _doorSpriteRenderer;
-
-    public Sprite Opened;
-    public Sprite Closed;
-
-    public string NextLevel;
-
-    private void Awake()
+    public class DoorController : MonoBehaviour
     {
-        _dialogManager = FindObjectOfType<DialogManager>();
-        Door = transform.parent.gameObject;
-        _doorSpriteRenderer = Door.GetComponent<SpriteRenderer>();
-    }
+        public PlayerMentalHealthEnum NeededMetalHealthe;
+        public GameObject Door;
+        private DialogManager _dialogManager;
+        private SpriteRenderer _doorSpriteRenderer;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        public Sprite Opened;
+        public Sprite Closed;
+
+        public string NextLevel;
+
+        private void Awake()
         {
-            var playerMentalHealth = collision.GetComponent<PlayerController>();
-            if (playerMentalHealth.CurrentMentalState == NeededMetalHealthe)
-            {
-                _doorSpriteRenderer.sprite = Opened;
-                _dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Abierta" });
+            _dialogManager = FindObjectOfType<DialogManager>();
+            Door = transform.parent.gameObject;
+            _doorSpriteRenderer = Door.GetComponent<SpriteRenderer>();
+        }
 
-                if (!string.IsNullOrEmpty(NextLevel))
-                    SceneManager.LoadScene(NextLevel);
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                var playerMentalHealth = collision.GetComponent<PlayerController>();
+                if (playerMentalHealth.CurrentMentalState == NeededMetalHealthe)
+                {
+                    _doorSpriteRenderer.sprite = Opened;
+                    _dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Abierta" });
+
+                    if (!string.IsNullOrEmpty(NextLevel))
+                        SceneManager.LoadScene(NextLevel);
+                    else
+                    {
+                        _dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
+                        UnityEngine.Application.Quit();
+                    }
+                }
                 else
                 {
-                    _dialogManager.Start_Dialog("Puesta", new List<string> { "Pudsite escapar, felicidades" });
-                    Application.Quit();
+                    _doorSpriteRenderer.sprite = Closed;
+                    _dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Cerrada" });
                 }
-            }
-            else
-            {
-                _doorSpriteRenderer.sprite = Closed;
-                _dialogManager.Start_Dialog("Puesta", new List<string> { "Puesta Cerrada" });
             }
         }
     }
